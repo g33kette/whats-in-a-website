@@ -1,7 +1,7 @@
 
 import $ from 'jquery';
 
-// console.log('Hello from your Chrome extension!');
+console.log('Hello from your Chrome extension!');
 $(document).ready(function() {
     let style = [
         'width: 100%;',

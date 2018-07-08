@@ -1,13 +1,22 @@
 {
-    "manifest_version": 2,
-    "name": "Browser Protect",
-    "description": "Plugin to detect harmful website content.",
-    "version": "0.1",
-    "permissions": ["storage"],
-    "background": [
-        {
-          "matches": ["<all_urls>"],
-          "js": ["content.js"]
-        }
-      ]
+  "manifest_version": 2,
+  "name": "Browser Protect",
+  "description": "Plugin to detect harmful website content.",
+  "version": "0.1",
+  "permissions": ["storage"],
+  "background": [
+    {
+      "todo I think this should be replace the content load bit below":"",
+      "matches": ["<all_urls>"],
+      "js": ["app.js"]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": ["app.js"]
+    }
+  ]
 }

@@ -18,6 +18,6 @@ module.exports = {
     "max-len": ["warn", { "code": 120 }],
     "linebreak-style": ["off"],
     "no-unused-vars": ["warn", { "args": "none", varsIgnorePattern: "self" }],
-    "no-console": ["warn"],
+    "no-console": ["off"],
   },
 };
