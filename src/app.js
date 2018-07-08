@@ -1,3 +1,6 @@
+
+import $ from 'jquery';
+
 console.log("Hello from your Chrome extension!");
 $(document).ready(function() {
     let style = [
@@ -15,5 +18,5 @@ $(document).ready(function() {
     console.log('content', content);
     $('html').prepend(cover);//.css('height', '100%');
     $('body').hide();
-    
+
 });

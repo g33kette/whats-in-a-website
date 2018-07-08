@@ -1,0 +1,13 @@
+{
+    "manifest_version": 2,
+    "name": "Browser Protect",
+    "description": "Plugin to detect harmful website content.",
+    "version": "0.1",
+    "permissions": ["storage"],
+    "background": [
+        {
+          "matches": ["<all_urls>"],
+          "js": ["content.js"]
+        }
+      ]
+}
