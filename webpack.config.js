@@ -16,6 +16,12 @@ module.exports = {
         rules: [
             {test: /\.(png|svg|jpg|gif)$/, use: 'file-loader'},
             {test: /\.css$/, use: ['style-loader', 'css-loader']},
+            {
+                enforce: "pre",
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: "eslint-loader",
+            },
         ]
     },
     plugins: [

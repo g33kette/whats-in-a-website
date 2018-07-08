@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -15,8 +16,12 @@
   "author": "Joanne Buxton",
   "license": "ISC",
   "devDependencies": {
+    "babel-eslint": "^8.2.5",
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^1.0.0",
+    "eslint": "^5.0.1",
+    "eslint-config-google": "^0.9.1",
+    "eslint-loader": "^2.0.0",
     "file-loader": "^1.1.11",
     "style-loader": "^0.21.0",
     "webpack": "^4.15.1",
