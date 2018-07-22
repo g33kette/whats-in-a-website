@@ -3,20 +3,17 @@
   "name": "Browser Protect",
   "description": "Plugin to detect harmful website content.",
   "version": "0.1",
-  "permissions": ["storage"],
-  "background": [
-    {
-      "todo I think this should be replace the content load bit below":"",
-      "matches": ["<all_urls>"],
-      "js": ["app.js"]
-    }
-  ],
+  "permissions": ["storage", "<all_urls>", "webRequest", "webRequestBlocking", "webNavigation"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
   "content_scripts": [
     {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": ["app.js"]
+      "matches": ["*://*.bbc.co.uk/"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "css": ["assets/css/style.css"]
     }
   ]
 }

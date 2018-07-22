@@ -4,9 +4,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
     mode: 'production',
     entry: {
-        app: './src/app.js',
-        // manifest: './src/manifest.json'
-        // styles: './src/style.css'
+        background: './src/background.js',
+        content: './src/content.js'
+        // manifest: './static/manifest.json',
+        // styles: './src/assets/css/style.css'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
