@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Browser Protect",
+  "description": "Plugin to detect harmful website content.",
+  "version": "0.1",
+  "permissions": ["storage", "<all_urls>", "webRequest", "webRequestBlocking", "webNavigation"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.bbc.co.uk/"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "css": ["assets/css/style.css"]
+    }
+  ]
+}

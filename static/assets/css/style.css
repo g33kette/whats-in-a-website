@@ -1,0 +1,39 @@
+#bp {
+    z-index: 999999999999999999999999999999999999999999999999999999999;
+    font-size: 20px;
+    color: #7bff68;
+    background: #2e2e2e;
+    height: 100vh;
+    overflow: auto;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    font-family: 'Share Tech Mono', monospace;
+}
+    #bp h1, #bp h2, #bp h3, #bp h4, #bp #h5 {
+        font-weight: normal;
+    }
+    #bp .loading {
+        height: 100%;
+    }
+    #bp .loading .loading-status {
+            position: relative;
+            top: 35%;
+        }
+        #bp .loading .loading-status i {
+            font-size: 30px;
+            margin: 40px 20px;
+            color: #666666;
+        }
+    #bp .footer {
+        color: #666666;
+        position: fixed;
+        bottom: 0;
+        background: #000;
+        width: 100%;
+    }
+        #bp .footer .bpText {
+            font-weight: bold;
+            font-style: italic;
+            color: #57b449;
+        }
