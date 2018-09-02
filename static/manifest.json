@@ -15,5 +15,14 @@
       "run_at": "document_start",
       "css": ["assets/css/style.css"]
     }
-  ]
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/img/logo16.png",
+      "24": "assets/img/logo24.png",
+      "32": "assets/img/logo32.png"
+    },
+    "default_title": "Browser Protect",
+    "default_popup": "pages/browser_actions.html"
+  }
 }

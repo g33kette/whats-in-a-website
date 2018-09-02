@@ -1,22 +1,81 @@
-#bp {
-    z-index: 999999999999999999999999999999999999999999999999999999999;
-    font-size: 20px;
+/**
+ * Scope general styles inside "browser-protect" class
+ */
+.browser-protect {
     color: #7bff68;
     background: #2e2e2e;
+    font-family: 'Share Tech Mono', monospace;
+}
+    .browser-protect h1,
+    .browser-protect h2,
+    .browser-protect h3,
+    .browser-protect h4,
+    .browser-protect #h5 {
+        font-weight: normal;
+    }
+
+    .browser-protect hr {
+        border-color: #666666;
+    }
+
+    .browser-protect label {}
+
+    .browser-protect .tag {
+        display: inline-block;
+        padding: 5px;
+        border-radius: 5px;
+    }
+        .browser-protect .tag.tag-success {
+            background-color: #7bff68;
+            color: #000000;
+        }
+        .browser-protect .tag.tag-danger {
+            background-color: #ff2c2c;
+            color: #ffffff;
+        }
+        .browser-protect .tag.tag-disabled {
+            background-color: #666666;
+            color: #eeeeee;
+        }
+
+    .browser-protect button {
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: #cccccc;
+        color: #000000;
+        font-weight: bold;
+        cursor: pointer;
+        font-family: 'Share Tech Mono', monospace;
+    }
+    .browser-protect button:hover {
+        background-color: #dddddd;
+    }
+
+    .browser-protect .align-left {
+        float: left;
+    }
+    .browser-protect .align-right {
+        float: right;
+    }
+    .browser-protect .clear-float {
+        clear: both;
+    }
+/**
+ * Scope content overly within "bp" ID
+ */
+#bp {
+    z-index: 999999999999999999999999999999999999999999999999999999999; /* Ensure this is displayed above ANY content */
+    font-size: 20px;
     height: 100vh;
     overflow: auto;
     position: fixed;
     width: 100%;
     text-align: center;
-    font-family: 'Share Tech Mono', monospace;
 }
-    #bp h1, #bp h2, #bp h3, #bp h4, #bp #h5 {
-        font-weight: normal;
-    }
     #bp .loading {
         height: 100%;
     }
-    #bp .loading .loading-status {
+        #bp .loading .loading-status {
             position: relative;
             top: 35%;
         }
@@ -37,3 +96,9 @@
             font-style: italic;
             color: #57b449;
         }
+/**
+ * Scope "browser_action" menu within "bp_menu" ID
+ */
+#bp_menu {
+    width: 400px;
+}
