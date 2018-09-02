@@ -5,9 +5,8 @@ module.exports = {
     mode: 'production',
     entry: {
         background: './src/background.js',
-        content: './src/content.js'
-        // manifest: './static/manifest.json',
-        // styles: './src/assets/css/style.css'
+        content: './src/content.js',
+        menu: './src/menu.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),

@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-let container = $('<div id="bp">' +
+let container = $('<div id="bp" class="browser-protect">' +
     '<div class="footer">' +
     '<p>Browsing Protected by <span class="bpText">BrowserProtect</span></p>' +
     '</div>' +
