@@ -2,34 +2,30 @@
 // Action Types --------------------------------------------------------------------------------------------------------
 
 /**
- * SET_MESSAGE
- * @type {string}
- */
-export const SET_MESSAGE = 'setMessage';
-
-/**
  * SET_ENABLED
  * @type {string}
  */
 export const SET_ENABLED = 'setEnabled';
 
 /**
+ * SET_MESSAGE
+ * @type {string}
+ */
+export const SET_SESSION_MESSAGE = 'setSessionMessage';
+
+/**
  * SET_LOADING
  * @type {string}
  */
-export const SET_LOADING = 'setLoading';
-
-// Action Creators -----------------------------------------------------------------------------------------------------
+export const SET_SESSION_LOADING = 'setSessionLoading';
 
 /**
- * Set Message
- *
- * @param {string} message
- * @return {{type: string, message: *}}
+ * CLEAR_SESSION
+ * @type {string}
  */
-export function setMessage(message) {
-    return {type: SET_MESSAGE, message};
-}
+export const CLEAR_SESSION = 'clearSession';
+
+// Action Creators -----------------------------------------------------------------------------------------------------
 
 /**
  * Set Enabled
@@ -42,11 +38,30 @@ export function setEnabled(enabled) {
 }
 
 /**
- * Set Loading
+ * Set Session Message
+ *
+ * @param {string} message
+ * @return {{type: string, message: *}}
+ */
+export function setSessionMessage(message) {
+    return {type: SET_SESSION_MESSAGE, message};
+}
+
+/**
+ * Set Session Loading
  *
  * @param {bool} loading
  * @return {{type: string, loading: *}}
  */
-export function setLoading(loading) {
-    return {type: SET_LOADING, loading};
+export function setSessionLoading(loading) {
+    return {type: SET_SESSION_LOADING, loading};
+}
+
+/**
+ * Clear Session
+ *
+ * @return {{type: string}}
+ */
+export function clearSession() {
+    return {type: SET_SESSION_LOADING};
 }

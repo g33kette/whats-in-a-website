@@ -1,14 +1,13 @@
 import $ from 'jquery';
 
 import {hideContent} from './contentInterface';
-import store from './../scripts/store/store';
-import {setMessage} from './../scripts/store/actions';
+import {setSessionMessage} from './../scripts/store/actions';
 
-let parseContent = () => {
+let parseContent = (store) => {
     return new Promise((resolve) => {
-        hideContent().then(() => {
+        hideContent(store).then(() => {
             setTimeout(() => { // Wait 5 seconds for network content to load
-                store.dispatch(setMessage('[2] Processing page...'));
+                store.dispatch(setSessionMessage('[2] Processing page...'));
                 resolve($('body').text());
             }, 5000);
         });

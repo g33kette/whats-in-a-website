@@ -1,12 +1,11 @@
 import $ from 'jquery';
-import store from './../scripts/store/store';
-import {setMessage, setLoading} from './../scripts/store/actions';
+import {setSessionMessage, setSessionLoading} from './../scripts/store/actions';
 
 let frame = $('<iframe ' +
     'style="width: 100%; height: 100vh; z-index: 999999999999999999999999999999999999999999999999; position: fixed;" ' +
     'src="'+chrome.runtime.getURL('pages/protection_overlay.html')+'"></iframe>');
 
-let hideContent = () => {
+let hideContent = (store) => {
     return new Promise((resolve) => {
         let page = $('html');
         page.hide();
@@ -16,8 +15,8 @@ let hideContent = () => {
             body.prepend(frame);
             setTimeout(() => { // Allow time for iFrame to load
                 page.show();
-                store.dispatch(setMessage('[1] Reading page...'));
-                store.dispatch(setLoading(true));
+                store.dispatch(setSessionMessage('[1] Reading page...'));
+                store.dispatch(setSessionLoading(true));
                 resolve();
             }, 500);
         });

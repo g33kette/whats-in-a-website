@@ -1,33 +1,48 @@
 import {createStore} from 'redux';
-import {bpState} from './reducers';
-import {setEnabled, setLoading, setMessage} from './actions';
+import {bpState, getInitialState} from './reducers';
+
+const mapFromStorage = ['enabled', 'session'];
 
 /**
- * Load State From Local Storage
+ * Create Store From Local Storage
  *
- * @param {*} store
  * @return {Promise<any>}
  */
-export function loadStateFromLocalStorage(store) {
+export function createStoreFromLocalStorage() {
+    console.log('createStoreFromLocalStorage');
     return new Promise((resolve) => {
-        chrome.storage.sync.get(['bpEnabled', 'bpLoading', 'bpMessage'], (result) => {
-            /**
-             * OnLoad - Check local storage, only parse content if the protection is enabled.
-             */
-            if (typeof result.bpEnabled !== 'undefined') {
-                store.dispatch(setEnabled(result.bpEnabled));
+        chrome.storage.sync.get(mapFromStorage, (localStorage) => {
+            let state = getInitialState();
+            for (let key of mapFromStorage) {
+                if (typeof localStorage[key] !== 'undefined') {
+                    let assign = {};
+                    assign[key] = typeof localStorage[key] === 'object'?
+                        Object.assign({}, localStorage[key])
+                        :localStorage[key];
+                    state = Object.assign(state, assign);
+                }
             }
-            if (typeof result.bpLoading !== 'undefined') {
-                store.dispatch(setLoading(result.bpLoading));
-            }
-            if (typeof result.bpMessage !== 'undefined') {
-                store.dispatch(setMessage(result.bpMessage));
-            }
-            resolve();
+            console.log('createStore', state);
+            resolve(createStore(bpState, state));
         });
     });
 }
 
-// Create and export store
-const store = createStore(bpState);
-export default store;
+/**
+ * Subscribe To Store Changes
+ *
+ * @param {object} store
+ * @param {function} callback
+ */
+export function subscribeToStoreChanges(store, callback) {
+    store.subscribe(() => callback(store.getState(), 'storeChange'));
+    chrome.storage.onChanged.addListener(function(changes, namespace) {
+        for (let key in changes) {
+            if (changes.hasOwnProperty(key) && mapFromStorage.indexOf(key) >= 0) {
+                let change = {};
+                change[key] = changes[key].newValue;
+                callback(change, 'localStorageChange');
+            }
+        }
+    });
+}

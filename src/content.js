@@ -1,14 +1,16 @@
 import {parseContent} from './scripts/contentProtect';
-import store, {loadStateFromLocalStorage} from './scripts/store/store';
-import {setMessage} from './scripts/store/actions';
+import {createStoreFromLocalStorage, subscribeToStoreChanges} from './scripts/store/store';
+import {setSessionMessage} from './scripts/store/actions';
 
-store.subscribe(() => {
-    console.log('stateChanged content.js', store.getState());
-});
-
-loadStateFromLocalStorage.then(() => {
+createStoreFromLocalStorage().then((store) => {
+    subscribeToStoreChanges(store, (newState, debug) => {
+        console.log('stateChanged content.js', newState, debug);
+    });
+    /**
+     * OnLoad - Check local storage, only parse content if the protection is enabled.
+     */
     if (store.getState().enabled) {
-        parseContent().then(finit);
+        parseContent(store).then((content) => finit(content, store));
     }
 });
 
@@ -16,11 +18,12 @@ loadStateFromLocalStorage.then(() => {
  * Finit - WIP method after content is parsed
  *
  * @param {string} content
+ * @param {object} store
  */
-let finit = (content) => {
+function finit(content, store) {
     setTimeout(() => { // Fakin' it.
-        store.dispatch(setMessage('Done.'));
+        store.dispatch(setSessionMessage('Done.'));
         console.log('Contented.');
         // console.log(content);
     }, 2000);
-};
+}

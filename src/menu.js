@@ -1,13 +1,19 @@
 import $ from 'jquery';
+import {createStoreFromLocalStorage, subscribeToStoreChanges} from './scripts/store/store';
+import {setEnabled} from './scripts/store/actions';
 
-// Initial load, get status
-getStatusFromStorage(showStatus);
-
-// Register DOM interaction on ready
-$(document).ready(function() {
-    $('body').on('click', '.bp-status-toggle', () => {
-        getStatusFromStorage((bpEnabled) => {
-            setStatusInStorage(!bpEnabled, showStatus);
+createStoreFromLocalStorage().then((store) => {
+    subscribeToStoreChanges(store, (newState, debug) => {
+        // alert('stateChanged menu.js '+debug);
+    });
+    // Initial load, get status
+    showStatus(store.getState().enabled);
+    // Register DOM interaction on ready
+    $(document).ready(function() {
+        $('body').on('click', '.bp-status-toggle', () => {
+            let enabled = !store.getState().enabled;
+            store.dispatch(setEnabled(enabled));
+            showStatus(enabled);
         });
     });
 });
@@ -29,25 +35,3 @@ function showStatus(enabled) {
     }
 }
 
-/**
- * Get Status From Storage
- *
- * @param {function} callback(bpEnabled)
- */
-function getStatusFromStorage(callback) {
-    chrome.storage.sync.get(['bpEnabled'], function(result) {
-        callback(result.bpEnabled);
-    });
-}
-
-/**
- * Set Status In Storage
- *
- * @param {boolean} enabled
- * @param {function} callback(bpEnabled)
- */
-function setStatusInStorage(enabled, callback) {
-    chrome.storage.sync.set({bpEnabled: enabled}, function() {
-        callback(enabled);
-    });
-}
