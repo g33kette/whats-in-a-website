@@ -49,24 +49,6 @@ export function createStoreFromLocalStorage() {
     });
 }
 
-// /**
-//  * Subscribe To Store Changes
-//  *
-//  * @param {object} store
-//  * @param {function} callback
-//  */
-// export function subscribeToStoreChanges(store, callback) {
-//     store.subscribe(() => callback(store.getState()));
-//     chrome.storage.onChanged.addListener(function(changes) {
-//         for (let key in changes) {
-//             if (changes.hasOwnProperty(key) && typeof mapFromStorage[key] !== 'undefined') {
-//                 applyToStoreFromLocalStorage(store, mapFromStorage[key], changes[key].newValue);
-//             }
-//         }
-//         callback(store.getState());
-//     });
-// }
-
 /**
  * Apply To Store From Local Storage
  *
