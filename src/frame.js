@@ -1,19 +1,18 @@
-import {createStoreFromLocalStorage, subscribeToStoreChanges} from './scripts/store/store';
+import {createStoreFromLocalStorage} from './scripts/store/store';
 import $ from 'jquery';
-
-let loader = $('.loading');
-
 createStoreFromLocalStorage().then((store) => {
-    let displayLoadingScreen = (loading) => loading?loader.show():loader.hide();
-    let updateLoadingMessage = (message) => loader.find('.message').html(message);
+    let loadingElement;
+    let messageElement;
+    $(document).ready(function() {
+        loadingElement = $('.loading');
+        messageElement = $('.message');
+    });
+    let displayLoadingScreen = (loading) => loading?loadingElement.show():loadingElement.hide();
+    let updateLoadingMessage = (message) => messageElement.html(message);
 
-    console.log('loader', loader.outerHtml);
-    console.log('state', store.getState());
-
-    subscribeToStoreChanges(store, (newState, debug) => {
-        console.log('stateChanged frame.js', newState, debug, store.getState());
-        displayLoadingScreen(store.getState().loading);
-        updateLoadingMessage(store.getState().message);
+    store.subscribe(() => {
+        displayLoadingScreen(store.getState().scan.loading);
+        updateLoadingMessage(store.getState().scan.message);
     });
 });
 

@@ -1,11 +1,8 @@
 import $ from 'jquery';
-import {createStoreFromLocalStorage, subscribeToStoreChanges} from './scripts/store/store';
+import {createStoreFromLocalStorage} from './scripts/store/store';
 import {setEnabled} from './scripts/store/actions';
 
 createStoreFromLocalStorage().then((store) => {
-    subscribeToStoreChanges(store, (newState, debug) => {
-        // alert('stateChanged menu.js '+debug);
-    });
     // Initial load, get status
     showStatus(store.getState().enabled);
     // Register DOM interaction on ready

@@ -1,18 +1,4 @@
 
-import {getEmptySession} from './scripts/store/reducers';
-
-/**
- * Clear local storage session on start up
- */
-chrome.runtime.onStartup.addListener(function() {
-    // todo this is not firing, actually want it to reset on each page load. maybe should rename it to something
-    // todo that's not session?
-    console.log('clear session');
-    chrome.storage.sync.set({session: getEmptySession()});
-});
-
-//
-//
 
 chrome.webNavigation.onCommitted.addListener(function(details) {
         // https://developer.chrome.com/extensions/content_scripts

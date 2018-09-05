@@ -8,22 +8,22 @@
 export const SET_ENABLED = 'setEnabled';
 
 /**
- * SET_MESSAGE
+ * SET_SCAN_MESSAGE
  * @type {string}
  */
-export const SET_SESSION_MESSAGE = 'setSessionMessage';
+export const SET_SCAN_MESSAGE = 'setScanMessage';
 
 /**
- * SET_LOADING
+ * SET_SCAN_LOADING
  * @type {string}
  */
-export const SET_SESSION_LOADING = 'setSessionLoading';
+export const SET_SCAN_LOADING = 'setScanLoading';
 
 /**
- * CLEAR_SESSION
+ * RESET_SCAN
  * @type {string}
  */
-export const CLEAR_SESSION = 'clearSession';
+export const RESET_SCAN = 'resetScan';
 
 // Action Creators -----------------------------------------------------------------------------------------------------
 
@@ -31,37 +31,41 @@ export const CLEAR_SESSION = 'clearSession';
  * Set Enabled
  *
  * @param {bool} enabled
+ * @param {string|undefined} [source]
  * @return {{type: string, enabled: *}}
  */
-export function setEnabled(enabled) {
-    return {type: SET_ENABLED, enabled};
+export function setEnabled(enabled, source) {
+    return {type: SET_ENABLED, enabled, source};
 }
 
 /**
- * Set Session Message
+ * Set Scan Message
  *
  * @param {string} message
+ * @param {string|undefined} [source]
  * @return {{type: string, message: *}}
  */
-export function setSessionMessage(message) {
-    return {type: SET_SESSION_MESSAGE, message};
+export function setScanMessage(message, source) {
+    return {type: SET_SCAN_MESSAGE, message, source};
 }
 
 /**
- * Set Session Loading
+ * Set Scan Loading
  *
  * @param {bool} loading
+ * @param {string|undefined} [source]
  * @return {{type: string, loading: *}}
  */
-export function setSessionLoading(loading) {
-    return {type: SET_SESSION_LOADING, loading};
+export function setScanLoading(loading, source) {
+    return {type: SET_SCAN_LOADING, loading, source};
 }
 
 /**
- * Clear Session
+ * Reset Scan
  *
+ * @param {string|undefined} [source]
  * @return {{type: string}}
  */
-export function clearSession() {
-    return {type: SET_SESSION_LOADING};
+export function resetScan(source) {
+    return {type: RESET_SCAN, source};
 }

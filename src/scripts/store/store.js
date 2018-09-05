@@ -1,7 +1,19 @@
 import {createStore} from 'redux';
 import {bpState, getInitialState} from './reducers';
 
-const mapFromStorage = ['enabled', 'session'];
+import {
+    setEnabled,
+    setScanLoading,
+    setScanMessage,
+} from './actions';
+
+const mapFromStorage = {
+    'enabled': setEnabled,
+    'scan': {
+        'loading': setScanLoading,
+        'message': setScanMessage,
+    },
+};
 
 /**
  * Create Store From Local Storage
@@ -9,40 +21,67 @@ const mapFromStorage = ['enabled', 'session'];
  * @return {Promise<any>}
  */
 export function createStoreFromLocalStorage() {
-    console.log('createStoreFromLocalStorage');
     return new Promise((resolve) => {
-        chrome.storage.sync.get(mapFromStorage, (localStorage) => {
+        chrome.storage.sync.get(Object.keys(mapFromStorage), (localStorage) => {
             let state = getInitialState();
-            for (let key of mapFromStorage) {
-                if (typeof localStorage[key] !== 'undefined') {
-                    let assign = {};
-                    assign[key] = typeof localStorage[key] === 'object'?
-                        Object.assign({}, localStorage[key])
-                        :localStorage[key];
-                    state = Object.assign(state, assign);
+            for (let key in mapFromStorage) {
+                if (mapFromStorage.hasOwnProperty(key)) {
+                    if (typeof localStorage[key] !== 'undefined') {
+                        let assign = {};
+                        assign[key] = typeof localStorage[key] === 'object' ?
+                            Object.assign({}, localStorage[key])
+                            : localStorage[key];
+                        state = Object.assign(state, assign);
+                    }
                 }
             }
-            console.log('createStore', state);
-            resolve(createStore(bpState, state));
+            let store = createStore(bpState, state);
+            // Add local storage listener
+            chrome.storage.onChanged.addListener((changes) => {
+                for (let key in changes) {
+                    if (changes.hasOwnProperty(key) && typeof mapFromStorage[key] !== 'undefined') {
+                        applyToStoreFromLocalStorage(store, mapFromStorage[key], changes[key].newValue);
+                    }
+                }
+            });
+            resolve(store);
         });
     });
 }
 
+// /**
+//  * Subscribe To Store Changes
+//  *
+//  * @param {object} store
+//  * @param {function} callback
+//  */
+// export function subscribeToStoreChanges(store, callback) {
+//     store.subscribe(() => callback(store.getState()));
+//     chrome.storage.onChanged.addListener(function(changes) {
+//         for (let key in changes) {
+//             if (changes.hasOwnProperty(key) && typeof mapFromStorage[key] !== 'undefined') {
+//                 applyToStoreFromLocalStorage(store, mapFromStorage[key], changes[key].newValue);
+//             }
+//         }
+//         callback(store.getState());
+//     });
+// }
+
 /**
- * Subscribe To Store Changes
+ * Apply To Store From Local Storage
  *
  * @param {object} store
- * @param {function} callback
+ * @param {object|string} storageFunction
+ * @param {*} value
  */
-export function subscribeToStoreChanges(store, callback) {
-    store.subscribe(() => callback(store.getState(), 'storeChange'));
-    chrome.storage.onChanged.addListener(function(changes, namespace) {
-        for (let key in changes) {
-            if (changes.hasOwnProperty(key) && mapFromStorage.indexOf(key) >= 0) {
-                let change = {};
-                change[key] = changes[key].newValue;
-                callback(change, 'localStorageChange');
+function applyToStoreFromLocalStorage(store, storageFunction, value) {
+    if (typeof storageFunction === 'function') {
+        store.dispatch(storageFunction(value, 'storage'));
+    } else {
+        for (let key in storageFunction) {
+            if (storageFunction.hasOwnProperty(key) && typeof value[key] !== 'undefined') {
+                applyToStoreFromLocalStorage(store, storageFunction[key], value[key]);
             }
         }
-    });
+    }
 }

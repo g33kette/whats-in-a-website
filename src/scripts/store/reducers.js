@@ -1,28 +1,28 @@
 import {
     SET_ENABLED,
-    SET_SESSION_MESSAGE,
-    SET_SESSION_LOADING,
-    CLEAR_SESSION,
+    SET_SCAN_MESSAGE,
+    SET_SCAN_LOADING,
+    RESET_SCAN,
 } from './actions';
 
 /**
- * Get Empty Session
+ * Get Initial State
  *
  * @return {*}
  */
 export function getInitialState() {
     return {
         enabled: false,
-        session: getEmptySession(),
+        scan: getNewScan(),
     };
 }
 
 /**
- * Get Empty Session
+ * Get New Scan
  *
  * @return {*}
  */
-export function getEmptySession() {
+export function getNewScan() {
     return {
         message: '',
         loading: true,
@@ -39,21 +39,23 @@ export function getEmptySession() {
 export function bpState(state = getInitialState(), action) {
     switch (action.type) {
         case SET_ENABLED:
-            return persistToStateAndStorage('enabled', action.enabled, state);
-        case SET_SESSION_MESSAGE:
+            return persistToStateAndStorage('enabled', action.enabled, state, action.source);
+        case SET_SCAN_MESSAGE:
             return persistToStateAndStorage(
-                'session',
-                Object.assign({}, state.session, {message: action.message}),
-                state
+                'scan',
+                Object.assign({}, state.scan, {message: action.message}),
+                state,
+                action.source
             );
-        case SET_SESSION_LOADING:
+        case SET_SCAN_LOADING:
             return persistToStateAndStorage(
-                'session',
-                Object.assign({}, state.session, {loading: action.loading}),
-                state
+                'scan',
+                Object.assign({}, state.scan, {loading: action.loading}),
+                state,
+                action.source
             );
-        case CLEAR_SESSION:
-            return persistToStateAndStorage('session', getEmptySession(), state);
+        case RESET_SCAN:
+            return persistToStateAndStorage('scan', getNewScan(), state, action.source);
         default:
             return state;
     }
@@ -65,14 +67,16 @@ export function bpState(state = getInitialState(), action) {
  * @param {string} key
  * @param {*} value
  * @param {object} state
+ * @param {string|undefined} source
  * @return {object}
  */
-function persistToStateAndStorage(key, value, state) {
-    console.log('persistToStateAndStorage', key, value);
+function persistToStateAndStorage(key, value, state, source) {
     let assignValue = {};
     assignValue[key] = value;
-    chrome.storage.sync.set(assignValue, () => {
-        console.log('saved to storage', assignValue);
-    });
+    if (source !== 'storage') {
+        // console.log('update storage', assignValue);
+        chrome.storage.sync.set(assignValue);
+    }
+    // console.log('update state', assignValue);
     return Object.assign({}, state, assignValue);
 }

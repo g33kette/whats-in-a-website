@@ -72,14 +72,17 @@
     width: 100%;
     text-align: center;
 }
-    #bp .loading {
+    #bp .main-content {
         height: 100%;
     }
-        #bp .loading .loading-status {
+        #bp .main-content .message {
+            margin-top: 10%;
+        }
+        #bp .main-content .loading {
             position: relative;
             top: 35%;
         }
-        #bp .loading .loading-status i {
+        #bp .main-content .loading i {
             font-size: 30px;
             margin: 40px 20px;
             color: #666666;
