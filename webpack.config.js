@@ -6,7 +6,8 @@ module.exports = {
     entry: {
         background: './src/background.js',
         content: './src/content.js',
-        menu: './src/menu.js'
+        menu: './src/menu.js',
+        frame: './src/frame.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),

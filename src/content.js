@@ -1,13 +1,11 @@
 import {parseContent} from './scripts/contentProtect';
-import {updateLoadingMessage} from './scripts/contentInterface';
-import $ from 'jquery';
+import {createStoreFromLocalStorage} from './scripts/store/store';
+import {setScanMessage, setScanLoading} from './scripts/store/actions';
 
-/**
- * OnLoad - Check local storage, only parse content if the protection is enabled.
- */
-chrome.storage.sync.get(['bpEnabled'], function(result) {
-    if (result.bpEnabled) {
-        parseContent().then(finit);
+createStoreFromLocalStorage().then((store) => {
+    /* OnLoad - Check local storage, only parse content if the protection is enabled. */
+    if (store.getState().enabled) {
+        parseContent(store).then((content) => finit(content, store));
     }
 });
 
@@ -15,13 +13,13 @@ chrome.storage.sync.get(['bpEnabled'], function(result) {
  * Finit - WIP method after content is parsed
  *
  * @param {string} content
+ * @param {object} store
  */
-let finit = (content) => {
+function finit(content, store) {
     setTimeout(() => { // Fakin' it.
-        updateLoadingMessage('Done.');
-        $('#bp .loading')
-            .append($('<textarea style="position: relative; width: 80%; height: 30vh; margin-top: 25%;" />')
-                .text(content));
+        store.dispatch(setScanMessage('Done.'));
+        store.dispatch(setScanLoading(false));
         console.log('Contented.');
+        // console.log(content);
     }, 2000);
-};
+}
