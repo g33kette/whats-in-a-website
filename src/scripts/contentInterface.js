@@ -2,7 +2,8 @@ import $ from 'jquery';
 import {setScanMessage, setScanLoading} from './../scripts/store/actions';
 
 let frame = $('<iframe ' +
-    'style="width: 100%; height: 100vh; z-index: 999999999999999999999999999999999999999999999999; position: fixed;" ' +
+    'style="width: 100% !important; height: 100vh !important; top: 0 !important; right: 0 !important; ' +
+    'position: fixed !important; z-index: 9999999999999999999999999999999999999999999999999999999999999 !important;" ' +
     'src="'+chrome.runtime.getURL('pages/protection_overlay.html')+'"></iframe>');
 
 let hideContent = (store) => {
