@@ -1,8 +1,10 @@
 import {
     SET_ENABLED,
-    SET_SCAN_MESSAGE,
-    SET_SCAN_LOADING,
-    RESET_SCAN,
+    SET_PROCESSING_MESSAGE,
+    SET_PROCESSING_LOADING,
+    RESET_PROCESSING,
+    SET_REMOVE_FRAME,
+    SET_ACTIVE_TAB_ID,
 } from './actions';
 
 /**
@@ -13,16 +15,18 @@ import {
 export function getInitialState() {
     return {
         enabled: false,
-        scan: getNewScan(),
+        activeTabId: null,
+        removeFrame: false,
+        processing: getNewProcessing(),
     };
 }
 
 /**
- * Get New Scan
+ * Get New Processing
  *
  * @return {*}
  */
-export function getNewScan() {
+export function getNewProcessing() {
     return {
         message: '',
         loading: true,
@@ -40,22 +44,26 @@ export function bpState(state = getInitialState(), action) {
     switch (action.type) {
         case SET_ENABLED:
             return persistToStateAndStorage('enabled', action.enabled, state, action.source);
-        case SET_SCAN_MESSAGE:
+        case SET_ACTIVE_TAB_ID:
+            return persistToStateAndStorage('activeTabId', action.id, state, action.source);
+        case SET_REMOVE_FRAME:
+            return persistToStateAndStorage('removeFrame', action.remove, state, action.source);
+        case SET_PROCESSING_MESSAGE:
             return persistToStateAndStorage(
-                'scan',
-                Object.assign({}, state.scan, {message: action.message}),
+                'processing',
+                Object.assign({}, state.processing, {message: action.message}),
                 state,
                 action.source
             );
-        case SET_SCAN_LOADING:
+        case SET_PROCESSING_LOADING:
             return persistToStateAndStorage(
-                'scan',
-                Object.assign({}, state.scan, {loading: action.loading}),
+                'processing',
+                Object.assign({}, state.processing, {loading: action.loading}),
                 state,
                 action.source
             );
-        case RESET_SCAN:
-            return persistToStateAndStorage('scan', getNewScan(), state, action.source);
+        case RESET_PROCESSING:
+            return persistToStateAndStorage('processing', getNewProcessing(), state, action.source);
         default:
             return state;
     }

@@ -8,22 +8,34 @@
 export const SET_ENABLED = 'setEnabled';
 
 /**
- * SET_SCAN_MESSAGE
+ * SET_PROCESSING_MESSAGE
  * @type {string}
  */
-export const SET_SCAN_MESSAGE = 'setScanMessage';
+export const SET_PROCESSING_MESSAGE = 'setProcessingMessage';
 
 /**
- * SET_SCAN_LOADING
+ * SET_PROCESSING_LOADING
  * @type {string}
  */
-export const SET_SCAN_LOADING = 'setScanLoading';
+export const SET_PROCESSING_LOADING = 'setProcessingLoading';
 
 /**
- * RESET_SCAN
+ * RESET_PROCESSING
  * @type {string}
  */
-export const RESET_SCAN = 'resetScan';
+export const RESET_PROCESSING = 'resetProcessing';
+
+/**
+ * SET_REMOVE_FRAME
+ * @type {string}
+ */
+export const SET_REMOVE_FRAME = 'setRemoveFrame';
+
+/**
+ * SET_ACTIVE_TAB_ID
+ * @type {string}
+ */
+export const SET_ACTIVE_TAB_ID = 'setActiveTabId';
 
 // Action Creators -----------------------------------------------------------------------------------------------------
 
@@ -39,33 +51,55 @@ export function setEnabled(enabled, source) {
 }
 
 /**
- * Set Scan Message
+ * Set Processing Message
  *
  * @param {string} message
  * @param {string|undefined} [source]
  * @return {{type: string, message: *}}
  */
-export function setScanMessage(message, source) {
-    return {type: SET_SCAN_MESSAGE, message, source};
+export function setProcessingMessage(message, source) {
+    return {type: SET_PROCESSING_MESSAGE, message, source};
 }
 
 /**
- * Set Scan Loading
+ * Set Processing Loading
  *
  * @param {bool} loading
  * @param {string|undefined} [source]
  * @return {{type: string, loading: *}}
  */
-export function setScanLoading(loading, source) {
-    return {type: SET_SCAN_LOADING, loading, source};
+export function setProcessingLoading(loading, source) {
+    return {type: SET_PROCESSING_LOADING, loading, source};
 }
 
 /**
- * Reset Scan
+ * Reset Processing
  *
  * @param {string|undefined} [source]
  * @return {{type: string}}
  */
-export function resetScan(source) {
-    return {type: RESET_SCAN, source};
+export function resetProcessing(source) {
+    return {type: RESET_PROCESSING, source};
+}
+
+/**
+ * Set Remove Frame
+ *
+ * @param {boolean} remove
+ * @param {string|undefined} [source]
+ * @return {{type: string}}
+ */
+export function setRemoveFrame(remove, source) {
+    return {type: SET_REMOVE_FRAME, remove, source};
+}
+
+/**
+ * Set Active Tab ID
+ *
+ * @param {int} id
+ * @param {string|undefined} [source]
+ * @return {{type: string}}
+ */
+export function setActiveTabId(id, source) {
+    return {type: SET_ACTIVE_TAB_ID, id, source};
 }

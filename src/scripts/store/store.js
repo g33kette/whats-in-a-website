@@ -3,15 +3,19 @@ import {bpState, getInitialState} from './reducers';
 
 import {
     setEnabled,
-    setScanLoading,
-    setScanMessage,
+    setRemoveFrame,
+    setActiveTabId,
+    setProcessingLoading,
+    setProcessingMessage,
 } from './actions';
 
 const mapFromStorage = {
     'enabled': setEnabled,
-    'scan': {
-        'loading': setScanLoading,
-        'message': setScanMessage,
+    'removeFrame': setRemoveFrame(),
+    'activeTabId': setActiveTabId(),
+    'processing': {
+        'loading': setProcessingLoading,
+        'message': setProcessingMessage,
     },
 };
 

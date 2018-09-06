@@ -3,7 +3,7 @@
   "name": "Browser Protect",
   "description": "Plugin to detect harmful website content.",
   "version": "0.1",
-  "permissions": ["storage", "<all_urls>", "webRequest", "webRequestBlocking", "webNavigation"],
+  "permissions": ["storage", "<all_urls>", "tabs", "webRequest", "webRequestBlocking", "webNavigation"],
   "background": {
     "scripts": ["background.js"],
     "persistent": true

@@ -1,10 +1,11 @@
-import {parseContent} from './scripts/contentProtect';
+import parseContent from './scripts/parseContent';
 import {createStoreFromLocalStorage} from './scripts/store/store';
-import {setScanMessage, setScanLoading} from './scripts/store/actions';
+import {setProcessingMessage, setProcessingLoading, setRemoveFrame} from './scripts/store/actions';
 
 createStoreFromLocalStorage().then((store) => {
     /* OnLoad - Check local storage, only parse content if the protection is enabled. */
     if (store.getState().enabled) {
+        store.dispatch(setRemoveFrame(false)); // todo remove, this temporarily will reset
         parseContent(store).then((content) => finit(content, store));
     }
 });
@@ -17,8 +18,8 @@ createStoreFromLocalStorage().then((store) => {
  */
 function finit(content, store) {
     setTimeout(() => { // Fakin' it.
-        store.dispatch(setScanMessage('Done.'));
-        store.dispatch(setScanLoading(false));
+        store.dispatch(setProcessingMessage('Done.'));
+        store.dispatch(setProcessingLoading(false));
         console.log('Contented.');
         // console.log(content);
     }, 2000);
