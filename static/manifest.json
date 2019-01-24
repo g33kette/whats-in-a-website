@@ -26,6 +26,6 @@
       "32": "assets/img/logo32.png"
     },
     "default_title": "Browser Protect",
-    "default_popup": "pages/browser_actions.html"
+    "default_popup": "pages/menu.html"
   }
 }

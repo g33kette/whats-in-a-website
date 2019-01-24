@@ -1,26 +1,37 @@
-import parseContent from './scripts/parseContent';
-import {createStoreFromLocalStorage} from './scripts/store/store';
-import {setProcessingMessage, setProcessingLoading, setRemoveFrame} from './scripts/store/actions';
+import $ from 'jquery';
 
-createStoreFromLocalStorage().then((store) => {
-    /* OnLoad - Check local storage, only parse content if the protection is enabled. */
-    if (store.getState().enabled) {
-        store.dispatch(setRemoveFrame(false)); // todo remove, this temporarily will reset
-        parseContent(store).then((content) => finit(content, store));
+chrome.runtime.sendMessage({get: 'enabled'}, (enabled) => {
+    if (enabled) {
+        hideContent().then((content) => {
+            chrome.runtime.sendMessage({trigger: 'initialiseProcessing', content: content});
+            // chrome.tabs.query({currentWindow: true, active: true}, (tabs) => {
+            //     console.log('tabs', tabs);
+            // });
+        });
     }
 });
 
-/**
- * Finit - WIP method after content is parsed
- *
- * @param {string} content
- * @param {object} store
- */
-function finit(content, store) {
-    setTimeout(() => { // Fakin' it.
-        store.dispatch(setProcessingMessage('Done.'));
-        store.dispatch(setProcessingLoading(false));
-        console.log('Contented.');
-        // console.log(content);
-    }, 2000);
-}
+const hideContent = () => {
+    const frame = $('<iframe ' +
+        'style="width: 100% !important; height: 100vh !important; top: 0 !important; right: 0 !important; ' +
+        'position: fixed !important; z-index: 999999999999999999999999999999999999999999999999999999999 !important;" ' +
+        'src="'+chrome.runtime.getURL('pages/protection_overlay.html')+'"></iframe>');
+    const page = $('html');
+    page.hide();
+    return new Promise((resolve) => {
+        $(document).ready(() => {
+            const body = $('body');
+            const text = parseContent(body);
+            body.css('overflow', 'hidden');
+            body.prepend(frame);
+            setTimeout(() => { // Allow time for iFrame to load
+                page.show();
+            }, 500);
+            resolve(text);
+        });
+    });
+};
+
+const parseContent = (element) => {
+    return element.text();
+};
