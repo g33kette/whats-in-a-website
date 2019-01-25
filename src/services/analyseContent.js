@@ -7,10 +7,13 @@
  */
 export const prepareText = (content) => {
     return new Promise((resolve) => {
-        let preparedTextData = {};
-        setTimeout(() => { // TODO Pretending...
-            resolve(preparedTextData);
-        }, 2000);
+        const nlp = require('compromise');
+        let doc = nlp(content);
+        // Normalise Values
+        doc.normalize();
+        // Add POS Tags to output
+        const preparedTextData = doc.out('tags');
+        resolve(preparedTextData);
     });
 };
 
@@ -22,7 +25,7 @@ export const prepareText = (content) => {
  */
 export const analyseContent = (textData) => {
     return new Promise((resolve) => {
-        let result = {safe: false, summary: 'Summary of content...'};
+        let result = {safe: false, summary: JSON.stringify(textData)};
         setTimeout(() => { // TODO Pretending...
             resolve(result);
         }, 2000);
