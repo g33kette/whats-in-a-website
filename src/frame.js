@@ -1,3 +1,10 @@
+/**
+ * Frame.js
+ *
+ * This script is included in the iFrame overlay that is injected into the page to hide existing content.
+ * Some methods that manipulate content on this frame (e.g. messages) must be run here not content.js (no permissions)
+ */
+
 import $ from 'jquery';
 
 let loadingElement;
@@ -9,8 +16,14 @@ $(document).ready(function() {
     messageElement = $('.message');
     completeElement = $('.complete');
 
+    loadingElement.show();
+    messageElement.show();
+    completeElement.hide();
+
     completeElement.on('click', '#actionContinue', function() {
-        // todo store.dispatch(setRemoveFrame(true));
+        chrome.tabs.getCurrent((tab) => {
+            chrome.tabs.sendMessage(tab.id, {trigger: 'closeFrame'});
+        });
     });
 
     completeElement.on('click', '#actionClose', function() {
@@ -20,20 +33,48 @@ $(document).ready(function() {
     });
 });
 
-// let displayLoadingScreen = (loading) => {
-//     if (loading) {
-//         loadingElement.show();
-//         completeElement.hide();
-//     } else {
-//         loadingElement.hide();
-//         completeElement.show();
-//     }
-// };
-// let updateLoadingMessage = (message) => messageElement.html(message);
-//
-// store.subscribe(() => {
-//     displayLoadingScreen(store.getState().processing.loading);
-//     updateLoadingMessage(store.getState().processing.message);
-// });
+/**
+ * Listens for events to be actioned on tab
+ */
+chrome.runtime.onMessage.addListener((request) => {
+    // console.log('frame.js', request);
+    /**
+     * Trigger Events
+     */
+    switch (request.trigger) {
+        case 'showMessage':
+            updateMessage(request.message);
+            return;
+        case 'showAnalysis':
+            showAnalysis(request.result);
+            return;
+        default:
+        // Do Nothing
+    }
+});
 
+/**
+ * Update Message
+ *
+ * @param {string} message
+ */
+const updateMessage = (message) => {
+    if (messageElement) {
+        messageElement.html(message);
+    }
+};
 
+/**
+ * Show Analysis
+ *
+ * @param {object} result
+ */
+const showAnalysis = (result) => {
+    if (loadingElement) {
+        loadingElement.hide();
+    }
+    if (completeElement) {
+        completeElement.show();
+        completeElement.find('textarea').text(result.summary);
+    }
+};

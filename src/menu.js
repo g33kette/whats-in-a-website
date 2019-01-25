@@ -1,3 +1,10 @@
+/**
+ * Menu.js
+ *
+ * This script is included in the Browser Protect menu, triggered by clicking the button on the chrome menu bar.
+ * Allows extension options to be configured like logging in, enabling etc.
+ */
+
 import $ from 'jquery';
 
 $(document).ready(function() {
