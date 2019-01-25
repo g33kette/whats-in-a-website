@@ -85,7 +85,11 @@ const hideContent = () => {
 const parseContent = (element) => {
     return new Promise((resolve) => {
         setTimeout(() => { // Wait 3 seconds for network content to load
-            resolve(element.text());
+            const clone = element.clone();
+            clone.find('iframe').remove();
+            clone.find('script').remove();
+            clone.find('style').remove();
+            resolve(clone.text());
         }, 3000);
     });
 };

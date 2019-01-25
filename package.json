@@ -28,6 +28,7 @@
     "webpack-cli": "^3.0.8"
   },
   "dependencies": {
+    "compromise": "^11.13.0",
     "jquery": "^3.3.1",
     "redux": "^4.0.0"
   }
