@@ -38,7 +38,10 @@
             color: #eeeeee;
         }
 
-    .browser-protect button {
+    .browser-protect button, .browser-protect a.button,
+    .browser-protect a.button:active,
+    .browser-protect a.button:focus,
+    .browser-protect a.visited {
         padding: 5px 10px;
         border-radius: 5px;
         background-color: #cccccc;
@@ -46,8 +49,10 @@
         font-weight: bold;
         cursor: pointer;
         font-family: 'Share Tech Mono', monospace;
+        text-decoration: none;
     }
-    .browser-protect button:hover {
+    .browser-protect button:hover,
+    .browser-protect a.button:hover {
         background-color: #dddddd;
     }
 

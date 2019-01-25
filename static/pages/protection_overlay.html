@@ -10,14 +10,23 @@
 </head>
 <body class="browser-protect" id="bp">
     <div class="main-content">
-        <div class="loading">
-            <div class="loading-status">
-                <i class="fas fa-ban fa-spin"></i>
-                <i class="fas fa-ban fa-spin"></i>
-                <i class="fas fa-ban fa-spin"></i>
+        <h2 class="message"></h2>
+        <div class="processing">
+            <div class="loading">
+                <div class="loading-status">
+                    <i class="fas fa-cog fa-spin"></i>
+                    <i class="fas fa-cog fa-spin"></i>
+                    <i class="fas fa-cog fa-spin"></i>
+                </div>
             </div>
         </div>
-        <h2 class="message"></h2>
+        <div class="complete">
+            <div class="actions">
+                <button id="actionContinue">Continue to Website</button>
+                <button id="actionClose">Cancel and Close</button>
+            </div>
+            <textarea></textarea>
+        </div>
     </div>
     <div class="footer">
         <p>Browsing Protected by <span class="bpText">BrowserProtect</span></p>
