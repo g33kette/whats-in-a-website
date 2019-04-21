@@ -29,5 +29,10 @@ module.exports = {
         new CopyWebpackPlugin([
             { from: './static', to: './' }
         ] , {})
-    ]
+    ],
+    performance: {
+        hints: false,
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
+    }
 };
