@@ -31,6 +31,12 @@ $(document).ready(function() {
             chrome.tabs.remove(tab.id);
         });
     });
+
+    completeElement.on('click', '#actionGoBack', function() {
+        chrome.tabs.getCurrent(() => {
+            history.back();
+        });
+    });
 });
 
 /**
