@@ -12,3 +12,6 @@ export const setUsername = (username, source) => ({type: SET_USERNAME, username,
 
 export const SET_ENABLED = 'setEnabled';
 export const setEnabled = (enabled, source) => ({type: SET_ENABLED, enabled, source});
+
+export const SET_CORPUS = 'setCorpus';
+export const setCorpus = (corpus, source) => ({type: SET_CORPUS, corpus, source});

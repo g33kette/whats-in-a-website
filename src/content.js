@@ -86,10 +86,30 @@ const parseContent = (element) => {
     return new Promise((resolve) => {
         setTimeout(() => { // Wait 3 seconds for network content to load
             const clone = element.clone();
+            // Remove un-processable elements
             clone.find('iframe').remove();
             clone.find('script').remove();
+            clone.find('noscript').remove();
             clone.find('style').remove();
-            resolve(clone.text());
+            $.when(clone.find('*').each(function() {
+                // Add whitespace to each element, prevents words being concatenated together when only separate by tags
+                // eslint-disable-next-line
+                $(this).append(' ');
+                // Append title text into document to include in processing
+                // eslint-disable-next-line
+                if ($(this).attr('title')) {
+                    // eslint-disable-next-line
+                    $(this).append($(this).attr('title') + ' ');
+                }
+                // Append alt text into document to include in processing
+                // eslint-disable-next-line
+                if ($(this).attr('alt')) {
+                    // eslint-disable-next-line
+                    $(this).append($(this).attr('alt') + ' ');
+                }
+            })).then(() => {
+                resolve(clone.text());
+            });
         }, 3000);
     });
 };

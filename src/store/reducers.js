@@ -3,6 +3,7 @@ import {
     SET_ENCRYPTION_TOKEN,
     SET_USERNAME,
     SET_ENABLED,
+    SET_CORPUS,
 } from './actions';
 
 /**
@@ -16,6 +17,7 @@ export async function getInitialState() {
         username: null,
         enabled: false,
         tabs: [],
+        corpus: [],
     };
 }
 
@@ -36,6 +38,8 @@ export function coreReducer(state = getInitialState(), action) {
             return Object.assign({}, state, {username: action.username});
         case SET_ENABLED:
             return Object.assign({}, state, {enabled: action.enabled});
+        case SET_CORPUS:
+            return Object.assign({}, state, {corpus: action.corpus});
         default:
             return state;
     }

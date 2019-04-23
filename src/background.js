@@ -10,6 +10,7 @@ import {
     setEncryptionToken,
     setEnabled,
     setUsername,
+    setCorpus,
     overrideStateParams,
 } from './store/actions';
 import {authenticate} from './services/authentication';
@@ -119,9 +120,9 @@ function triggerPrepareProcessing(tabId) {
  */
 function triggerInitialiseProcessing(tabId, content) {
     chrome.tabs.sendMessage(tabId, {trigger: 'showMessage', message: '[2] Processing page...'});
-    prepareText(content).then((textData) => {
+    prepareText(content).then((textVector) => {
         chrome.tabs.sendMessage(tabId, {trigger: 'showMessage', message: '[3] Analysing content...'});
-        analyseContent(textData).then((result) => {
+        analyseContent(textVector).then((result) => {
             if (result.safe) {
                 chrome.tabs.sendMessage(tabId, {trigger: 'closeFrame'});
             } else {
@@ -142,7 +143,7 @@ function triggerInitialiseProcessing(tabId, content) {
  *
  * @return {boolean}
  */
-function getEnabled() {
+export function getEnabled() {
     return store.getState().enabled;
 }
 
@@ -151,8 +152,29 @@ function getEnabled() {
  *
  * @return {string}
  */
-function getUsername() {
+export function getUsername() {
     return store.getState().username;
+}
+
+/**
+ * Get: Corpus
+ *
+ * @return {string}
+ */
+export function getCorpus() {
+    return store.getState().corpus;
+}
+
+// Set Methods ---------------------------------------------------------------------------------------------------------
+
+/**
+ * Set: Corpus
+ *
+ * @param {array} corpus
+ */
+export function saveCorpus(corpus) {
+    store.dispatch(setCorpus(corpus));
+    persistToLocalStorage(getUsername(), 'corpus', corpus);
 }
 
 // Local Methods -------------------------------------------------------------------------------------------------------
@@ -196,5 +218,6 @@ async function retrieveFromLocalStorage(username, key, defaultValue = null) {
 async function loadStateParamsFromLocalStorage(username) {
     return {
         enabled: await retrieveFromLocalStorage(username, 'enabled', false),
+        corpus: await retrieveFromLocalStorage(username, 'corpus', []),
     };
 }
