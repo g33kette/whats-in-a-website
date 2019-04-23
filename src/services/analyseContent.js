@@ -1,4 +1,5 @@
 import {getCorpus, saveCorpus} from '../background';
+import {predictClassification} from './model';
 
 // * Prepare Text ------------------------------------------------------------------------------------------------------
 
@@ -70,14 +71,25 @@ const buildCorpus = (words) => {
 /**
  * Analyse Content
  *
- * @param {object} textData
+ * @param {array} textVector
  * @return {Promise}
  */
-export const analyseContent = (textData) => {
-    return new Promise((resolve) => {
-        let result = {safe: false, summary: JSON.stringify(textData)};
-        setTimeout(() => { // TODO Pretending...
-            resolve(result);
-        }, 500);
-    });
+export const analyseContent = async (textVector) => {
+    try {
+        const prediction = await predictClassification(textVector);
+        if (Object.keys(prediction.confidences).length < 2) {
+            throw new Error();
+        }
+        return {
+            safe: prediction.label === 'safe',
+            summary: prediction.label,
+            prediction: prediction,
+        };
+    } catch (e) {
+        return {
+            safe: null,
+            summary: 'Cannot classify content without both safe and harmful examples.',
+            prediction: null,
+        };
+    }
 };

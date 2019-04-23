@@ -62,12 +62,10 @@ chrome.runtime.onMessage.addListener((request) => {
                 removeTrainingFrame();
                 return;
             case 'markContentSafe':
-                console.log('markContentSafe');
-                // TODO
+                chrome.runtime.sendMessage({trigger: 'markContentSafe'});
                 return;
             case 'markContentHarmful':
-                console.log('markContentHarmful');
-                // TODO
+                chrome.runtime.sendMessage({trigger: 'markContentHarmful'});
                 return;
             default:
             // Do Nothing

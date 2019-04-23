@@ -4,6 +4,8 @@ import {
     SET_USERNAME,
     SET_ENABLED,
     SET_CORPUS,
+    SET_TAB_CONTENT,
+    SET_CLASSIFIER,
 } from './actions';
 
 /**
@@ -16,8 +18,9 @@ export async function getInitialState() {
         encryptionToken: null,
         username: null,
         enabled: false,
-        tabs: [],
+        tabs: {},
         corpus: [],
+        classifier: null,
     };
 }
 
@@ -29,6 +32,7 @@ export async function getInitialState() {
  * @return {*}
  */
 export function coreReducer(state = getInitialState(), action) {
+    let tabs;
     switch (action.type) {
         case OVERRIDE_STATE_PARAMS:
             return Object.assign({}, state, action.params);
@@ -40,6 +44,11 @@ export function coreReducer(state = getInitialState(), action) {
             return Object.assign({}, state, {enabled: action.enabled});
         case SET_CORPUS:
             return Object.assign({}, state, {corpus: action.corpus});
+        case SET_CLASSIFIER:
+            return Object.assign({}, state, {classifier: action.classifier});
+        case SET_TAB_CONTENT:
+            tabs = Object.assign({}, state.tabs, {[action.tabId]: action.content});
+            return Object.assign({}, state, {tabs: tabs});
         default:
             return state;
     }

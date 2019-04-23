@@ -15,3 +15,9 @@ export const setEnabled = (enabled, source) => ({type: SET_ENABLED, enabled, sou
 
 export const SET_CORPUS = 'setCorpus';
 export const setCorpus = (corpus, source) => ({type: SET_CORPUS, corpus, source});
+
+export const SET_CLASSIFIER = 'setClassifier';
+export const setClassifier = (classifier, source) => ({type: SET_CLASSIFIER, classifier, source});
+
+export const SET_TAB_CONTENT = 'setTabContent';
+export const setTabContent = (tabId, content, source) => ({type: SET_TAB_CONTENT, tabId, content, source});

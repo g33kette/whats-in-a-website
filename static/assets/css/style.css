@@ -102,11 +102,24 @@
             position: relative;
             top: 35%;
         }
-        #bp .main-content .loading i {
-            font-size: 30px;
-            margin: 40px 20px;
-            color: #666666;
-        }
+            #bp .main-content .loading i {
+                font-size: 30px;
+                margin: 40px 20px;
+                color: #666666;
+            }
+        #bp .main-content .complete {}
+            #bp .main-content .complete h3 {
+                color: #cccccc;
+            }
+            #bp .main-content .complete .result.safe {
+                color: #57b449;
+            }
+            #bp .main-content .complete .result.harmful {
+                color: #ff2c2c;
+            }
+            #bp .main-content .complete .result.warning {
+                color: #ffb15c;
+            }
 /**
  * Scope "browser_action" menu within "bp_menu" ID
  */

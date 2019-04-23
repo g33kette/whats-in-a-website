@@ -19,7 +19,7 @@
     "babel-eslint": "^8.2.5",
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^1.0.0",
-    "eslint": "^5.0.1",
+    "eslint": "^5.16.0",
     "eslint-config-google": "^0.9.1",
     "eslint-loader": "^2.0.0",
     "file-loader": "^1.1.11",
@@ -28,8 +28,10 @@
     "webpack-cli": "^3.0.8"
   },
   "dependencies": {
+    "@tensorflow-models/knn-classifier": "^1.1.0",
+    "@tensorflow/tfjs": "^1.1.0",
     "compromise": "^11.13.0",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.0",
     "redux": "^4.0.0"
   }
 }
