@@ -65,6 +65,21 @@
     .browser-protect .clear-float {
         clear: both;
     }
+
+    .browser-protect .footer {
+        color: #666666;
+        position: fixed;
+        bottom: 0;
+        background: #000;
+        width: 100%;
+        text-align: center;
+    }
+        .browser-protect .footer .bpText {
+            font-weight: bold;
+            font-style: italic;
+            color: #57b449;
+        }
+
 /**
  * Scope content overly within "bp" ID
  */
@@ -92,21 +107,18 @@
             margin: 40px 20px;
             color: #666666;
         }
-    #bp .footer {
-        color: #666666;
-        position: fixed;
-        bottom: 0;
-        background: #000;
-        width: 100%;
-    }
-        #bp .footer .bpText {
-            font-weight: bold;
-            font-style: italic;
-            color: #57b449;
-        }
 /**
  * Scope "browser_action" menu within "bp_menu" ID
  */
 #bp_menu {
     width: 400px;
 }
+/**
+ * Scope content overly within "bp_training" ID
+ */
+#bp_training {
+    text-align: center;
+}
+    #bp .actions {
+        margin-top: 30vh;
+    }

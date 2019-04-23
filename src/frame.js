@@ -23,6 +23,7 @@ $(document).ready(function() {
     completeElement.on('click', '#actionContinue', function() {
         chrome.tabs.getCurrent((tab) => {
             chrome.tabs.sendMessage(tab.id, {trigger: 'closeFrame'});
+            chrome.tabs.sendMessage(tab.id, {trigger: 'showTrainingFrame'});
         });
     });
 
