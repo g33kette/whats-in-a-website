@@ -23,6 +23,7 @@ $(document).ready(function() {
     completeElement.on('click', '#actionContinue', function() {
         chrome.tabs.getCurrent((tab) => {
             chrome.tabs.sendMessage(tab.id, {trigger: 'closeFrame'});
+            chrome.tabs.sendMessage(tab.id, {trigger: 'showTrainingFrame'});
         });
     });
 
@@ -80,7 +81,9 @@ const showAnalysis = (result) => {
         loadingElement.hide();
     }
     if (completeElement) {
+        const resultElement = completeElement.find('.result');
+        resultElement.html(result.summary);
+        resultElement.addClass(result.safe?'safe':(result.safe===null?'warning':'harmful'));
         completeElement.show();
-        completeElement.find('textarea').text(result.summary);
     }
 };

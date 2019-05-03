@@ -8,14 +8,24 @@
 import $ from 'jquery';
 
 /**
- * IFrame element from overlay
+ * IFrame overlay element
  *
  * @type {*|jQuery|HTMLElement}
  */
-const frame = $('<iframe ' +
+const overlayFrame = $('<iframe ' +
     'style="width: 100% !important; height: 100vh !important; top: 0 !important; right: 0 !important; ' +
     'position: fixed !important; z-index: 999999999999999999999999999999999999999999999999999999999 !important;" ' +
     'src="'+chrome.runtime.getURL('pages/protection_overlay.html')+'"></iframe>');
+
+/**
+ * IFrame training element
+ *
+ * @type {*|jQuery|HTMLElement}
+ */
+const trainingFrame = $('<iframe ' +
+    'style="width: 100% !important; top: 0 !important; right: 0 !important; ' +
+    'position: fixed !important; z-index: 999999999999999999999999999999999999999999999999999999999 !important;" ' +
+    'src="'+chrome.runtime.getURL('pages/training_overlay.html')+'"></iframe>');
 
 /**
  * On Load Event
@@ -37,17 +47,31 @@ chrome.runtime.sendMessage({get: 'enabled'}, (enabled) => {
  * Listens for events to be actioned on tab
  */
 chrome.runtime.onMessage.addListener((request) => {
-    // console.log('content.js', request);
-    /**
-     * Trigger Events
-     */
-    switch (request.trigger) {
-        case 'closeFrame':
-            removeFrame();
-            return;
-        default:
+    return new Promise((resolve) => {
+        /**
+         * Trigger Events
+         */
+        switch (request.trigger) {
+            case 'closeFrame':
+                removeOverlayFrame();
+                return;
+            case 'showTrainingFrame':
+                showTrainingFrame();
+                return;
+            case 'closeTrainingFrame':
+                removeTrainingFrame();
+                return;
+            case 'markContentSafe':
+                chrome.runtime.sendMessage({trigger: 'markContentSafe'});
+                return;
+            case 'markContentHarmful':
+                chrome.runtime.sendMessage({trigger: 'markContentHarmful'});
+                return;
+            default:
             // Do Nothing
-    }
+        }
+        resolve();
+    });
 });
 
 /**
@@ -65,7 +89,7 @@ const hideContent = () => {
         $(document).ready(() => {
             const body = $('body');
             body.css('overflow', 'hidden');
-            body.prepend(frame);
+            body.prepend(overlayFrame);
             setTimeout(() => { // Allow time for iFrame to load
                 page.show();
                 resolve();
@@ -117,10 +141,27 @@ const parseContent = (element) => {
 /**
  * Remove Overlay Frame
  */
-const removeFrame = () => {
+const removeOverlayFrame = () => {
     $(document).ready(() => {
         const body = $('body');
         body.css('overflow', 'auto');
-        frame.remove();
+        overlayFrame.remove();
     });
+};
+
+/**
+ * Show Training Frame
+ */
+const showTrainingFrame = () => {
+    $(document).ready(() => {
+        const body = $('body');
+        body.prepend(trainingFrame);
+    });
+};
+
+/**
+ * Remove Training Frame
+ */
+const removeTrainingFrame = () => {
+    trainingFrame.remove();
 };

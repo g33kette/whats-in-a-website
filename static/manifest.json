@@ -25,7 +25,8 @@
     }
   ],
   "web_accessible_resources": [
-    "pages/protection_overlay.html"
+    "pages/protection_overlay.html",
+    "pages/training_overlay.html"
   ],
   "browser_action": {
     "default_icon": {

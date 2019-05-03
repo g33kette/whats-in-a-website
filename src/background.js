@@ -12,9 +12,11 @@ import {
     setUsername,
     setCorpus,
     overrideStateParams,
+    setTabContent, setClassifier,
 } from './store/actions';
 import {authenticate} from './services/authentication';
 import {analyseContent, prepareText} from './services/analyseContent';
+import {trainModel} from './services/model';
 
 /**
  * Custom Event Listeners
@@ -38,6 +40,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             return;
         case 'initialiseProcessing':
             triggerInitialiseProcessing(sender.tab.id, request.content);
+            sendResponse(sender.tab.id);
+            return;
+        case 'markContentSafe':
+            triggerMarkContentSafe(sender.tab.id);
+            sendResponse(sender.tab.id);
+            return;
+        case 'markContentHarmful':
+            triggerMarkContentHarmful(sender.tab.id);
             sendResponse(sender.tab.id);
             return;
         default:
@@ -106,7 +116,6 @@ function triggerToggleEnabled() {
  * Trigger: Initialise Processing
  *
  * @param {int} tabId
- * @param {string} content
  */
 function triggerPrepareProcessing(tabId) {
     chrome.tabs.sendMessage(tabId, {trigger: 'showMessage', message: '[1] Reading page...'});
@@ -122,18 +131,38 @@ function triggerInitialiseProcessing(tabId, content) {
     chrome.tabs.sendMessage(tabId, {trigger: 'showMessage', message: '[2] Processing page...'});
     prepareText(content).then((textVector) => {
         chrome.tabs.sendMessage(tabId, {trigger: 'showMessage', message: '[3] Analysing content...'});
+        saveTabContent(tabId, textVector);
         analyseContent(textVector).then((result) => {
-            if (result.safe) {
-                chrome.tabs.sendMessage(tabId, {trigger: 'closeFrame'});
-            } else {
-                chrome.tabs.sendMessage(
-                    tabId,
-                    {trigger: 'showMessage', message: 'Analysis Complete. Please review before continuing.'}
-                );
-                chrome.tabs.sendMessage(tabId, {trigger: 'showAnalysis', result: result});
-            }
+            console.log(result);
+            // if (result.safe) {
+            //     chrome.tabs.sendMessage(tabId, {trigger: 'closeFrame'});
+            // } else {
+            chrome.tabs.sendMessage(
+                tabId,
+                {trigger: 'showMessage', message: 'Analysis Complete. Please review before continuing.'}
+            );
+            chrome.tabs.sendMessage(tabId, {trigger: 'showAnalysis', result: result});
+            // }
         });
     });
+}
+
+/**
+ * Trigger: Mark Content Safe
+ *
+ * @param {int} tabId
+ */
+function triggerMarkContentSafe(tabId) {
+    trainModel(getTabContent(tabId), 'safe');
+}
+
+/**
+ * Trigger: Mark Content Harmful
+ *
+ * @param {int} tabId
+ */
+function triggerMarkContentHarmful(tabId) {
+    trainModel(getTabContent(tabId), 'harmful');
 }
 
 // Get Methods ---------------------------------------------------------------------------------------------------------
@@ -165,6 +194,25 @@ export function getCorpus() {
     return store.getState().corpus;
 }
 
+/**
+ * Get: Classifier
+ *
+ * @return {string}
+ */
+export function getClassifier() {
+    return store.getState().classifier;
+}
+
+/**
+ * Get: Tab Content
+ *
+ * @param {int|string} tabId
+ * @return {*}
+ */
+export function getTabContent(tabId) {
+    return store.getState().tabs[tabId];
+}
+
 // Set Methods ---------------------------------------------------------------------------------------------------------
 
 /**
@@ -175,6 +223,30 @@ export function getCorpus() {
 export function saveCorpus(corpus) {
     store.dispatch(setCorpus(corpus));
     persistToLocalStorage(getUsername(), 'corpus', corpus);
+}
+
+/**
+ * Set: Classifier
+ *
+ * @param {object} classifier
+ */
+export function saveClassifier(classifier) {
+    store.dispatch(setClassifier(classifier));
+    // Get the full dataset, useful for saving state.
+    // classifier.getClassifierDataset(): {[label: string]: Tensor2D}
+    // Set the full dataset, useful for restoring state.
+    // classifier.setClassifierDataset(dataset: {[label: string]: Tensor2D})
+    // TODO persistToLocalStorage(getUsername(), 'classifier', classifier);
+}
+
+/**
+ * Set: Tab Content
+ *
+ * @param {int|string} tabId
+ * @param {*} content
+ */
+export function saveTabContent(tabId, content) {
+    store.dispatch(setTabContent(tabId, content));
 }
 
 // Local Methods -------------------------------------------------------------------------------------------------------
@@ -219,5 +291,6 @@ async function loadStateParamsFromLocalStorage(username) {
     return {
         enabled: await retrieveFromLocalStorage(username, 'enabled', false),
         corpus: await retrieveFromLocalStorage(username, 'corpus', []),
+        // TODO classifier: await retrieveFromLocalStorage(username, 'classifier', null),
     };
 }
