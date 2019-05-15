@@ -16,8 +16,8 @@ import {
 export async function getInitialState() {
     return {
         encryptionToken: null,
-        username: null,
-        enabled: false,
+        username: 'null',
+        enabled: true,
         tabs: {},
         corpus: [],
         classifier: null,
