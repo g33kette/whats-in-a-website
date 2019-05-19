@@ -13,6 +13,7 @@ import $ from 'jquery';
  * @type {*|jQuery|HTMLElement}
  */
 const overlayFrame = $('<iframe ' +
+    'id="bp_overlay_frame" ' +
     'style="width: 100% !important; height: 100vh !important; top: 0 !important; right: 0 !important; ' +
     'position: fixed !important; z-index: 999999999999999999999999999999999999999999999999999999999 !important;" ' +
     'src="'+chrome.runtime.getURL('pages/protection_overlay.html')+'"></iframe>');
@@ -23,6 +24,7 @@ const overlayFrame = $('<iframe ' +
  * @type {*|jQuery|HTMLElement}
  */
 const trainingFrame = $('<iframe ' +
+    'id="bp_training_frame" ' +
     'style="width: 100% !important; top: 0 !important; right: 0 !important; ' +
     'position: fixed !important; z-index: 999999999999999999999999999999999999999999999999999999999 !important;" ' +
     'src="'+chrome.runtime.getURL('pages/training_overlay.html')+'"></iframe>');

@@ -1,4 +1,4 @@
 {
-  "steps": "./features/step-definitions",
+  "steps": "./features/step_definitions",
   "browser": "./features/driver.js"
 }

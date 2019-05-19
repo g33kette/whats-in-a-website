@@ -16,8 +16,12 @@ import {
 export async function getInitialState() {
     return {
         encryptionToken: null,
+        // TODO The plugin needs to be auto-enabled for testing
+        // username: null,
+        // enabled: false,
         username: 'null',
         enabled: true,
+        // TODO ----
         tabs: {},
         corpus: [],
         classifier: null,
