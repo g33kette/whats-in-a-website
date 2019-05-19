@@ -12,7 +12,6 @@ Feature: Training the App
     Then I should see protection training
     Then I mark page as "safe"
 
-#  Scenario: BBC Football Manchester Utd
     When I go to "https://www.bbc.co.uk/sport/football/teams/manchester-united"
     Then I should see protection overlay
     When content analysis is complete
@@ -21,7 +20,6 @@ Feature: Training the App
     Then I should see protection training
     Then I mark page as "harmful"
 
-#  Scenario: BBC News
     When I go to "https://www.bbc.co.uk/news"
     Then I should see protection overlay
     When content analysis is complete
