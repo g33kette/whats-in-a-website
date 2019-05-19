@@ -1,9 +1,4 @@
 {
   "steps": "./features/step-definitions",
-  "browser": "./features/driver.js",
-  "capabilities": [{
-    "chromeOptions": {
-      "args": ["--load-extension=E:\\Localhost\\dissertation\\Extension\\dist"]
-    }
-  }]
+  "browser": "./features/driver.js"
 }
