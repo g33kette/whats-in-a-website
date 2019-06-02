@@ -3,7 +3,7 @@ import {
     SET_ENCRYPTION_TOKEN,
     SET_USERNAME,
     SET_ENABLED,
-    SET_VECTOR_SPACE,
+    SET_CORPUS,
     SET_TAB_CONTENT,
     SET_CLASSIFIER,
 } from './actions';
@@ -23,7 +23,7 @@ export async function getInitialState() {
         enabled: true,
         // TODO ----
         tabs: {},
-        vectorSpace: [],
+        corpus: {vectorSpace: [], numDocs: 0},
         classifier: null,
     };
 }
@@ -46,8 +46,8 @@ export function coreReducer(state = getInitialState(), action) {
             return Object.assign({}, state, {username: action.username});
         case SET_ENABLED:
             return Object.assign({}, state, {enabled: action.enabled});
-        case SET_VECTOR_SPACE:
-            return Object.assign({}, state, {vectorSpace: action.vectorSpace});
+        case SET_CORPUS:
+            return Object.assign({}, state, {corpus: action.corpus});
         case SET_CLASSIFIER:
             return Object.assign({}, state, {classifier: action.classifier});
         case SET_TAB_CONTENT:

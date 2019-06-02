@@ -1,9 +1,10 @@
-import {getVectorSpace, saveVectorSpace} from '../background';
+import {getCorpus, saveCorpus} from '../background';
 import {predictClassification} from './model';
+import l2Norm from 'compute-l2norm';
 
 // * Options -----------------------------------------------------------------------------------------------------------
 
-const vectorType = 'bagOfWords'; // Options: bagOfWords
+const vectorType = 'tfIdf'; // Options: bagOfWords, tfIdf
 const wordType = 'plain'; // Options: plain
 
 // * Prepare Text ------------------------------------------------------------------------------------------------------
@@ -52,6 +53,8 @@ const parseToNlpDoc = (content) => {
 const buildVector = (doc) => {
     const words = convertToListOfWords(doc);
     switch (vectorType) {
+        case 'tfIdf':
+            return tfIdfVector(words);
         case 'bagOfWords':
         default:
             return bagOfWords(words);
@@ -75,21 +78,24 @@ const convertToListOfWords = (doc) => {
 };
 
 /**
- * Generate Vector Space
+ * UpdateAndReturnCorpus
  *
  * @param {array} words - Array of words, can be string|array|object
- * @return {array}
+ * @return {object}
  * In structure:
- *      [
+ * {
+ *      vectorSpace: [
  *          {
  *              word: ['text', 'tag1', 'tag2'....] : Can be string|array|object
  *              f: 1, : Frequency
  *          },
- *      ]
+ *      ],
+ *      numDocs: 1,
+ * }
  */
-const generateVectorSpace = (words) => {
+const updateAndReturnCorpus = (words) => {
     // Get saved vector space
-    const vectorSpace = JSON.parse(JSON.stringify(getVectorSpace()));
+    let {vectorSpace, numDocs} = JSON.parse(JSON.stringify(getCorpus()));
     // Update vector space with new words
     words.reduce((vs, word) => {
         word = typeof word !== 'object'?[word]:word;
@@ -103,12 +109,11 @@ const generateVectorSpace = (words) => {
         }
         return vs;
     }, vectorSpace);
-
-    // If vectorSpace has expanded then save to storage
-    if (vectorSpace.length > getVectorSpace().length) {
-        saveVectorSpace(vectorSpace);
-    }
-    return vectorSpace;
+    // Increment numDocs
+    numDocs++;
+    // Update saved version in local storage storage
+    saveCorpus({vectorSpace, numDocs});
+    return {vectorSpace, numDocs};
 };
 
 /**
@@ -128,19 +133,44 @@ const vectorSpaceIndexForWord = (word, vectorSpace) => {
  * Bag of Words Vector
  *
  * @param {array} words
+ * @param {object} [corpus]
  * @return {array}
  */
-const bagOfWords = (words) => {
-    // Add new words to vector space
-    const vectorSpace = generateVectorSpace(words);
+const bagOfWords = (words, corpus) => {
+    if (!corpus) { // Don't re-generate corpus if passed as parameter
+        corpus = updateAndReturnCorpus(words);
+    }
     // Create bag of words vector based on vector space, set all values initially to 0
-    const bag = vectorSpace.map(() => 0);
+    const bag = corpus.vectorSpace.map(() => 0);
     words.reduce((accBag, word) => {
-        accBag[vectorSpaceIndexForWord(word, vectorSpace)]++;
+        accBag[vectorSpaceIndexForWord(word, corpus.vectorSpace)]++;
         return accBag;
     }, bag);
     // Return array vector
     return bag;
+};
+
+/**
+ * TF-IDF Vector
+ *
+ * @param {array} words
+ * @return {array}
+ */
+const tfIdfVector = (words) => {
+    // Add new words to vector space
+    const corpus = updateAndReturnCorpus(words);
+    // Create bag of words vector based on vector space
+    let tfIdfVector = bagOfWords(words, corpus);
+    // Re-assign weight based on td-idf calculation
+    tfIdfVector.forEach(function(tf, i) {
+        if (tf === 0) return; // Continue if frequency is 0
+        const vectorSpaceTerm = corpus.vectorSpace[i];
+        const idf = 1 + (Math.log(corpus.numDocs / (1 + vectorSpaceTerm.f)));
+        this[i] = tf * idf;
+    }, tfIdfVector); // use arr as this
+    const tfIdfL2Norm = l2Norm(tfIdfVector);
+    tfIdfVector = tfIdfVector.map((v) => v/tfIdfL2Norm);
+    return tfIdfVector;
 };
 
 // * Analyse Content ---------------------------------------------------------------------------------------------------

@@ -10,7 +10,7 @@ import {
     setEncryptionToken,
     setEnabled,
     setUsername,
-    setVectorSpace,
+    setCorpus,
     overrideStateParams,
     setTabContent, setClassifier,
 } from './store/actions';
@@ -186,12 +186,12 @@ export function getUsername() {
 }
 
 /**
- * Get: Vector Space
+ * Get: Corpus
  *
  * @return {string}
  */
-export function getVectorSpace() {
-    return store.getState().vectorSpace;
+export function getCorpus() {
+    return store.getState().corpus;
 }
 
 /**
@@ -216,13 +216,13 @@ export function getTabContent(tabId) {
 // Set Methods ---------------------------------------------------------------------------------------------------------
 
 /**
- * Set: Vector Space
+ * Set: Corpus
  *
- * @param {array} vectorSpace
+ * @param {object} corpus
  */
-export function saveVectorSpace(vectorSpace) {
-    store.dispatch(setVectorSpace(vectorSpace));
-    persistToLocalStorage(getUsername(), 'vectorSpace', vectorSpace);
+export function saveCorpus(corpus) {
+    store.dispatch(setCorpus(corpus));
+    persistToLocalStorage(getUsername(), 'corpus', corpus);
 }
 
 /**
@@ -290,7 +290,7 @@ async function retrieveFromLocalStorage(username, key, defaultValue = null) {
 async function loadStateParamsFromLocalStorage(username) {
     return {
         enabled: await retrieveFromLocalStorage(username, 'enabled', false),
-        vectorSpace: await retrieveFromLocalStorage(username, 'vectorSpace', []),
+        corpus: await retrieveFromLocalStorage(username, 'corpus', {vectorSpace: [], numDocs: 0}),
         // TODO classifier: await retrieveFromLocalStorage(username, 'classifier', null),
     };
 }

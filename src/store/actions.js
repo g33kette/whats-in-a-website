@@ -13,8 +13,8 @@ export const setUsername = (username, source) => ({type: SET_USERNAME, username,
 export const SET_ENABLED = 'setEnabled';
 export const setEnabled = (enabled, source) => ({type: SET_ENABLED, enabled, source});
 
-export const SET_VECTOR_SPACE = 'setVectorSpace';
-export const setVectorSpace = (vectorSpace, source) => ({type: SET_VECTOR_SPACE, vectorSpace, source});
+export const SET_CORPUS = 'setCorpus';
+export const setCorpus = (corpus, source) => ({type: SET_CORPUS, corpus, source});
 
 export const SET_CLASSIFIER = 'setClassifier';
 export const setClassifier = (classifier, source) => ({type: SET_CLASSIFIER, classifier, source});
