@@ -82,6 +82,7 @@ module.exports = function() {
         return driver.wait(async () => {
             for (const row of args.raw()) {
                 console.log('. ' + ++progress);
+                console.log(row[0]);
                 // console.log(row);
                 const url = row[0];
                 const classification = row[1];
