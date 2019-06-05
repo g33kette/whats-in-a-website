@@ -76,7 +76,7 @@ module.exports = function() {
      * Given the model is trained with the following classifications
      *  | url | classification |
      */
-    this.Given(/^the model is trained with the following classifications$/, {timeout: 600000}, function(args) {
+    this.Given(/^the model is trained with the following classifications$/, {timeout: 1800000}, function(args) {
         console.log('Training ('+(args.raw().length)+' classifications): ');
         let progress = 0;
         return driver.wait(async () => {
@@ -109,7 +109,7 @@ module.exports = function() {
      */
     this.Then(/^the following classifications are tested$/, {timeout: 600000}, function(args) {
         console.log('Checking ('+(args.raw().length)+' classifications): ');
-        const results = {correct: 0, wrong: 0};
+        const results = {tp: 0, tn: 0, fp: 0, fn: 0};
         return driver.wait(async () => {
             for (const row of args.raw()) {
                 // console.log(row);
@@ -133,8 +133,15 @@ module.exports = function() {
             // False-Positive Rate = FP / FP + TN
             // True-Negative Rate = TN / TN + FP
             // False-Negative Rate = FN / FN + TP
-            const accuracy = results.correct === 0 ? 0 : ((results.correct/(results.wrong+results.correct))*100);
+            const accuracy = (results.tp + results.tn) === 0 ? 0 : (((results.tp + results.tn)/(results.tp + results.tn + results.fp + results.fn))*100);
+            const sensitivity = (results.tp + results.fn) === 0 ? 0 : (results.tp/(results.tp + results.fn));
+            const specificity = (results.tn + results.fp) === 0 ? 0 : (results.tn/(results.tn + results.fp));
+            const precision = (results.tp + results.fp) === 0 ? 0 : (results.tp/(results.tp + results.fp));
+            console.log('Final correct score: '+(results.tp + results.tn)+'/'+(results.tp + results.tn + results.fn + results.fp));
             console.log('Final accuracy score: '+accuracy+'%');
+            console.log('Final sensitivity score: '+sensitivity);
+            console.log('Final specificity score: '+specificity);
+            console.log('Final precision score: '+precision);
         });
     });
 
