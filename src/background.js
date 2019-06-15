@@ -218,7 +218,7 @@ export function getTabContent(tabId) {
 /**
  * Set: Corpus
  *
- * @param {array} corpus
+ * @param {object} corpus
  */
 export function saveCorpus(corpus) {
     store.dispatch(setCorpus(corpus));
@@ -290,7 +290,7 @@ async function retrieveFromLocalStorage(username, key, defaultValue = null) {
 async function loadStateParamsFromLocalStorage(username) {
     return {
         enabled: await retrieveFromLocalStorage(username, 'enabled', false),
-        corpus: await retrieveFromLocalStorage(username, 'corpus', []),
+        corpus: await retrieveFromLocalStorage(username, 'corpus', {vectorSpace: [], numDocs: 0}),
         // TODO classifier: await retrieveFromLocalStorage(username, 'classifier', null),
     };
 }
