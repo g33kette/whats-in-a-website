@@ -1,5 +1,11 @@
 import {getCorpus, saveCorpus} from '../background';
 import {predictClassification} from './model';
+import l2Norm from 'compute-l2norm';
+
+// * Options -----------------------------------------------------------------------------------------------------------
+
+const vectorType = 'tfIdf'; // Options: bagOfWords, tfIdf
+const wordType = 'plain'; // Options: plain
 
 // * Prepare Text ------------------------------------------------------------------------------------------------------
 
@@ -9,61 +15,162 @@ import {predictClassification} from './model';
  * @param {string} content
  * @return {Promise}
  */
-export const prepareText = (content) => {
-    return new Promise((resolve) => {
-        const nlp = require('compromise');
-        const normaliseOptions = {
-            whitespace: true,
-            case: true,
-            numbers: true,
-            punctuation: true,
-            unicode: true,
-            contractions: true,
-            acronyms: true,
-            // Enable non-defaults:
-            possessives: true,
-            plurals: true,
-            verbs: true,
-        };
-        // // Normalise and remove numeric values
-        // const doc = nlp(content).normalize(normaliseOptions).filter((v) => isNaN(parseFloat(v)));
-        const doc = nlp(content).normalize(normaliseOptions);
-        const words = doc.words();
-        // const tagged = doc.out('tags');
-        const vector = buildVector(words.out('array'));
-        resolve(vector);
-    });
+export const prepareText = async (content) => {
+    return buildVector(parseToNlpDoc(content));
 };
 
-const buildVector = (words) => {
-    return bagOfWords(words);
+/**
+ * Parse to NLP Doc
+ *
+ * @param {string} content
+ * @return {object}
+ */
+const parseToNlpDoc = (content) => {
+    const nlp = require('compromise');
+    const normaliseOptions = {
+        whitespace: true,
+        case: true,
+        numbers: true,
+        punctuation: true,
+        unicode: true,
+        contractions: true,
+        acronyms: true,
+        // Enable non-defaults:
+        possessives: true,
+        plurals: true,
+        verbs: true,
+    };
+    // Return normalised values
+    return nlp(content).normalize(normaliseOptions);
 };
 
-const bagOfWords = (words) => {
-    const corpus = buildCorpus(words);
-    const bag = {};
-    corpus.reduce((v, k) => Object.assign(bag, {[k]: 0}));
-    for (const word of words) {
-        if (typeof bag[word] === 'undefined') {
-            continue; // Shouldn't happen...
+/**
+ * Build Vector
+ *
+ * @param {object} doc
+ * @return {array}
+ */
+const buildVector = (doc) => {
+    const words = convertToListOfWords(doc);
+    switch (vectorType) {
+        case 'tfIdf':
+            return tfIdfVector(words);
+        case 'bagOfWords':
+        default:
+            return bagOfWords(words);
+    }
+};
+
+/**
+ * Convert To List of Words
+ *
+ * @param {object} doc
+ * @return {array}
+ */
+const convertToListOfWords = (doc) => {
+    switch (wordType) {
+        case 'plain':
+        default:
+            return doc.words().out('array').filter((v) => v !== '' && v !== null);
+            // remove num? .filter((v) => isNaN(parseFloat(v)));
+    }
+    // const tagged = doc.out('tags'); // todo
+};
+
+/**
+ * UpdateAndReturnCorpus
+ *
+ * @param {array} words - Array of words, can be string|array|object
+ * @return {object}
+ * In structure:
+ * {
+ *      vectorSpace: [
+ *          {
+ *              word: ['text', 'tag1', 'tag2'....] : Can be string|array|object
+ *              f: 1, : Frequency
+ *          },
+ *      ],
+ *      numDocs: 1,
+ * }
+ */
+const updateAndReturnCorpus = (words) => {
+    // Get saved vector space
+    let {vectorSpace, numDocs} = JSON.parse(JSON.stringify(getCorpus()));
+    // Update vector space with new words
+    words.reduce((vs, word) => {
+        word = typeof word !== 'object'?[word]:word;
+        const lookupIndex = vectorSpaceIndexForWord(word, vs);
+        if (lookupIndex >= 0) {
+            // Already in vectorSpace, just increment frequency
+            vs[lookupIndex].f++;
+        } else {
+            // New word, create new entry in vector space!
+            vs.push({word: word, f: 1});
         }
-        bag[word]++;
-    }
-    return Object.values(bag);
+        return vs;
+    }, vectorSpace);
+    // Increment numDocs
+    numDocs++;
+    // Update saved version in local storage storage
+    saveCorpus({vectorSpace, numDocs});
+    return {vectorSpace, numDocs};
 };
 
-const buildCorpus = (words) => {
-    // Get saved corpus
-    let corpus = JSON.parse(JSON.stringify(getCorpus()));
-    // Add new words to corpus
-    corpus.push(...words);
-    // Filter to only include unique words
-    corpus = corpus.filter((v, i, a) => a.indexOf(v) === i);
-    // If corpus has expanded then save to storage
-    if (corpus.length > getCorpus().length) {
-        saveCorpus(corpus);
+/**
+ * Vector Space Index For Word
+ *
+ * @param {*} word
+ * @param {object} vectorSpace
+ * @return {int}
+ */
+const vectorSpaceIndexForWord = (word, vectorSpace) => {
+    word = typeof word !== 'object'?[word]:word;
+    const lookup = vectorSpace.find((o) => JSON.stringify(o.word) === JSON.stringify(word));
+    return lookup?vectorSpace.indexOf(lookup):-1;
+};
+
+/**
+ * Bag of Words Vector
+ *
+ * @param {array} words
+ * @param {object} [corpus]
+ * @return {array}
+ */
+const bagOfWords = (words, corpus) => {
+    if (!corpus) { // Don't re-generate corpus if passed as parameter
+        corpus = updateAndReturnCorpus(words);
     }
-    return corpus;
+    // Create bag of words vector based on vector space, set all values initially to 0
+    const bag = corpus.vectorSpace.map(() => 0);
+    words.reduce((accBag, word) => {
+        accBag[vectorSpaceIndexForWord(word, corpus.vectorSpace)]++;
+        return accBag;
+    }, bag);
+    // Return array vector
+    return bag;
+};
+
+/**
+ * TF-IDF Vector
+ *
+ * @param {array} words
+ * @return {array}
+ */
+const tfIdfVector = (words) => {
+    // Add new words to vector space
+    const corpus = updateAndReturnCorpus(words);
+    // Create bag of words vector based on vector space
+    let tfIdfVector = bagOfWords(words, corpus);
+    // Re-assign weight based on td-idf calculation
+    tfIdfVector.forEach(function(tf, i) {
+        if (tf === 0) return; // Continue if frequency is 0
+        const vectorSpaceTerm = corpus.vectorSpace[i];
+        const idf = 1 + (Math.log(corpus.numDocs / (1 + vectorSpaceTerm.f)));
+        this[i] = tf * idf;
+    }, tfIdfVector); // use arr as this
+    const tfIdfL2Norm = l2Norm(tfIdfVector);
+    tfIdfVector = tfIdfVector.map((v) => v/tfIdfL2Norm);
+    return tfIdfVector;
 };
 
 // * Analyse Content ---------------------------------------------------------------------------------------------------

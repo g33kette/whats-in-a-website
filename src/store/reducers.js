@@ -23,7 +23,7 @@ export async function getInitialState() {
         enabled: true,
         // TODO ----
         tabs: {},
-        corpus: [],
+        corpus: {vectorSpace: [], numDocs: 0},
         classifier: null,
     };
 }

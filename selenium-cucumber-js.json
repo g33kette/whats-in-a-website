@@ -1,5 +1,5 @@
 {
   "steps": "./features/step_definitions",
   "browser": "./features/driver.js",
-  "features": "./features/model_test.feature"
+  "features": "./features/"
 }

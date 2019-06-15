@@ -84,10 +84,18 @@ exports.checkClassificationResult = (classification, results, driver) => {
         if (!visible) return false;
         const text = await els[0].getText();
         if (text === classification) {
-            results.correct++;
+            if (classification === 'safe') {
+                results.tp++;
+            } else {
+                results.tn++;
+            }
             console.log('. ✓');
         } else {
-            results.wrong++;
+            if (classification === 'safe') {
+                results.fn++;
+            } else {
+                results.fp++;
+            }
             console.log('. X');
         }
         return true;
