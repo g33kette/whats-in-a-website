@@ -27,41 +27,41 @@ Feature: Test Model Performance
       | https://www.bbc.co.uk/news/uk	                                                            | safe    |
       | https://www.bbc.co.uk/news/technology	                                                    | safe    |
       | https://www.bbc.co.uk/weather	                                                            | safe    |
-      | https://www.google.com/	                                                                    | safe    |
-      | https://twitter.com/explore	                                                                | safe    |
-      | https://duckduckgo.com/	                                                                    | safe    |
-      | https://www.youtube.com/results?search_query=game+of+thrones	                            | safe    |
-##      | https://www.youtube.com/results?search_query=stoke+city	                                    | safe    |
-      | https://www.youtube.com/results?search_query=manchester+united	                            | harmful |
-      | https://yogawithadriene.com/	                                                            | safe    |
-#      | https://www.nme.com/	                                                                    | safe    |
-#      | https://www.nme.com/festivals/glastonbury-2019	                                            | safe    |
-#      | https://www.nme.com/tag/game-of-thrones	                                                    | safe    |
-      | https://www.amazon.co.uk/	                                                                | safe    |
-##      | https://www.amazon.co.uk/gp/deals?ref_=nav_cs_gb	                                        | safe    |
-      | https://www.argos.co.uk/	                                                                | safe    |
-      | https://www.argos.co.uk/features/delivery-collection-guide?tag=ar:propbar:samedaydelivery	| safe    |
-      | https://www.tesco.com/groceries/	                                                        | safe    |
-      | https://www.edp24.co.uk/home	                                                            | safe    |
-#      | https://www.edp24.co.uk/sport/local-football	                                            | safe    |
-
-
-
-      | https://www.meetup.com/phpcambridge/events/261757326/	                                    | safe    |
-      | https://www.hippychick.com/	                                                                | safe    |
-      | https://www.google.com/maps/place/Longjie+Inn/@28.3123828,109.6032004,12z/data=!4m12!1m6!3m5!1s0x3699e00bdd955bf3:0x18c3371b1c8afa9c!2sDehang+Restaurant!8m2!3d28.343135!4d109.587036!3m4!1s0x0:0xae7a8fdf6327e2cf!8m2!3d28.3445403!4d109.5887049	| safe    |
-      | https://computationx.wordpress.com/2019/05/23/five-things-ive-learned-about-pair-programming/	| safe    |
-      | http://www.ourburystedmunds.com/whitsunfayre/	                                            | safe    |
-      #| https://www.houzz.com/discussions/leaves-brown-at-tips-on-rhododendron-dsvw-vd~4924655	    | safe    |
-      | https://www.boohoo.com/womens/trousers	                                                    | safe    |
-##      | https://www.boohoo.com/teddy-fur-1%2F2-zip-high-neck-sweat/DZZ05437.html?color=105	        | safe    |
-      | https://www.newlook.com/uk/c/black-woven-harem-trousers-/p/374021301	                    | safe    |
-      | https://www.bbc.co.uk/news/newsbeat-48352581	                                            | safe    |
-      | http://www.pivotaltracker.com	                                                            | safe    |
-      | http://www.finnpathologists.co.uk	                                                        | safe    |
-      | http://www.pexels.com	                                                                    | safe    |
-      | http://www.topcashback.co.uk	                                                            | safe    |
-      | http://www.nathab.com/traveler-resources/	                                                | safe    |
+#      | https://www.google.com/	                                                                    | safe    |
+#      | https://twitter.com/explore	                                                                | safe    |
+#      | https://duckduckgo.com/	                                                                    | safe    |
+#      | https://www.youtube.com/results?search_query=game+of+thrones	                            | safe    |
+###      | https://www.youtube.com/results?search_query=stoke+city	                                    | safe    |
+#      | https://www.youtube.com/results?search_query=manchester+united	                            | harmful |
+#      | https://yogawithadriene.com/	                                                            | safe    |
+##      | https://www.nme.com/	                                                                    | safe    |
+##      | https://www.nme.com/festivals/glastonbury-2019	                                            | safe    |
+##      | https://www.nme.com/tag/game-of-thrones	                                                    | safe    |
+#      | https://www.amazon.co.uk/	                                                                | safe    |
+###      | https://www.amazon.co.uk/gp/deals?ref_=nav_cs_gb	                                        | safe    |
+#      | https://www.argos.co.uk/	                                                                | safe    |
+#      | https://www.argos.co.uk/features/delivery-collection-guide?tag=ar:propbar:samedaydelivery	| safe    |
+#      | https://www.tesco.com/groceries/	                                                        | safe    |
+#      | https://www.edp24.co.uk/home	                                                            | safe    |
+##      | https://www.edp24.co.uk/sport/local-football	                                            | safe    |
+#
+#
+#
+#      | https://www.meetup.com/phpcambridge/events/261757326/	                                    | safe    |
+#      | https://www.hippychick.com/	                                                                | safe    |
+#      | https://www.google.com/maps/place/Longjie+Inn/@28.3123828,109.6032004,12z/data=!4m12!1m6!3m5!1s0x3699e00bdd955bf3:0x18c3371b1c8afa9c!2sDehang+Restaurant!8m2!3d28.343135!4d109.587036!3m4!1s0x0:0xae7a8fdf6327e2cf!8m2!3d28.3445403!4d109.5887049	| safe    |
+#      | https://computationx.wordpress.com/2019/05/23/five-things-ive-learned-about-pair-programming/	| safe    |
+#      | http://www.ourburystedmunds.com/whitsunfayre/	                                            | safe    |
+#      #| https://www.houzz.com/discussions/leaves-brown-at-tips-on-rhododendron-dsvw-vd~4924655	    | safe    |
+#      | https://www.boohoo.com/womens/trousers	                                                    | safe    |
+###      | https://www.boohoo.com/teddy-fur-1%2F2-zip-high-neck-sweat/DZZ05437.html?color=105	        | safe    |
+#      | https://www.newlook.com/uk/c/black-woven-harem-trousers-/p/374021301	                    | safe    |
+#      | https://www.bbc.co.uk/news/newsbeat-48352581	                                            | safe    |
+#      | http://www.pivotaltracker.com	                                                            | safe    |
+#      | http://www.finnpathologists.co.uk	                                                        | safe    |
+#      | http://www.pexels.com	                                                                    | safe    |
+#      | http://www.topcashback.co.uk	                                                            | safe    |
+#      | http://www.nathab.com/traveler-resources/	                                                | safe    |
       | http://www.gamertagnation.com	                                                            | safe    |
       | http://www.westsuffolk.gov.uk/	                                                            | safe    |
       | http://www.sortitoutsi.net	                                                                | safe    |
@@ -97,7 +97,7 @@ Feature: Test Model Performance
       | https://en.wikipedia.org/wiki/List_of_Manchester_United_F.C._players_(25%E2%80%9399_appearances)	                                                | harmful |
       #| https://www.manchestereveningnews.co.uk/sport/football/gallery/manchester-uniteds-top-50-players-15406175	                                                | harmful |
       | https://www.ranker.com/list/best-manchester-united-players-of-all-time/ranker-soccer	                                                | harmful |
-      | https://www.worldfootball.net/teams/manchester-united/10/	                                                | harmful |
+#      | https://www.worldfootball.net/teams/manchester-united/10/	                                                | harmful |
       | http://www.mufcinfo.com/manupag/a-z_player_archive/legegendsexunitedm.html	                                                | harmful |
       #| https://www.football365.com/news/liverpool-man-united-to-enter-tournament-for-first-time	                                                | harmful |
       #| https://www.manchestereveningnews.co.uk/sport/football/football-news/manchester-united-checkatrade-trophy-liverpool-16431031	                                                | harmful |
@@ -107,7 +107,7 @@ Feature: Test Model Performance
       | https://www.internationalchampionscup.com/en/teams/manchester-united#tab_team-stats=defence&tab_team-players-stats=general&tab_team=overview	                                                | harmful |
       | https://www.ea.com/en-gb/news/fifa-17-manchester-united-fc-player-tournament	                                                | harmful |
       | https://www.manutd.com/en/tickets-and-hospitality/match-tickets?t=y&int_source=muwebsite&int_medium=meganav&int_campaign=matchtickets&int_content=thnav&int_term=matchtickets	                                                | harmful |
-      | https://www.eticketing.co.uk/muticketsandmembership/	                                                | harmful |
+#      | https://www.eticketing.co.uk/muticketsandmembership/	                                                | harmful |
       | https://www.livefootballtickets.com/english-premiership/manchester-united-tickets.html	                                                | harmful |
       | https://www.ticketmaster.co.uk/manchester-united-tickets/artist/862031	                                                | harmful |
       | https://www.viagogo.co.uk/Sports-Tickets/Football/Barclays-Premier-League/Manchester-United-Tickets	                                                | harmful |

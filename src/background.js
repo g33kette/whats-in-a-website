@@ -37,7 +37,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             })();
             return true; // Keeps async open
         case 'toggleEnabled':
-            sendResponse(triggerToggleEnabled());
+            (async () => {
+                sendResponse(await triggerToggleEnabled());
+            })();
             return;
         case 'prepareProcessing':
             triggerPrepareProcessing(sender.tab.id);
@@ -48,10 +50,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             sendResponse(sender.tab.id);
             return;
         case 'markContentSafe':
+            // The following calls promise but does not need to wait for resolution
             triggerMarkContentSafe(sender.tab.id);
             sendResponse(sender.tab.id);
             return;
         case 'markContentHarmful':
+            // The following calls promise but does not need to wait for resolution
             triggerMarkContentHarmful(sender.tab.id);
             sendResponse(sender.tab.id);
             return;
@@ -63,13 +67,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
      */
     switch (request.get) {
         case 'authenticated':
-            sendResponse(!!(getUsername())); // boolean response
+            (async () => {
+                sendResponse(!!(await getUsername())); // boolean response
+            })();
             return;
         case 'username':
-            sendResponse(getUsername());
+            (async () => {
+                sendResponse(await getUsername());
+            })();
             return;
         case 'enabled':
-            sendResponse(getEnabled());
+            (async () => {
+                sendResponse(await getEnabled());
+            })();
             return;
         default:
         // Do nothing
@@ -145,8 +155,9 @@ function triggerInitialiseProcessing(tabId, content) {
  *
  * @param {int} tabId
  */
-function triggerMarkContentSafe(tabId) {
-    trainModel(getTabContent(tabId), 'safe');
+async function triggerMarkContentSafe(tabId) {
+    // The following calls promise but does not need to wait for resolution
+    trainModel(await getTabContent(tabId), 'safe');
 }
 
 /**
@@ -154,6 +165,7 @@ function triggerMarkContentSafe(tabId) {
  *
  * @param {int} tabId
  */
-function triggerMarkContentHarmful(tabId) {
-    trainModel(getTabContent(tabId), 'harmful');
+async function triggerMarkContentHarmful(tabId) {
+    // The following calls promise but does not need to wait for resolution
+    trainModel(await getTabContent(tabId), 'harmful');
 }

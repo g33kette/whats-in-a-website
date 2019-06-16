@@ -41,8 +41,8 @@ export function configureLocalStorageApi(localStorage) {
  *
  * @return {boolean}
  */
-export function getEnabled() {
-    return store.getState().enabled;
+export async function getEnabled() {
+    return (await store.getState()).enabled;
 }
 
 /**
@@ -50,8 +50,8 @@ export function getEnabled() {
  *
  * @return {string}
  */
-export function getUsername() {
-    return store.getState().username;
+export async function getUsername() {
+    return (await store.getState()).username;
 }
 
 /**
@@ -59,8 +59,8 @@ export function getUsername() {
  *
  * @return {string}
  */
-export function getCorpus() {
-    return store.getState().corpus;
+export async function getCorpus() {
+    return (await store.getState()).corpus;
 }
 
 /**
@@ -68,8 +68,8 @@ export function getCorpus() {
  *
  * @return {string}
  */
-export function getClassifier() {
-    return store.getState().classifier;
+export async function getClassifier() {
+    return (await store.getState()).classifier;
 }
 
 /**
@@ -78,8 +78,8 @@ export function getClassifier() {
  * @param {int|string} tabId
  * @return {*}
  */
-export function getTabContent(tabId) {
-    return store.getState().tabs[tabId];
+export async function getTabContent(tabId) {
+    return (await store.getState()).tabs[tabId];
 }
 
 // Set Methods ---------------------------------------------------------------------------------------------------------
@@ -89,9 +89,9 @@ export function getTabContent(tabId) {
  *
  * @param {object} corpus
  */
-export function saveCorpus(corpus) {
+export async function saveCorpus(corpus) {
     store.dispatch(setCorpus(corpus));
-    persistToLocalStorage(getUsername(), 'corpus', corpus);
+    persistToLocalStorage(await getUsername(), 'corpus', corpus);
 }
 
 /**
@@ -125,10 +125,10 @@ export function saveTabContent(tabId, content) {
  *
  * @return {boolean}
  */
-export function triggerToggleEnabled() {
-    const enabled = !(getEnabled());
+export async function triggerToggleEnabled() {
+    const enabled = !(await getEnabled());
     store.dispatch(setEnabled(enabled));
-    persistToLocalStorage(getUsername(), 'enabled', enabled);
+    persistToLocalStorage(await getUsername(), 'enabled', enabled);
     return enabled;
 }
 

@@ -5,9 +5,9 @@ import * as knnClassifier from '@tensorflow-models/knn-classifier';
 const fixedLength = 5000;
 
 let classifier;
-const getClassifier = () => {
+const getClassifier = async () => {
     if (!classifier) {
-        classifier = getClassifierFromStore();
+        classifier = await getClassifierFromStore();
     }
     if (!classifier) {
         classifier = knnClassifier.create();
@@ -21,9 +21,9 @@ const getClassifier = () => {
  * @param {array} textVector
  * @param {string} classification
  */
-export const trainModel = (textVector, classification) => {
-    getClassifier().addExample(tf.tensor(fixLength(textVector)), classification);
-    saveClassifier(getClassifier());
+export const trainModel = async (textVector, classification) => {
+    (await getClassifier()).addExample(tf.tensor(fixLength(textVector)), classification);
+    saveClassifier(await getClassifier());
 };
 
 /**
@@ -33,7 +33,7 @@ export const trainModel = (textVector, classification) => {
  * @return {Promise}
  */
 export const predictClassification = async (textVector) =>
-    await getClassifier().predictClass(tf.tensor(fixLength(textVector)));
+    (await getClassifier()).predictClass(tf.tensor(fixLength(textVector)));
 
 /**
  * Fix Length

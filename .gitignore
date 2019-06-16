@@ -3,4 +3,4 @@ node_modules
 dist
 reports
 debug.log
-/tests
+/tests/data
