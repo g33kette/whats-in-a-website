@@ -1,10 +1,17 @@
 module.exports = function() {
-    const sw = require('selenium-webdriver');
-    const chromeOptions = sw.Capabilities.chrome();
-    chromeOptions.set('chromeOptions', {'args': ['--load-extension=E:\\Localhost\\dissertation\\Extension\\dist']});
-    // chromeOptions.set('chromeOptions', {'args': ['--load-extension=C:\\Users\\Jo\\Desktop\\chrome-plugin\\dist']});
-    return new sw.Builder()
+    const wd = require('selenium-webdriver');
+
+    const chromeOptions = wd.Capabilities.chrome();
+    chromeOptions.set('chromeOptions', {'args': ['--load-extension='+__dirname+'\\..\\dist']});
+
+    const prefs = new wd.logging.Preferences();
+    prefs.setLevel('browser', wd.logging.Level.ALL);
+    prefs.setLevel('driver', wd.logging.Level.ALL);
+    chromeOptions.setLoggingPrefs(prefs);
+
+    const builder = new wd.Builder()
         .forBrowser('chrome')
         .withCapabilities(chromeOptions)
-        .build();
+        .setLoggingPrefs(prefs);
+    return builder.build();
 };

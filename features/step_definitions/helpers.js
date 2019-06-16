@@ -38,6 +38,43 @@ exports.assertProtectionOverlay = (driver) => driver.wait(until.elementsLocated(
 exports.assertProtectionTraining = (driver) => driver.wait(until.elementsLocated(by.css('#bp_training_frame')), 0, 1);
 
 /**
+ * Save Parsed Content To File
+ * @param {string} url
+ * @param {string} classification
+ * @param {*} driver
+ * @return {Promise}
+ */
+exports.saveParsedContentToFile = (url, classification, driver) => {
+    return new Promise(async (resolve) => {
+        // Read from logs
+        const getLogs = await driver.manage().logs().get('browser');
+        const content = getLogs.length?
+            getLogs[0].message.replace(
+                /chrome-extension:\/\/(\w+)\/content.js (\d+):(\d+) "content" "/,
+                ''
+            ).slice(0, -1)
+            :'';
+        // 'chrome-extension://heaikljhfbhlemebdocookpopjidoico/content.js 38:85082 "content" "....
+        if (content === '') {
+            // No content, return with error
+            throw new Error('Content for '+url+' not found.');
+        }
+
+        const filePath = __dirname+'/../../tests/data/training/'+classification+'/';
+        const fileName = url
+            .replace(/\//g, '.')
+            .replace(/(\?)/g, '+')
+            .replace(/[^\\.\\=\\&\\-\\+_A-z0-9]+/g, '');
+
+        const fs = require('fs');
+        fs.writeFile(filePath + fileName, content.replace(/\\n/g, '\r\n'), (err) => {
+            if (err) throw err;
+            resolve();
+        });
+    });
+};
+
+/**
  * Content Analysis Complete
  * @param {*} driver
  * @return {Promise}
@@ -156,9 +193,9 @@ exports.setPageClassification = (classification, driver, revertDriverCallback) =
 
 /**
  * Sleep
- * @param {int} ms
+ * @param {int} s
  * @return {Promise}
  */
-exports.sleep = (ms) => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+exports.sleep = (s) => {
+    return new Promise((resolve) => setTimeout(resolve, s*1000));
 };

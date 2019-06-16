@@ -39,6 +39,7 @@ chrome.runtime.sendMessage({get: 'enabled'}, (enabled) => {
         hideContent().then(async () => {
             chrome.runtime.sendMessage({trigger: 'prepareProcessing'});
             parseContent($('body')).then((content) => {
+                console.log('content', content); // todo only when running tests
                 chrome.runtime.sendMessage({trigger: 'initialiseProcessing', content: content});
             });
         });

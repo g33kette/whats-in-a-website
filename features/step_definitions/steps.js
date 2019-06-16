@@ -105,6 +105,36 @@ module.exports = function() {
     });
 
     /**
+     * Given content is extracted for the following websites
+     *  | url | classification |
+     */
+    this.Given(/^content is extracted for the following websites$/, {timeout: 3000000}, function(args) {
+        console.log('Training ('+(args.raw().length)+' classifications): ');
+        let progress = 0;
+        return driver.wait(async () => {
+            for (const row of args.raw()) {
+                const url = row[0];
+                const classification = row[1];
+                console.log('. ' + ++progress);
+                console.log(url);
+
+                await selectDefaultWindow(driver);
+                // Go to URL
+                await stepHelpers.goToUrl(url);
+                // Wait for processing to complete
+                await selectBpFrame(driver);
+                await stepHelpers.contentAnalysisComplete(driver);
+
+                // Save content from console logs to file
+                await stepHelpers.saveParsedContentToFile(url, classification, driver);
+
+                console.log('Done.');
+            }
+            return true;
+        });
+    });
+
+    /**
      * Then the following classifications are tested
      *  | url | classification |
      */
