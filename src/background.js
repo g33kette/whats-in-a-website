@@ -8,15 +8,20 @@
 import store from './store/store';
 import {
     setEncryptionToken,
-    setEnabled,
     setUsername,
-    setCorpus,
     overrideStateParams,
-    setTabContent, setClassifier,
 } from './store/actions';
 import {authenticate} from './services/authentication';
 import {analyseContent, prepareText} from './services/analyseContent';
 import {trainModel} from './services/model';
+import {
+    getEnabled,
+    getTabContent,
+    getUsername,
+    saveTabContent,
+    loadStateParamsFromLocalStorage,
+    triggerToggleEnabled,
+} from './services/accessors';
 
 /**
  * Custom Event Listeners
@@ -101,18 +106,6 @@ async function triggerAuthenticate(params) {
 }
 
 /**
- * Trigger: Toggle Enabled
- *
- * @return {boolean}
- */
-function triggerToggleEnabled() {
-    const enabled = !(getEnabled());
-    store.dispatch(setEnabled(enabled));
-    persistToLocalStorage(getUsername(), 'enabled', enabled);
-    return enabled;
-}
-
-/**
  * Trigger: Initialise Processing
  *
  * @param {int} tabId
@@ -163,134 +156,4 @@ function triggerMarkContentSafe(tabId) {
  */
 function triggerMarkContentHarmful(tabId) {
     trainModel(getTabContent(tabId), 'harmful');
-}
-
-// Get Methods ---------------------------------------------------------------------------------------------------------
-
-/**
- * Get: Enabled
- *
- * @return {boolean}
- */
-export function getEnabled() {
-    return store.getState().enabled;
-}
-
-/**
- * Get: Username
- *
- * @return {string}
- */
-export function getUsername() {
-    return store.getState().username;
-}
-
-/**
- * Get: Corpus
- *
- * @return {string}
- */
-export function getCorpus() {
-    return store.getState().corpus;
-}
-
-/**
- * Get: Classifier
- *
- * @return {string}
- */
-export function getClassifier() {
-    return store.getState().classifier;
-}
-
-/**
- * Get: Tab Content
- *
- * @param {int|string} tabId
- * @return {*}
- */
-export function getTabContent(tabId) {
-    return store.getState().tabs[tabId];
-}
-
-// Set Methods ---------------------------------------------------------------------------------------------------------
-
-/**
- * Set: Corpus
- *
- * @param {object} corpus
- */
-export function saveCorpus(corpus) {
-    store.dispatch(setCorpus(corpus));
-    persistToLocalStorage(getUsername(), 'corpus', corpus);
-}
-
-/**
- * Set: Classifier
- *
- * @param {object} classifier
- */
-export function saveClassifier(classifier) {
-    store.dispatch(setClassifier(classifier));
-    // Get the full dataset, useful for saving state.
-    // classifier.getClassifierDataset(): {[label: string]: Tensor2D}
-    // Set the full dataset, useful for restoring state.
-    // classifier.setClassifierDataset(dataset: {[label: string]: Tensor2D})
-    // TODO persistToLocalStorage(getUsername(), 'classifier', classifier);
-}
-
-/**
- * Set: Tab Content
- *
- * @param {int|string} tabId
- * @param {*} content
- */
-export function saveTabContent(tabId, content) {
-    store.dispatch(setTabContent(tabId, content));
-}
-
-// Local Methods -------------------------------------------------------------------------------------------------------
-
-/**
- * Persist To Local Storage
- *
- * @param {string} username
- * @param {string} key
- * @param {*} value
- */
-function persistToLocalStorage(username, key, value) {
-    let assignValue = {};
-    assignValue[username+'.'+key] = value;
-    chrome.storage.local.set(assignValue);
-}
-
-/**
- * Retrieve From Local Storage
- *
- * @param {string} username
- * @param {string} key
- * @param {*} defaultValue
- * @return {Promise<void>}
- */
-async function retrieveFromLocalStorage(username, key, defaultValue = null) {
-    return new Promise((resolve) => {
-        let storageKey = username+'.'+key;
-        chrome.storage.local.get([storageKey], (results) => {
-            resolve(typeof results[storageKey] !== 'undefined'?results[storageKey]:defaultValue);
-        });
-    });
-}
-
-/**
- * Load State Params From Local Storage
- *
- * @param {string} username
- * @return {*}
- */
-async function loadStateParamsFromLocalStorage(username) {
-    return {
-        enabled: await retrieveFromLocalStorage(username, 'enabled', false),
-        corpus: await retrieveFromLocalStorage(username, 'corpus', {vectorSpace: [], numDocs: 0}),
-        // TODO classifier: await retrieveFromLocalStorage(username, 'classifier', null),
-    };
 }

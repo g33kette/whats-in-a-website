@@ -1,4 +1,4 @@
-import {getCorpus, saveCorpus} from '../background';
+import {getCorpus, saveCorpus} from './accessors';
 import {predictClassification} from './model';
 import l2Norm from 'compute-l2norm';
 

@@ -1,4 +1,4 @@
-import {getClassifier as getClassifierFromStore, saveClassifier} from '../background';
+import {getClassifier as getClassifierFromStore, saveClassifier} from './accessors';
 import * as tf from '@tensorflow/tfjs';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
 

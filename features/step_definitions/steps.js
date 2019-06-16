@@ -109,14 +109,18 @@ module.exports = function() {
      *  | url | classification |
      */
     this.Given(/^content is extracted for the following websites$/, {timeout: 3000000}, function(args) {
-        console.log('Training ('+(args.raw().length)+' classifications): ');
-        let progress = 0;
         return driver.wait(async () => {
             for (const row of args.raw()) {
                 const url = row[0];
                 const classification = row[1];
-                console.log('. ' + ++progress);
+                console.log('. ');
                 console.log(url);
+
+                if (await stepHelpers.contentPreviouslyExtracted(url, classification)) {
+                    continue;
+                }
+
+                console.log('Extracting.');
 
                 await selectDefaultWindow(driver);
                 // Go to URL

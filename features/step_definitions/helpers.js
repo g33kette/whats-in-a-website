@@ -38,6 +38,29 @@ exports.assertProtectionOverlay = (driver) => driver.wait(until.elementsLocated(
 exports.assertProtectionTraining = (driver) => driver.wait(until.elementsLocated(by.css('#bp_training_frame')), 0, 1);
 
 /**
+ * Content Previously Extracted
+ *
+ * @param {string} url
+ * @param {string} classification
+ * @param {*} driver
+ * @return {Promise}
+ */
+exports.contentPreviouslyExtracted = (url, classification) => {
+    return new Promise(async (resolve) => {
+        const filePath = __dirname+'/../../tests/data/training/'+classification+'/';
+        const fileName = url
+            .replace(/\//g, '.')
+            .replace(/(\?)/g, '+')
+            .replace(/[^\\.\\=\\&\\-\\+_A-z0-9]+/g, '');
+
+        const fs = require('fs');
+        fs.access(filePath + fileName, fs.F_OK, (err) => {
+            resolve(!(err));
+        });
+    });
+};
+
+/**
  * Save Parsed Content To File
  * @param {string} url
  * @param {string} classification
@@ -48,13 +71,19 @@ exports.saveParsedContentToFile = (url, classification, driver) => {
     return new Promise(async (resolve) => {
         // Read from logs
         const getLogs = await driver.manage().logs().get('browser');
-        const content = getLogs.length?
-            getLogs[0].message.replace(
-                /chrome-extension:\/\/(\w+)\/content.js (\d+):(\d+) "content" "/,
-                ''
-            ).slice(0, -1)
-            :'';
-        // 'chrome-extension://heaikljhfbhlemebdocookpopjidoico/content.js 38:85082 "content" "....
+        let content = '';
+        for (const log of getLogs) {
+            // 'chrome-extension://heaikljhfbhlemebdocookpopjidoico/content.js 38:85082 "content" "....
+            if (log.message.match(/^chrome-extension:\/\/(\w+)\/content.js (\d+):(\d+) "content" "/)) {
+                content = log.message
+                    .replace(
+                        /chrome-extension:\/\/(\w+)\/content.js (\d+):(\d+) "content" "/,
+                        ''
+                    )
+                    .slice(0, -1)
+                    .replace(/\\n/g, '\r\n');
+            }
+        }
         if (content === '') {
             // No content, return with error
             throw new Error('Content for '+url+' not found.');

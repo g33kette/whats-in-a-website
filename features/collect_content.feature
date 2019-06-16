@@ -3,7 +3,6 @@ Feature: Collect Training Data
 
   Scenario: Collect Safe Content
     Given content is extracted for the following websites
-      | https://www.bbc.co.uk/sport/football | safe |
       | https://www.bbc.co.uk/sport/football	                                                    | safe    |
       | https://www.bbc.co.uk/sport/football/teams/manchester-united	                            | harmful |
       | https://www.bbc.co.uk/sport/football/teams/stoke-city	                                    | safe    |
@@ -75,7 +74,7 @@ Feature: Collect Training Data
       | http://www.vodafone.co.uk/	                                                                | safe    |
       | https://www.vodafone.co.uk/broadband	                                                    | safe    |
       | https://www.tripadvisor.co.uk/	                                                            | safe    |
-      | https://www.airbnb.co.uk/s/Lake-District-National-Park--Lakes--South-Lakeland-District/homes?refinement_paths%5B%5D=%2Fhomes&query=Lake%20District%20National%20Park%2C%20Lakes%2C%20South%20Lakeland%20District&place_id=ChIJF3A1IGLBfEgRhnpq6t17tRc&search_type=SECTION_NAVIGATION&allow_override%5B%5D=&s_tag=GmpfE3JY	| safe    |
+      | https://www.airbnb.co.uk/s/Lake-District-National-Park--Lakes--South-Lakeland-District/homes?refinement_paths%5B%5D=%2Fhomes&query=Lake%20District%20National%20Park%2C%20Lakes%2C%20South%20Lakeland%20District	| safe    |
       | https://www.booking.com/index.en-gb.html	                                                | safe    |
       | https://www.google.com/search?q=manchester+united&rlz=1C1CHBF_enGB839GB839&oq=manchester+united&aqs=chrome..69i57j0l2j69i59j0l2.4223j0j4&sourceid=chrome&ie=UTF-8	| harmful |
       | https://talksport.com/football/545799/transfer-news-live-man-united-man-city-spurs-fekir-de-ligt/	| harmful |
@@ -111,7 +110,7 @@ Feature: Collect Training Data
       | https://www.internationalchampionscup.com/en/teams/manchester-united#tab_team-stats=defence&tab_team-players-stats=general&tab_team=overview	                                                | harmful |
       | https://www.ea.com/en-gb/news/fifa-17-manchester-united-fc-player-tournament	                                                | harmful |
       | https://www.manutd.com/en/tickets-and-hospitality/match-tickets?t=y&int_source=muwebsite&int_medium=meganav&int_campaign=matchtickets&int_content=thnav&int_term=matchtickets	                                                | harmful |
-      | https://www.eticketing.co.uk/muticketsandmembership/	                                                | harmful |
+      #| https://www.eticketing.co.uk/muticketsandmembership/	                                                | harmful |
       | https://www.livefootballtickets.com/english-premiership/manchester-united-tickets.html	                                                | harmful |
       | https://www.ticketmaster.co.uk/manchester-united-tickets/artist/862031	                                                | harmful |
       | https://www.viagogo.co.uk/Sports-Tickets/Football/Barclays-Premier-League/Manchester-United-Tickets	                                                | harmful |
