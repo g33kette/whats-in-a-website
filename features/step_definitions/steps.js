@@ -76,7 +76,7 @@ module.exports = function() {
      * Given the model is trained with the following classifications
      *  | url | classification |
      */
-    this.Given(/^the model is trained with the following classifications$/, {timeout: 1800000}, function(args) {
+    this.Given(/^the model is trained with the following classifications$/, {timeout: 3000000}, function(args) {
         console.log('Training ('+(args.raw().length)+' classifications): ');
         let progress = 0;
         return driver.wait(async () => {
