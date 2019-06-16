@@ -24,3 +24,9 @@ Joanne Buxton | MSC Knowledge Discovery and Data Mining | University of East Ang
  - Go to **More Tools** > **Extensions**
  - Turn on **Developer Mode**
  - Click **Load Unpacked** and open _/project-folder/dist_
+
+### Testing setup on Windows:
+ - Install Visual Studio 2019 with C++ stuff: https://visualstudio.microsoft.com/downloads/
+ - Install Python 2.7 https://www.python.org/download/releases/2.7/
+ - Install windows-build-tools globally in administrator console
+    > npm install --production windows-build-tools -g

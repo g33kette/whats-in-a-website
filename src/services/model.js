@@ -32,8 +32,10 @@ export const trainModel = async (textVector, classification) => {
  * @param {array} textVector
  * @return {Promise}
  */
-export const predictClassification = async (textVector) =>
-    (await getClassifier()).predictClass(tf.tensor(fixLength(textVector)));
+export const predictClassification = async (textVector) => {
+    const classifier = await getClassifier();
+    return await classifier.predictClass(tf.tensor(fixLength(textVector)));
+};
 
 /**
  * Fix Length
@@ -47,7 +49,7 @@ function fixLength(vector) {
     } else {
         const expanded = [];
         expanded.push(...vector);
-        expanded.push(...(new Array(fixedLength-vector.length)));
+        expanded.push(...(new Array(fixedLength-vector.length)).fill(0));
         return expanded;
     }
 }
