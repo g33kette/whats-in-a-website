@@ -48,11 +48,7 @@ exports.assertProtectionTraining = (driver) => driver.wait(until.elementsLocated
 exports.contentPreviouslyExtracted = (url, classification) => {
     return new Promise(async (resolve) => {
         const filePath = __dirname+'/../../tests/data/training/'+classification+'/';
-        const fileName = url
-            .replace(/\//g, '.')
-            .replace(/(\?)/g, '+')
-            .replace(/[^\\.\\=\\&\\-\\+_A-z0-9]+/g, '');
-
+        const fileName = buildFileNameFromUrl(url);
         const fs = require('fs');
         fs.access(filePath + fileName, fs.F_OK, (err) => {
             resolve(!(err));
@@ -90,10 +86,7 @@ exports.saveParsedContentToFile = (url, classification, driver) => {
         }
 
         const filePath = __dirname+'/../../tests/data/training/'+classification+'/';
-        const fileName = url
-            .replace(/\//g, '.')
-            .replace(/(\?)/g, '+')
-            .replace(/[^\\.\\=\\&\\-\\+_A-z0-9]+/g, '');
+        const fileName = buildFileNameFromUrl(url);
 
         const fs = require('fs');
         fs.writeFile(filePath + fileName, content.replace(/\\n/g, '\r\n'), (err) => {
@@ -228,3 +221,20 @@ exports.setPageClassification = (classification, driver, revertDriverCallback) =
 exports.sleep = (s) => {
     return new Promise((resolve) => setTimeout(resolve, s*1000));
 };
+
+// Other Methods -------------------------------------------------------------------------------------------------------
+
+/**
+ * Build File Name From URL
+ *
+ * @param {string} url
+ * @return {string}
+ */
+function buildFileNameFromUrl(url) {
+    return url
+        .replace(/\//g, '.')
+        .replace(/(\?)/g, '+')
+        .replace(/[^\\.\\=\\&\\-\\+_A-z0-9]+/g, '')
+        .substr(0, 180) // Filenames too long was causing git issues
+        .replace(/^\.|\.$/g, ''); // trailing slash replaced by . was causing file issues
+}
