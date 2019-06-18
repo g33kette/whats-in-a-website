@@ -1,6 +1,6 @@
 /* eslint-disable */
-import {prepareText, config as analyseContentConfig} from '../src/services/analyseContent';
-import {resetStore} from './utils';
+import {prepareText, config as analyseContentConfig} from '../../src/services/analyseContent';
+import {resetStore} from '../utils';
 
 beforeEach(async () => {
     await resetStore();
