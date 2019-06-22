@@ -108,35 +108,39 @@ module.exports = function() {
      * Given content is extracted for the following websites
      *  | url | classification |
      */
-    this.Given(/^content is extracted for the following websites$/, {timeout: 3000000}, function(args) {
-        return driver.wait(async () => {
-            for (const row of args.raw()) {
-                const url = row[0];
-                const classification = row[1];
-                console.log('. ');
-                console.log(url);
+    this.Given(
+        /^(training|testing|evaluation) content is extracted for the following websites$/,
+        {timeout: 3000000},
+        function(contentType, args) {
+            return driver.wait(async () => {
+                for (const row of args.raw()) {
+                    const url = row[0];
+                    const classification = row[1];
+                    console.log('. ');
+                    console.log(url);
 
-                if (await stepHelpers.contentPreviouslyExtracted(url, classification)) {
-                    continue;
+                    if (await stepHelpers.contentPreviouslyExtracted(url, classification, contentType)) {
+                        continue;
+                    }
+
+                    console.log('Extracting.');
+
+                    await selectDefaultWindow(driver);
+                    // Go to URL
+                    await stepHelpers.goToUrl(url);
+                    // Wait for processing to complete
+                    await selectBpFrame(driver);
+                    await stepHelpers.contentAnalysisComplete(driver);
+
+                    // Save content from console logs to file
+                    await stepHelpers.saveParsedContentToFile(url, classification, contentType, driver);
+
+                    console.log('Done.');
                 }
-
-                console.log('Extracting.');
-
-                await selectDefaultWindow(driver);
-                // Go to URL
-                await stepHelpers.goToUrl(url);
-                // Wait for processing to complete
-                await selectBpFrame(driver);
-                await stepHelpers.contentAnalysisComplete(driver);
-
-                // Save content from console logs to file
-                await stepHelpers.saveParsedContentToFile(url, classification, driver);
-
-                console.log('Done.');
-            }
-            return true;
-        });
-    });
+                return true;
+            });
+        }
+    );
 
     /**
      * Then the following classifications are tested

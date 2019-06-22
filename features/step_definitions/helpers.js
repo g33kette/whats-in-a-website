@@ -42,12 +42,12 @@ exports.assertProtectionTraining = (driver) => driver.wait(until.elementsLocated
  *
  * @param {string} url
  * @param {string} classification
- * @param {*} driver
+ * @param {string} contentType
  * @return {Promise}
  */
-exports.contentPreviouslyExtracted = (url, classification) => {
+exports.contentPreviouslyExtracted = (url, classification, contentType) => {
     return new Promise(async (resolve) => {
-        const filePath = __dirname+'/../../tests/data/training/'+classification+'/';
+        const filePath = __dirname+'/../../tests/data/'+contentType+'/'+classification+'/';
         const fileName = buildFileNameFromUrl(url);
         const fs = require('fs');
         fs.access(filePath + fileName, fs.F_OK, (err) => {
@@ -60,10 +60,11 @@ exports.contentPreviouslyExtracted = (url, classification) => {
  * Save Parsed Content To File
  * @param {string} url
  * @param {string} classification
+ * @param {string} contentType
  * @param {*} driver
  * @return {Promise}
  */
-exports.saveParsedContentToFile = (url, classification, driver) => {
+exports.saveParsedContentToFile = (url, classification, contentType, driver) => {
     return new Promise(async (resolve) => {
         // Read from logs
         const getLogs = await driver.manage().logs().get('browser');
@@ -85,7 +86,7 @@ exports.saveParsedContentToFile = (url, classification, driver) => {
             throw new Error('Content for '+url+' not found.');
         }
 
-        const filePath = __dirname+'/../../tests/data/training/'+classification+'/';
+        const filePath = __dirname+'/../../tests/data/'+contentType+'/'+classification+'/';
         const fileName = buildFileNameFromUrl(url);
 
         const fs = require('fs');
