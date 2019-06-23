@@ -53,7 +53,7 @@ chrome.runtime.onMessage.addListener((request) => {
             updateMessage(request.message);
             return;
         case 'showAnalysis':
-            showAnalysis(request.result);
+            showAnalysis(request.result, request.summary);
             return;
         default:
         // Do Nothing
@@ -75,15 +75,33 @@ const updateMessage = (message) => {
  * Show Analysis
  *
  * @param {object} result
+ * @param {array} [summary]
  */
-const showAnalysis = (result) => {
+const showAnalysis = (result, summary) => {
     if (loadingElement) {
         loadingElement.hide();
     }
     if (completeElement) {
+        // Display classification result
         const resultElement = completeElement.find('.result');
         resultElement.html(result.summary);
         resultElement.addClass(result.safe?'safe':(result.safe===null?'warning':'harmful'));
+        // Display content summary
+        if (summary && summary.length) {
+            const summaryContainerElement = completeElement.find('.summary-container');
+            const summaryElement = summaryContainerElement.find('.summary');
+            summaryElement.html(convertListToHtml(summary));
+            summaryContainerElement.show();
+        }
+        // Show element
         completeElement.show();
     }
+};
+
+const convertListToHtml = (arr) => {
+    let bits = [];
+    for (const row of arr) {
+        bits.push('<li>'+row+'</li>');
+    }
+    return '<ul>'+bits.join('')+'</ul>';
 };

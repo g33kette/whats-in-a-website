@@ -22,6 +22,7 @@ import {
     loadStateParamsFromLocalStorage,
     triggerToggleEnabled,
 } from './services/accessors';
+import {summariseText} from './services/summarise';
 
 /**
  * Custom Event Listeners
@@ -136,16 +137,14 @@ function triggerInitialiseProcessing(tabId, content) {
         chrome.tabs.sendMessage(tabId, {trigger: 'showMessage', message: '[3] Analysing content...'});
         saveTabContent(tabId, textVector);
         analyseContent(textVector).then((result) => {
-            console.log(result);
-            // if (result.safe) {
-            //     chrome.tabs.sendMessage(tabId, {trigger: 'closeFrame'});
-            // } else {
-            chrome.tabs.sendMessage(
-                tabId,
-                {trigger: 'showMessage', message: 'Analysis Complete. Please review before continuing.'}
-            );
-            chrome.tabs.sendMessage(tabId, {trigger: 'showAnalysis', result: result});
-            // }
+            chrome.tabs.sendMessage(tabId, {trigger: 'showMessage', message: '[4] Summarising content...'});
+            summariseText(content).then((summary) => {
+                chrome.tabs.sendMessage(
+                    tabId,
+                    {trigger: 'showMessage', message: 'Analysis Complete. Please review before continuing.'}
+                );
+                chrome.tabs.sendMessage(tabId, {trigger: 'showAnalysis', result: result, summary: summary});
+            });
         });
     });
 }
