@@ -4,9 +4,23 @@
   "description": "What's In A Website? Chrome Extension",
   "private": true,
   "scripts": {
-    "test": "node ./node_modules/selenium-cucumber-js/index.js",
+    "test": "jest --testPathPattern=^tests/integration",
+    "evaluate": "jest --testPathPattern=^tests/evaluation",
+    "e2e": "node ./node_modules/selenium-cucumber-js/index.js",
     "build": "webpack",
     "watch": "webpack && webpack --watch"
+  },
+  "babel": {
+    "env": {
+      "test": {
+        "plugins": [
+          "transform-es2015-modules-commonjs"
+        ]
+      }
+    }
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "repository": {
     "type": "git",
@@ -17,6 +31,7 @@
   "license": "ISC",
   "devDependencies": {
     "babel-eslint": "^8.2.5",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^1.0.0",
     "cucumber": "^5.1.0",
@@ -24,6 +39,7 @@
     "eslint-config-google": "^0.9.1",
     "eslint-loader": "^2.0.0",
     "file-loader": "^1.1.11",
+    "jest": "^24.8.0",
     "selenium-cucumber-js": "^1.6.2",
     "style-loader": "^0.21.0",
     "webpack": "^4.15.1",

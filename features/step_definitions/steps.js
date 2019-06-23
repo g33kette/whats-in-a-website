@@ -76,12 +76,13 @@ module.exports = function() {
      * Given the model is trained with the following classifications
      *  | url | classification |
      */
-    this.Given(/^the model is trained with the following classifications$/, {timeout: 1800000}, function(args) {
+    this.Given(/^the model is trained with the following classifications$/, {timeout: 3000000}, function(args) {
         console.log('Training ('+(args.raw().length)+' classifications): ');
         let progress = 0;
         return driver.wait(async () => {
             for (const row of args.raw()) {
                 console.log('. ' + ++progress);
+                console.log(row[0]);
                 // console.log(row);
                 const url = row[0];
                 const classification = row[1];
@@ -102,6 +103,44 @@ module.exports = function() {
             return true;
         });
     });
+
+    /**
+     * Given content is extracted for the following websites
+     *  | url | classification |
+     */
+    this.Given(
+        /^(training|testing|validation) content is extracted for the following websites$/,
+        {timeout: 3000000},
+        function(contentType, args) {
+            return driver.wait(async () => {
+                for (const row of args.raw()) {
+                    const url = row[0];
+                    const classification = row[1];
+                    console.log('. ');
+                    console.log(url);
+
+                    if (await stepHelpers.contentPreviouslyExtracted(url, classification, contentType)) {
+                        continue;
+                    }
+
+                    console.log('Extracting.');
+
+                    await selectDefaultWindow(driver);
+                    // Go to URL
+                    await stepHelpers.goToUrl(url);
+                    // Wait for processing to complete
+                    await selectBpFrame(driver);
+                    await stepHelpers.contentAnalysisComplete(driver);
+
+                    // Save content from console logs to file
+                    await stepHelpers.saveParsedContentToFile(url, classification, contentType, driver);
+
+                    console.log('Done.');
+                }
+                return true;
+            });
+        }
+    );
 
     /**
      * Then the following classifications are tested

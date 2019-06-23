@@ -1,13 +1,13 @@
-import {getClassifier as getClassifierFromStore, saveClassifier} from '../background';
+import {getClassifier as getClassifierFromStore, saveClassifier} from './accessors';
 import * as tf from '@tensorflow/tfjs';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
 
 const fixedLength = 5000;
 
 let classifier;
-const getClassifier = () => {
+const getClassifier = async () => {
     if (!classifier) {
-        classifier = getClassifierFromStore();
+        classifier = await getClassifierFromStore();
     }
     if (!classifier) {
         classifier = knnClassifier.create();
@@ -21,9 +21,9 @@ const getClassifier = () => {
  * @param {array} textVector
  * @param {string} classification
  */
-export const trainModel = (textVector, classification) => {
-    getClassifier().addExample(tf.tensor(fixLength(textVector)), classification);
-    saveClassifier(getClassifier());
+export const trainModel = async (textVector, classification) => {
+    (await getClassifier()).addExample(tf.tensor(fixLength(textVector)), classification);
+    saveClassifier(await getClassifier());
 };
 
 /**
@@ -32,8 +32,10 @@ export const trainModel = (textVector, classification) => {
  * @param {array} textVector
  * @return {Promise}
  */
-export const predictClassification = async (textVector) =>
-    await getClassifier().predictClass(tf.tensor(fixLength(textVector)));
+export const predictClassification = async (textVector) => {
+    const classifier = await getClassifier();
+    return await classifier.predictClass(tf.tensor(fixLength(textVector)));
+};
 
 /**
  * Fix Length
@@ -47,7 +49,7 @@ function fixLength(vector) {
     } else {
         const expanded = [];
         expanded.push(...vector);
-        expanded.push(...(new Array(fixedLength-vector.length)));
+        expanded.push(...(new Array(fixedLength-vector.length)).fill(0));
         return expanded;
     }
 }

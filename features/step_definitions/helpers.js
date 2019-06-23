@@ -38,6 +38,66 @@ exports.assertProtectionOverlay = (driver) => driver.wait(until.elementsLocated(
 exports.assertProtectionTraining = (driver) => driver.wait(until.elementsLocated(by.css('#bp_training_frame')), 0, 1);
 
 /**
+ * Content Previously Extracted
+ *
+ * @param {string} url
+ * @param {string} classification
+ * @param {string} contentType
+ * @return {Promise}
+ */
+exports.contentPreviouslyExtracted = (url, classification, contentType) => {
+    return new Promise(async (resolve) => {
+        const filePath = __dirname+'/../../tests/data/'+contentType+'/'+classification+'/';
+        const fileName = buildFileNameFromUrl(url);
+        const fs = require('fs');
+        fs.access(filePath + fileName, fs.F_OK, (err) => {
+            resolve(!(err));
+        });
+    });
+};
+
+/**
+ * Save Parsed Content To File
+ * @param {string} url
+ * @param {string} classification
+ * @param {string} contentType
+ * @param {*} driver
+ * @return {Promise}
+ */
+exports.saveParsedContentToFile = (url, classification, contentType, driver) => {
+    return new Promise(async (resolve) => {
+        // Read from logs
+        const getLogs = await driver.manage().logs().get('browser');
+        let content = '';
+        for (const log of getLogs) {
+            // 'chrome-extension://heaikljhfbhlemebdocookpopjidoico/content.js 38:85082 "content" "....
+            if (log.message.match(/^chrome-extension:\/\/(\w+)\/content.js (\d+):(\d+) "content" "/)) {
+                content = log.message
+                    .replace(
+                        /chrome-extension:\/\/(\w+)\/content.js (\d+):(\d+) "content" "/,
+                        ''
+                    )
+                    .slice(0, -1)
+                    .replace(/\\n/g, '\r\n');
+            }
+        }
+        if (content === '') {
+            // No content, return with error
+            throw new Error('Content for '+url+' not found.');
+        }
+
+        const filePath = __dirname+'/../../tests/data/'+contentType+'/'+classification+'/';
+        const fileName = buildFileNameFromUrl(url);
+
+        const fs = require('fs');
+        fs.writeFile(filePath + fileName, content.replace(/\\n/g, '\r\n'), (err) => {
+            if (err) throw err;
+            resolve();
+        });
+    });
+};
+
+/**
  * Content Analysis Complete
  * @param {*} driver
  * @return {Promise}
@@ -156,9 +216,26 @@ exports.setPageClassification = (classification, driver, revertDriverCallback) =
 
 /**
  * Sleep
- * @param {int} ms
+ * @param {int} s
  * @return {Promise}
  */
-exports.sleep = (ms) => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+exports.sleep = (s) => {
+    return new Promise((resolve) => setTimeout(resolve, s*1000));
 };
+
+// Other Methods -------------------------------------------------------------------------------------------------------
+
+/**
+ * Build File Name From URL
+ *
+ * @param {string} url
+ * @return {string}
+ */
+function buildFileNameFromUrl(url) {
+    return url
+        .replace(/\//g, '.')
+        .replace(/(\?)/g, '+')
+        .replace(/[^\\.\\=\\&\\-\\+_A-z0-9]+/g, '')
+        .substr(0, 180) // Filenames too long was causing git issues
+        .replace(/^\.|\.$/g, ''); // trailing slash replaced by . was causing file issues
+}

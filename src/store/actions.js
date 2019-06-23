@@ -1,6 +1,9 @@
 
 // Actions -------------------------------------------------------------------------------------------------------------
 
+export const RESET = 'reset';
+export const reset = (source) => ({type: RESET, source});
+
 export const OVERRIDE_STATE_PARAMS = 'overrideStateParams';
 export const overrideStateParams = (params, source) => ({type: OVERRIDE_STATE_PARAMS, params, source});
 

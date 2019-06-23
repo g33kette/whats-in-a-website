@@ -1,0 +1,461 @@
+
+
+
+\t
+\t\t
+\t\t\t
+\t\t\t\t
+\t\t\t\t\tComputation X  
+\t\t\t\t\tThoughts about computing, education and research 
+\t\t\t\t 
+\t\t\t 
+\t\t 
+\t 
+\t
+\t\tMenu  
+\t\tSkip to content 
+
+\t\t
+Home  About  
+  
+\t\t
+\t\t\tSearch 
+\t\t 
+\t\t
+\t\t\t
+\t\t\t\t
+\t\t\t\t\tSearch for: 
+\t\t\t\t\t 
+\t\t\t\t 
+\t\t\t\t 
+\t\t\t \t\t 
+\t 
+\t
+
+\t
+\t\t
+
+\t\t\t\t\t
+\t\t\t
+
+\t
+\t\t\t\t\tFive things I’ve learned about pair programming \t\t\t\t
+\t\t\tMay 23, 2019 May 23, 2019    /  Katharine Childs   \t\t\t\t\t 
+\t 
+
+\t
+\t\tPair programming is a specific teaching technique where pupils work in pairs to write computer programs. One pupil takes the role of the driver, has control of the computer and writes or manipulates the code. The other pupil takes the role of the navigator, who has the project instructions, reads them out and looks out for any bumps in the road (aka bugs in the code). The roots of this learning technique come from industry, where developers work with a partner on programming tasks. 
+At our recent staff meeting, we had a mini maker day where we all tried out some of our projects. I worked with my colleague Dan on a Sonic Pi  project to code the Tetris theme tune , and we decided to try using pair programming techniques to structure our collaboration. This was the first time I’d tried pair programming for quite some time and it was a really positive experience for me. Here are five things I learned about pair programming along the way: 
+Coding is fun and pair programming increases that fun   – It is very exciting to write code that works. It is enormously satisfying to write code that doesn’t work, debug it and then see it work. Pair programming increases that excitement and satisfaction exponentially as you get to share the “wow, we’ve made that” moments with a partner. Somehow that more than doubles the sense of achievement! 
+It’s quite hard to stick to the roles rigidly but it was fine when we didn’t  – Sometimes we found that we both ended up taking the navigator role as we worked together to try and debug the code. It was useful to look through the instructions together to see if there were any clues or hints that would help us, then look through the code together to find and fix the errors. Once we’d spotted what we needed, we then reverted back to our roles again. This flexibility worked well for us. 
+Coding is immersive and it’s easy to forget to swap roles  – We really enjoyed the Sonic Pi project we worked on together. After we had completed the first section, we swapped roles. We were so engaged in completing the tune though, that we forgot to swap again. We remembered once we’d started to apply what we had learned and write our own tune and then by that time, we ended up staying in set roles based on our skills. In a classroom, I’d definitely use a timer to remind children to swap roles. I’d also spend some time getting children to evaluate their strengths and weaknesses in each role so they can better understand how to use this technique more and more effectively. 
+There are lots of different skills which make a great pair programmer  – I was very lucky to be working with Dan, who was very patient, enthusiastic and open to working together to solve problems. I know my own weakness in pair programming is that when I’m learning something new, I want to be able to do it at my pace. Dan was very good at making suggestions, coming up with ideas and taking the lead so that the pace worked well for us both. I’d like to think that my eye for detail, creativity and resilience also contributed towards the partnership too. 
+Working in pairs is really helpful for text-based programming languages  – In Sonic Pi, there are some syntax rules to follow. Punctuation such as square brackets, commas, and colons need to be in the right place for the code to run without errors. It really helped to read out the full punctuation as well as the words from the project instructions, as this improved the accuracy of the code we were writing. 
+We were both really proud of what we’d achieved by the end of the session. Not only had we coded the Tetris theme, we’d also made a start on the Star Wars theme. We’d experimented with different sounds, added repeating loops and found a way of adding a drum beat. We both commented that we wanted to explore Sonic Pi further – so maybe we’ll set up another pair programming session in the future! 
+
+        
+     \t\t
+\t\t\t
+\t\t\t\tAdvertisements 
+\t\t\t\t\t\t
+\t\t\t Report this ad   
+\t\t  
+\t\t\t\t
+\t\t\t 
+\t\t Share this: Twitter  Click to share on Twitter  Facebook  Click to share on Facebook  LinkedIn  Click to share on LinkedIn  Email  Click to email this to a friend  Print  Click to print  Reddit  Click to share on Reddit  Pinterest  Click to share on Pinterest       Like this: Like   Loading...      \t\t\t 
+
+\t
+\t\t\t\t\t\t
+\t\t\t\t\tProgramming , Raspberry Pi \t\t\t\t 
+\t\t\t\t\tlearning , music , pair programming , Raspberry Pi , sonic pi  \t 
+ 
+
+\t\t\t\t
+\t\tPost navigation 
+\t\t
+\t\t\t←  Recruiting educational research participants via social media  \t\t 
+\t 
+\t
+\t\t\t
+
+
+\t
+\t
+\t
+\t\t
+\t\tLeave a Reply Cancel reply   \t\t\t
+\t\t\t\t  
+ 
+
+
+\t
+\t  Enter your comment here...  
+ 
+
+
+\t
+\t\tFill in your details below or click an icon to log in: 
+\t\t
+\t\t\t
+\t\t\t\t
+\t\t\t\t\t\t\t\t\t Login via Guest 
+\t\t\t 
+\t\t\t
+\t\t\t\t
+\t\t\t\t\t    \t\t\t\t Login via WordPress.com 
+\t\t\t 
+\t\t\t
+\t\t\t
+\t\t\t 
+\t\t\t
+\t\t\t\t
+\t\t\t\t\t    \t\t\t\t Login via Twitter 
+\t\t\t 
+\t\t\t
+\t\t\t\t
+\t\t\t\t\t    \t\t\t\t Login via Facebook 
+\t\t\t 
+\t\t 
+\t 
+
+\t
+\t\t
+\t\t\t
+\t\t\t\t Gravatar 
+ \t\t\t 
+
+\t\t\t\t
+\t\t\t\t
+\t\t\t\t\tEmail (required)  (Address never made public)  
+\t\t\t\t\t  
+\t\t\t\t 
+\t\t\t\t
+\t\t\t\t\tName (required)  
+\t\t\t\t\t  
+\t\t\t\t 
+\t\t\t\t
+\t\t\t\t\tWebsite 
+\t\t\t\t\t  
+\t\t\t\t 
+\t\t\t 
+\t\t\t
+\t\t 
+\t 
+
+\t
+\t\t
+\t\t\t
+\t\t\t\t WordPress.com Logo 
+\t\t\t 
+
+\t\t\t\t
+\t\t\t\t 
+\t\t\t\t 
+\t\t\t\t 
+\t\t\t\t\t\t
+\t\t\t 
+\t\t\tYou are commenting using your WordPress.com  account.\t\t\t
+\t\t\t\t( Log Out  / 
+\t\t\t\tChange  )
+\t\t\t 
+\t\t\t     
+\t\t 
+\t\t\t\t\t 
+\t
+\t\t 
+\t 
+
+\t
+\t\t
+\t\t\t
+\t\t\t\t Google photo 
+\t\t\t 
+
+\t\t\t\t
+\t\t\t\t 
+\t\t\t\t 
+\t\t\t\t 
+\t\t\t\t\t\t
+\t\t\t 
+\t\t\tYou are commenting using your Google account.\t\t\t
+\t\t\t\t( Log Out  / 
+\t\t\t\tChange  )
+\t\t\t 
+\t\t\t      
+\t\t 
+\t\t\t\t\t 
+\t
+\t\t 
+\t 
+
+\t
+\t\t
+\t\t\t
+\t\t\t\t Twitter picture 
+\t\t\t 
+
+\t\t\t\t
+\t\t\t\t 
+\t\t\t\t 
+\t\t\t\t 
+\t\t\t\t\t\t
+\t\t\t 
+\t\t\tYou are commenting using your Twitter account.\t\t\t
+\t\t\t\t( Log Out  / 
+\t\t\t\tChange  )
+\t\t\t 
+\t\t\t     
+\t\t 
+\t\t\t\t\t 
+\t
+\t\t 
+\t 
+
+\t
+\t\t
+\t\t\t
+\t\t\t\t Facebook photo 
+\t\t\t 
+
+\t\t\t\t
+\t\t\t\t 
+\t\t\t\t 
+\t\t\t\t 
+\t\t\t\t\t\t
+\t\t\t 
+\t\t\tYou are commenting using your Facebook account.\t\t\t
+\t\t\t\t( Log Out  / 
+\t\t\t\tChange  )
+\t\t\t 
+\t\t\t     
+\t\t 
+\t\t\t\t\t 
+\t
+\t\t 
+\t 
+
+
+\t
+\t\tCancel  
+\t\tConnecting to %s 
+\t 
+
+ 
+
+
+
+
+\t  Notify me of new comments via email.    Notify me of new posts via email.   
+
+
+
+
+   
+ 
+   
+ 
+ \t\t\t  
+\t\t\t 
+\t This site uses Akismet to reduce spam. Learn how your comment data is processed . 
+ 
+
+\t\t
+\t\t 
+\t 
+
+
+\t
+\t\t
+\t\t\t\t
+\t\t\t\t\tSearch for: 
+\t\t\t\t\t 
+\t\t\t\t 
+\t\t\t\t 
+\t\t\t  \t\t\t\tRecent Posts \t\t
+\t\t\t\t\t\t\t\t\t\t\t
+\t\t\t\t\tFive things I’ve learned about pair programming 
+\t\t\t\t\t\t\t\t\t\t\tMay 23, 2019 
+\t\t\t\t\t\t\t\t\t 
+\t\t\t\t\t\t\t\t\t\t\t
+\t\t\t\t\tRecruiting educational research participants via social media 
+\t\t\t\t\t\t\t\t\t\t\tMay 14, 2019 
+\t\t\t\t\t\t\t\t\t 
+\t\t\t\t\t\t\t\t\t\t\t
+\t\t\t\t\tI got by with a little help from my friends: how I completed my masters degree 
+\t\t\t\t\t\t\t\t\t\t\tApril 25, 2019 
+\t\t\t\t\t\t\t\t\t 
+\t\t\t\t\t\t\t\t\t\t\t
+\t\t\t\t\tThe top 10 physical computing devices used in Key Stage 2 teaching 
+\t\t\t\t\t\t\t\t\t\t\tFebruary 16, 2019 
+\t\t\t\t\t\t\t\t\t 
+\t\t\t\t\t\t\t\t\t\t\t
+\t\t\t\t\tPi-spy at Derby Mini Maker Faire! 
+\t\t\t\t\t\t\t\t\t\t\tOctober 27, 2017 
+\t\t\t\t\t\t\t\t\t 
+\t\t\t\t\t 
+\t\t Follow me on Twitter  Archives \t\tArchives 
+\t\t
+\t\t\t
+\t\t\tSelect Month 
+\t\t\t\t May 2019  (2) 
+\t April 2019  (1) 
+\t February 2019  (1) 
+\t October 2017  (1) 
+\t September 2016  (1) 
+\t July 2016  (1) 
+\t June 2016  (1) 
+\t May 2016  (2) 
+\t April 2016  (1) 
+\t February 2016  (1) 
+\t January 2016  (1) 
+\t December 2015  (2) 
+\t July 2015  (2) 
+\t June 2015  (1) 
+\t May 2015  (2) 
+\t April 2015  (3) 
+\t March 2015  (1) 
+\t September 2014  (3) 
+\t August 2014  (1) 
+\t July 2014  (5) 
+\t June 2014  (1) 
+\t May 2014  (2) 
+\t March 2014  (2) 
+\t February 2014  (2) 
+\t January 2014  (1) 
+\t November 2013  (1) 
+\t October 2013  (2) 
+\t December 2012  (1) 
+\t November 2012  (1) 
+\t October 2012  (4) 
+
+\t\t 
+
+
+
+\t\t Categories \t\t
+\t\t\t\tcomputational thinking  (3)
+ 
+\tComputing Curriculum  (21)
+ 
+\tDigital literacy  (1)
+ 
+\teSafety  (3)
+ 
+\tGeneral Just general stuff that won't fit anywhere else or is so generic I can't categorise it!  (10)
+ 
+\tHardware tips Tips to do with hardware - computers, printers, visualisers, interactive whiteboards etc  (3)
+ 
+\tPhysical computing  (1)
+ 
+\tProgramming  (1)
+ 
+\tRaspberry Pi  (3)
+ 
+\tResearch  (1)
+ 
+\tSoftware tips Tips to do with any software or resources for teaching and learning.   (6)
+ 
+\tUncategorized  (4)
+ 
+\tWeb Science  (1)
+ 
+\tWebsite  (1)
+ 
+\t\t 
+\t\t\t Meta \t\t\t
+\t\t\tRegister  \t\t\tLog in  
+\t\t\tEntries RSS Really Simple Syndication   
+\t\t\tComments RSS Really Simple Syndication   
+\t\t\tWordPress.com Powered by WordPress, state-of-the-art semantic personal publishing platform.  \t\t\t 
+\t\t\t \t\t
+\t\t\t
+\t\t\t\tAdvertisements 
+\t\t\t\t
+\t\t\t\t\t\t\t
+\t\t\t Report this ad   
+\t\t 
+\t\t\t\t 
+\t\t\t\t
+\t\t\t 
+\t\t \t 
+
+\t 
+\t
+\t\t\t
+\t\t\t\t\t\t\t
+\t\t\t\tMy Tweets  \t\t\t 
+\t\t\t\t\t 
+\t\t
+\t\t\tBlog at WordPress.com. 
+\t\t\t
+\t\t\t\t\t 
+\t 
+ 
+
+
+
+
+
+
+\t
+
+\t\t
+\t 
+
+
+
+\t
+\t\t\t\t\t
+\t\t
+
+
+\t
+\t\t 
+
+\t\tPrivacy & Cookies: This site uses cookies. By continuing to use this website, you agree to their use.  
+To find out more, including how to control cookies, see here:
+\t\t
+\t\t\tCookie Policy\t\t 
+  
+ 
+  \t\t\t    \t   Follow   \t\t\t    \t \t\t\t    \t\t  \t\t\t    \t\t  \t\t\t    \t  \t\t\t      \t\t\t        \t\t\t   \t\t\t  \t  \t\t\t  \t \t\t\t\t   \t\t\t\t      Computation X   \t\t\t\t   \t   Customize     \t\t\t\t       Follow    \t\t\t\t\tSign up   \t\t\t\t    Log in   \t\t\t\t     \t\t\t\t    Copy shortlink   \t\t\t\t    Report this content   \t\t\t\t     \t\t\t\t     \t\t\t\t    Manage subscriptions   \t\t\t\t    Collapse this bar   \t\t\t        \t\t\t      \t\t        \t\t      \t        
+
+\t\t
+\t\t%d  bloggers like this:   
+
+
+
+
+
+
+
+\t\t
+\t\t\tSend to Email Address 
+\t\t\t 
+
+\t\t\t
+\t\t\t\tYour Name 
+\t\t\t\t 
+
+\t\t\t\tYour Email Address 
+\t\t\t\t 
+
+\t\t\t\t\t\t This field is for validation and should not be changed 
+\t\t\t
+\t\t\t    
+\t\t\t
+\t\t\t
+\t\t\t loading 
+\t\t\t 
+\t\t\tCancel 
+
+\t\t\t
+\t\t\t\tPost was not sent - check your email addresses!\t\t\t 
+
+\t\t\t
+\t\t\t\tEmail check failed, please try again\t\t\t 
+
+\t\t\t
+\t\t\t\tSorry, your blog cannot share posts by email.\t\t\t 
+\t\t 
+\t  :)      

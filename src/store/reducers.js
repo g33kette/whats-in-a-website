@@ -1,4 +1,5 @@
 import {
+    RESET,
     OVERRIDE_STATE_PARAMS,
     SET_ENCRYPTION_TOKEN,
     SET_USERNAME,
@@ -9,11 +10,11 @@ import {
 } from './actions';
 
 /**
- * Get Initial State
+ * Get Initial State Values
  *
  * @return {*}
  */
-export async function getInitialState() {
+function getInitialStateValues() {
     return {
         encryptionToken: null,
         // TODO The plugin needs to be auto-enabled for testing
@@ -27,6 +28,14 @@ export async function getInitialState() {
         classifier: null,
     };
 }
+/**
+ * Get Initial State - Wraps getInitialStateValues in a promise.
+ *
+ * @return {*}
+ */
+export async function getInitialState() {
+    return getInitialStateValues();
+}
 
 /**
  * Browser Protect State
@@ -38,6 +47,8 @@ export async function getInitialState() {
 export function coreReducer(state = getInitialState(), action) {
     let tabs;
     switch (action.type) {
+        case RESET:
+            return Object.assign({}, getInitialStateValues());
         case OVERRIDE_STATE_PARAMS:
             return Object.assign({}, state, action.params);
         case SET_ENCRYPTION_TOKEN:
