@@ -2,11 +2,11 @@
 
 import {resetStore, trainFromFiles, runClassificationEvaluation} from '../utils';
 
-jest.setTimeout(3600000); // 1 hour
+jest.setTimeout(7200000); // 2 hours
 
 const vectorType = 'bagOfWords';
 const wordType = 'plain';
-const limit = 0; // 2 takes  64 sec...
+const limit = 0; // ~ 100 minutes...
 
 beforeAll(async () => {
     await resetStore();
@@ -27,7 +27,7 @@ afterAll( async () => {
 });
 
 it('Should run evaluation of model against test data', async () => {
-    await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, limit);
+    await runClassificationEvaluation('/tests/data/testing', vectorType, wordType);
 });
 
 // Not to be run until final evaluation
