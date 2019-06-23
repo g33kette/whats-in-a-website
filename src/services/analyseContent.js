@@ -7,7 +7,7 @@ import l2Norm from 'compute-l2norm';
 // Exported so can be set in tests
 export const config = {
     vectorType: 'bagOfWords', // Options: bagOfWords, tfIdf
-    wordType: 'plain', // Options: plain
+    wordType: 'plain', // Options: plain, tagged
 };
 
 // * Prepare Text ------------------------------------------------------------------------------------------------------
@@ -30,21 +30,7 @@ export const prepareText = async (content) => {
  */
 const parseToNlpDoc = (content) => {
     const nlp = require('compromise');
-    const normaliseOptions = {
-        whitespace: true,
-        case: true,
-        numbers: true,
-        punctuation: true,
-        unicode: true,
-        contractions: true,
-        acronyms: true,
-        // Enable non-defaults:
-        possessives: true,
-        plurals: true,
-        verbs: true,
-    };
-    // Return normalised values
-    return nlp(content).normalize(normaliseOptions);
+    return nlp(content).normalize();
 };
 
 /**
@@ -71,13 +57,18 @@ const buildVector = async (doc) => {
  * @return {array}
  */
 const convertToListOfWords = (doc) => {
+    const normalized = doc.words().normalize({
+        possessives: true,
+        plurals: true,
+        verbs: true,
+    });
     switch (config.wordType) {
+        case 'tagged':
+            return normalized.out('tags');
         case 'plain':
         default:
-            return doc.words().out('array').filter((v) => v !== '' && v !== null);
-            // remove num? .filter((v) => isNaN(parseFloat(v)));
+            return normalized.out('array');
     }
-    // const tagged = doc.out('tags'); // todo
 };
 
 /**
