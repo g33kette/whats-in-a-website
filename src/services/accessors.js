@@ -1,7 +1,7 @@
 /**
  * Accessors.js
  *
- * This script an accessor layer between the backgroun scripts and the store.
+ * This script an accessor layer between the background scripts and the store.
  */
 
 import store from './../store/store';
