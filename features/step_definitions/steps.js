@@ -109,7 +109,7 @@ module.exports = function() {
      *  | url | classification |
      */
     this.Given(
-        /^(training|testing|evaluation) content is extracted for the following websites$/,
+        /^(training|testing|validation) content is extracted for the following websites$/,
         {timeout: 3000000},
         function(contentType, args) {
             return driver.wait(async () => {

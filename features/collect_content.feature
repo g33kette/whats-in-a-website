@@ -122,9 +122,9 @@ Feature: Collect Training Data
       | https://www.premierleague.com/clubs/12/Manchester-United/stadium	                         | harmful |
 
 
-  Scenario: Collect Content For Evaluation
+  Scenario: Collect Content For Validation
 
-    Given evaluation content is extracted for the following websites
+    Given validation content is extracted for the following websites
       | http://www.hdewcameras.co.uk/canon-ef-s-18-135mm-f35-56-is-usm-lens-nano-4665-p.asp          | safe |
       | https://www.pexels.com/search/forest/                                                        | safe |
       | https://www.nathab.com/traveler-resources/                                                   | safe |
@@ -146,7 +146,7 @@ Feature: Collect Training Data
       | https://personal.secure.scottishwidows.co.uk/terms/                                          | safe |
       | https://www.fox-and-sons.co.uk/houses-for-sale/property-details/SBX104013                    | safe |
 
-    And evaluation content is extracted for the following websites
+    And validation content is extracted for the following websites
       | https://en.wikipedia.org/wiki/Ole_Gunnar_Solskjaer                                           | harmful |
       | https://www.planetfootball.com/quizzes/can-name-every-member-man-utds-treble-winning-squad/  | harmful |
       | http://www.thefootballramble.co.uk/forum/viewthread/5439/P3080/                              | harmful |

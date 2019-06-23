@@ -3,7 +3,7 @@
 import {prepareText, config as analyseContentConfig} from '../src/services/analyseContent';
 import store from '../src/store/store';
 import {reset} from './../src/store/actions';
-import {trainModel} from '../src/services/model';
+import {predictClassification, trainModel} from '../src/services/model';
 import fs from 'fs';
 
 /**
@@ -89,8 +89,78 @@ export function sleep(s) {
 export async function trainFromFiles(safeFilesDirectory, harmfulFilesDirectory, vectorType, wordType, limit) {
     await trainCategorisationFiles('safe', safeFilesDirectory, vectorType, wordType, limit);
     await trainCategorisationFiles('harmful', harmfulFilesDirectory, vectorType, wordType, limit);
+    console.log('Training complete.');
 }
 
+/**
+ * Prepare Vectors From Files
+ *
+ * @param {string} filesDirectory
+ * @param {string} vectorType
+ * @param {string} wordType
+ * @param {int} limit
+ * @return {Promise<Array[]>}
+ */
+export async function prepareVectorsFromFiles(filesDirectory, vectorType, wordType, limit) {
+    const files = await listFiles(filesDirectory);
+    const vectors = [];
+    limit = limit?limit:files.length;
+    for (const file of files) {
+        // console.log(file);
+        vectors.push(await prepareVectorFromFile(filesDirectory, file, vectorType, wordType));
+        if (!--limit) {
+            break;
+        }
+    }
+    return vectors;
+}
+
+/**
+ * Run Evaluation
+ *
+ * @param {string} dataDir
+ * @param {string} vectorType
+ * @param {string} wordType
+ * @param {int} limit
+ * @return {Promise<void>}
+ */
+export async function runClassificationEvaluation(dataDir, vectorType, wordType, limit) {
+    let classification;
+    const results = {tp: 0, tn: 0, fp: 0, fn: 0};
+    const testSafeVectors = await prepareVectorsFromFiles(
+        dataDir + '/safe',
+        vectorType,
+        wordType,
+        limit
+    );
+    for (const safeVector of testSafeVectors) {
+        classification = await predictClassification(safeVector);
+        if (classification === 'safe') {
+            results.tp++;
+            console.log('. ✓ (safe)');
+        } else {
+            results.fn++;
+            console.log('. X (harmful)');
+        }
+    }
+    const testHarmfulVectors = await prepareVectorsFromFiles(
+        dataDir + '/harmful',
+        vectorType,
+        wordType,
+        limit
+    );
+    for (const harmfulVector of testHarmfulVectors) {
+        classification = await predictClassification(harmfulVector);
+        if (classification === 'harmful') {
+            results.tn++;
+            console.log('. ✓ (harmful)');
+        } else {
+            results.fp++;
+            console.log('. X (safe)');
+        }
+    }
+    outputModelEvaluationResults(results);
+}
 
 // Private Methods -----------------------------------------------------------------------------------------------------
 
@@ -100,7 +170,7 @@ const listFiles = (dir) => {
             if (err) {
                 reject(err);
             } else {
-                resolve(files);
+                resolve(files.filter((fn) => fn !== '.gitkeep'));
             }
         });
     });
@@ -122,6 +192,7 @@ const trainCategorisationFiles = async (category, filesDirectory, vectorType, wo
     const files = await listFiles(filesDirectory);
     limit = limit?limit:files.length;
     for (const file of files) {
+        // console.log(category, file);
         await trainCategorisationFromFile(category, filesDirectory, file, vectorType, wordType);
         if (!--limit) {
             break;
@@ -130,8 +201,39 @@ const trainCategorisationFiles = async (category, filesDirectory, vectorType, wo
 };
 
 const trainCategorisationFromFile = async (category, filesDirectory, file, vectorType, wordType) => {
-    const fileContent = await getFileContent(filesDirectory, file);
-    const vector = await prepareVector(fileContent, vectorType, wordType);
+    const vector = await prepareVectorFromFile(filesDirectory, file, vectorType, wordType);
     await trainModel(vector, category);
-    // console.log('. ['+category+']');
+};
+
+const prepareVectorFromFile = async (filesDirectory, file, vectorType, wordType) => {
+    const fileContent = await getFileContent(filesDirectory, file);
+    return await prepareVector(fileContent, vectorType, wordType);
+};
+
+/**
+ * Output Model Evaluation Results
+ * @param {*} results
+ */
+const outputModelEvaluationResults = (results) => {
+    // Sensitivity = TP / TP + FN
+    // Specificity = TN / TN + FP
+    // Precision = TP / TP + FP
+    // True-Positive Rate = TP / TP + FN
+    // False-Positive Rate = FP / FP + TN
+    // True-Negative Rate = TN / TN + FP
+    // False-Negative Rate = FN / FN + TP
+    const accuracy = (results.tp + results.tn) === 0 ? 0
+        : (((results.tp + results.tn)/(results.tp + results.tn + results.fp + results.fn))*100);
+    const sensitivity = (results.tp + results.fn) === 0 ? 0
+        : (results.tp/(results.tp + results.fn));
+    const specificity = (results.tn + results.fp) === 0 ? 0
+        : (results.tn/(results.tn + results.fp));
+    const precision = (results.tp + results.fp) === 0 ? 0
+        : (results.tp/(results.tp + results.fp));
+    const totalResults = (results.tp + results.tn + results.fn + results.fp);
+    console.log('Final correct score: '+(results.tp + results.tn)+'/'+totalResults);
+    console.log('Final accuracy score: '+accuracy+'%');
+    console.log('Final sensitivity score: '+sensitivity);
+    console.log('Final specificity score: '+specificity);
+    console.log('Final precision score: '+precision);
 };
