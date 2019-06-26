@@ -4,7 +4,7 @@ import {resetStore, trainFromFiles, runClassificationEvaluation} from '../utils'
 
 jest.setTimeout(7200000); // 2 hours
 
-const vectorType = 'bagOfWords';
+const vectorType = 'tfIdf';
 const wordType = 'plain';
 const limit = 0; // ~ 100 minutes...
 
