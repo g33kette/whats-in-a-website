@@ -28,7 +28,7 @@ export const prepareText = async (content) => {
  * @param {string} content
  * @return {object}
  */
-const parseToNlpDoc = (content) => {
+export const parseToNlpDoc = (content) => {
     const nlp = require('compromise');
     return nlp(content).normalize();
 };
@@ -41,12 +41,13 @@ const parseToNlpDoc = (content) => {
  */
 const buildVector = async (doc) => {
     const words = convertToListOfWords(doc);
+    const corpus = await updateAndReturnWordCorpus(words);
     switch (config.vectorType) {
         case 'tfIdf':
-            return await tfIdfVector(words);
+            return await tfIdfVector(words, corpus);
         case 'bagOfWords':
         default:
-            return await bagOfWords(words);
+            return await bagOfWords(words, corpus);
     }
 };
 
@@ -71,55 +72,69 @@ const convertToListOfWords = (doc) => {
     }
 };
 
+// * Prepare Vector ----------------------------------------------------------------------------------------------------
+
 /**
- * UpdateAndReturnCorpus
+ * Update And Return Corpus Object
  *
- * @param {array} words - Array of words, can be string|array|object
+ * @param {array} items - Array of words, can be string|array|object
+ * @param {object} corpus to update (from store)
  * @return {object}
  * In structure:
  * {
  *      vectorSpace: [
  *          {
- *              word: ['text', 'tag1', 'tag2'....] : Can be string|array|object
+ *              item: ['text', 'tag1', 'tag2'....] : Can be string|array|object
  *              f: 1, : Frequency
  *          },
  *      ],
  *      numDocs: 1,
  * }
  */
-const updateAndReturnCorpus = async (words) => {
+export const updateAndReturnCorpusObject = async (items, corpus) => {
     // Get saved vector space
-    let {vectorSpace, numDocs} = JSON.parse(JSON.stringify(await getCorpus()));
+    let {vectorSpace, numDocs} = JSON.parse(JSON.stringify(corpus));
     // Update vector space with new words
-    words.reduce((vs, word) => {
-        word = typeof word !== 'object'?[word]:word;
-        const lookupIndex = vectorSpaceIndexForWord(word, vs);
+    items.reduce((vs, item) => {
+        item = typeof item !== 'object'?[item]:item;
+        const lookupIndex = vectorSpaceIndexForItem(item, vs);
         if (lookupIndex >= 0) {
             // Already in vectorSpace, just increment frequency
             vs[lookupIndex].f++;
         } else {
-            // New word, create new entry in vector space!
-            vs.push({word: word, f: 1});
+            // New item, create new entry in vector space!
+            vs.push({item: item, f: 1});
         }
         return vs;
     }, vectorSpace);
     // Increment numDocs
     numDocs++;
-    // Update saved version in local storage storage (no need to wait for save to finish)
-    saveCorpus({vectorSpace, numDocs});
     return {vectorSpace, numDocs};
 };
 
 /**
- * Vector Space Index For Word
+ * Update And Return Word Corpus
  *
- * @param {*} word
+ * @param {array} words - Array of words, can be string|array|object
+ * @return {object}
+ */
+const updateAndReturnWordCorpus = async (words) => {
+    const updatedCorpus = updateAndReturnCorpusObject(words, await getCorpus());
+    // Update saved version in local storage storage (no need to wait for save to finish)
+    saveCorpus(updatedCorpus);
+    return updatedCorpus;
+};
+
+/**
+ * Vector Space Index For Item
+ *
+ * @param {*} item
  * @param {object} vectorSpace
  * @return {int}
  */
-const vectorSpaceIndexForWord = (word, vectorSpace) => {
-    word = typeof word !== 'object'?[word]:word;
-    const lookup = vectorSpace.find((o) => JSON.stringify(o.word) === JSON.stringify(word));
+const vectorSpaceIndexForItem = (item, vectorSpace) => {
+    item = typeof item !== 'object'?[item]:item;
+    const lookup = vectorSpace.find((o) => JSON.stringify(o.item) === JSON.stringify(item));
     return lookup?vectorSpace.indexOf(lookup):-1;
 };
 
@@ -130,14 +145,11 @@ const vectorSpaceIndexForWord = (word, vectorSpace) => {
  * @param {object} [corpus]
  * @return {array}
  */
-const bagOfWords = async (words, corpus) => {
-    if (!corpus) { // Don't re-generate corpus if passed as parameter
-        corpus = await updateAndReturnCorpus(words);
-    }
+export const bagOfWords = async (words, corpus) => {
     // Create bag of words vector based on vector space, set all values initially to 0
     const bag = corpus.vectorSpace.map(() => 0);
     words.reduce((accBag, word) => {
-        accBag[vectorSpaceIndexForWord(word, corpus.vectorSpace)]++;
+        accBag[vectorSpaceIndexForItem(word, corpus.vectorSpace)]++;
         return accBag;
     }, bag);
     // Return array vector
@@ -148,11 +160,10 @@ const bagOfWords = async (words, corpus) => {
  * TF-IDF Vector
  *
  * @param {array} words
+ * @param {object} corpus
  * @return {array}
  */
-const tfIdfVector = async (words) => {
-    // Add new words to vector space
-    const corpus = await updateAndReturnCorpus(words);
+export const tfIdfVector = async (words, corpus) => {
     // Create bag of words vector based on vector space
     let tfIdfVector = await bagOfWords(words, corpus);
     // Re-assign weight based on td-idf calculation

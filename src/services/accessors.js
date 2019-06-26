@@ -7,6 +7,7 @@
 import store from './../store/store';
 import {
     setCorpus,
+    setPhraseCorpus,
     setTabContent,
     setClassifier,
     setEnabled,
@@ -64,6 +65,15 @@ export async function getCorpus() {
 }
 
 /**
+ * Get: Phrase Corpus
+ *
+ * @return {string}
+ */
+export async function getPhraseCorpus() {
+    return (await store.getState()).phraseCorpus;
+}
+
+/**
  * Get: Classifier
  *
  * @return {string}
@@ -92,6 +102,16 @@ export async function getTabContent(tabId) {
 export async function saveCorpus(corpus) {
     store.dispatch(setCorpus(corpus));
     persistToLocalStorage(await getUsername(), 'corpus', corpus);
+}
+
+/**
+ * Set: Phrase Corpus
+ *
+ * @param {object} phraseCorpus
+ */
+export async function savePhraseCorpus(phraseCorpus) {
+    store.dispatch(setPhraseCorpus(phraseCorpus));
+    persistToLocalStorage(await getUsername(), 'phraseCorpus', phraseCorpus);
 }
 
 /**

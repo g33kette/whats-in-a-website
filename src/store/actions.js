@@ -19,6 +19,9 @@ export const setEnabled = (enabled, source) => ({type: SET_ENABLED, enabled, sou
 export const SET_CORPUS = 'setCorpus';
 export const setCorpus = (corpus, source) => ({type: SET_CORPUS, corpus, source});
 
+export const SET_PHRASE_CORPUS = 'setPhraseCorpus';
+export const setPhraseCorpus = (phraseCorpus, source) => ({type: SET_PHRASE_CORPUS, phraseCorpus, source});
+
 export const SET_CLASSIFIER = 'setClassifier';
 export const setClassifier = (classifier, source) => ({type: SET_CLASSIFIER, classifier, source});
 

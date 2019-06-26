@@ -5,6 +5,7 @@ import {
     SET_USERNAME,
     SET_ENABLED,
     SET_CORPUS,
+    SET_PHRASE_CORPUS,
     SET_TAB_CONTENT,
     SET_CLASSIFIER,
 } from './actions';
@@ -25,6 +26,7 @@ function getInitialStateValues() {
         // TODO ----
         tabs: {},
         corpus: {vectorSpace: [], numDocs: 0},
+        phraseCorpus: {vectorSpace: [], numDocs: 0},
         classifier: null,
     };
 }
@@ -59,6 +61,8 @@ export function coreReducer(state = getInitialState(), action) {
             return Object.assign({}, state, {enabled: action.enabled});
         case SET_CORPUS:
             return Object.assign({}, state, {corpus: action.corpus});
+        case SET_PHRASE_CORPUS:
+            return Object.assign({}, state, {phraseCorpus: action.phraseCorpus});
         case SET_CLASSIFIER:
             return Object.assign({}, state, {classifier: action.classifier});
         case SET_TAB_CONTENT:

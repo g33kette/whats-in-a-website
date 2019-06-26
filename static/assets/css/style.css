@@ -120,6 +120,19 @@
             #bp .main-content .complete .result.warning {
                 color: #ffb15c;
             }
+            #bp .main-content .complete .summary-container {
+                display: none;
+                text-align: left;
+                color: #fff;
+                width: 800px;
+                margin: auto;
+                font-size: .9em;
+                max-height: 30vh;
+                overflow: auto;
+                max-width: 90%;
+                border: dashed 1px #666;
+                padding: 20px;
+            }
 /**
  * Scope "browser_action" menu within "bp_menu" ID
  */
