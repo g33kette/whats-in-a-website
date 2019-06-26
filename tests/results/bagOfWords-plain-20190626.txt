@@ -1,0 +1,116 @@
+"C:\Program Files\nodejs\node.exe" --require "C:\Program Files\JetBrains\WebStorm 2018.3.5\plugins\JavaScriptLanguage\helpers\jest-intellij\lib\jest-intellij-stdin-fix.js" E:\Localhost\dissertation\Extension\node_modules\jest\bin\jest.js --colors --reporters "C:\Program Files\JetBrains\WebStorm 2018.3.5\plugins\JavaScriptLanguage\helpers\jest-intellij\lib\jest-intellij-reporter.js" --verbose --runTestsByPath E:/Localhost/dissertation/Extension/tests/evaluation/bagOfWords-plain.test.js
+  console.warn node_modules/@tensorflow/tfjs-core/dist/log.js:26
+
+    ============================
+    Hi there 👋. Looks like you are running TensorFlow.js in Node.js. To speed things up dramatically, install our node backend, which binds to TensorFlow C++, by running npm i @tensorflow/tfjs-node, or npm i @tensorflow/tfjs-node-gpu if you have CUDA. Then call require('@tensorflow/tfjs-node'); (-gpu suffix for CUDA) at the start of your program. Visit https://github.com/tensorflow/tfjs-node for more details.
+    ============================
+
+
+  console.log tests/utils.js:92
+    Training complete. 2019-06-26T08:22:15.430Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:23:01.705Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:23:30.674Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:23:46.753Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:24:08.599Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:24:38.167Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:24:54.738Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:25:51.118Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:26:42.102Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:32:14.611Z
+
+  console.log tests/utils.js:139
+    . X harmful 2019-06-26T08:48:58.312Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:49:12.454Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:51:55.276Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:52:10.893Z
+
+  console.log tests/utils.js:139
+    . X harmful 2019-06-26T08:53:05.647Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:53:33.715Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:56:35.464Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:56:49.133Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:57:22.546Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:57:42.791Z
+
+  console.log tests/utils.js:136
+    . ✓ safe 2019-06-26T08:58:13.298Z
+
+  console.log tests/utils.js:148
+    . ✓ harmful 2019-06-26T08:58:36.490Z
+
+  console.log tests/utils.js:151
+    . X safe 2019-06-26T08:59:07.329Z
+
+  console.log tests/utils.js:151
+    . X safe 2019-06-26T08:59:45.903Z
+
+  console.log tests/utils.js:148
+    . ✓ harmful 2019-06-26T09:00:07.562Z
+
+  console.log tests/utils.js:148
+    . ✓ harmful 2019-06-26T09:00:25.061Z
+
+  console.log tests/utils.js:151
+    . X safe 2019-06-26T09:01:35.398Z
+
+  console.log tests/utils.js:148
+    . ✓ harmful 2019-06-26T09:01:52.663Z
+
+  console.log tests/utils.js:151
+    . X safe 2019-06-26T09:02:19.598Z
+
+  console.log tests/utils.js:151
+    . X safe 2019-06-26T09:03:39.117Z
+
+  console.log tests/utils.js:148
+    . ✓ harmful 2019-06-26T09:04:53.853Z
+
+  console.log tests/utils.js:226
+    Final correct score: 23/30
+
+  console.log tests/utils.js:227
+    Final accuracy score: 76.66666666666667%
+
+  console.log tests/utils.js:228
+    Final sensitivity score: 0.9
+
+  console.log tests/utils.js:229
+    Final specificity score: 0.5
+
+  console.log tests/utils.js:230
+    Final precision score: 0.782608695652174
+
