@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --testPathPattern=^tests/integration",
     "evaluate": "jest --testPathPattern=^tests/evaluation",
-    "e2e": "node ./node_modules/selenium-cucumber-js/index.js",
+    "e2e": "node ./node_modules/selenium-cucumber-js/index.js -f ./features/e2e -s ./features/step_definitions/steps.js -b ./features/driver.js",
+    "prepare": "node ./node_modules/selenium-cucumber-js/index.js -f ./features/prep -s ./features/step_definitions/steps.js -b ./features/driver.js",
     "build": "webpack",
     "watch": "webpack && webpack --watch"
   },
