@@ -168,7 +168,7 @@ const listFiles = (dir) => {
     });
 };
 
-const getFileContent = (dir, file) => {
+export const getFileContent = (dir, file) => {
     return new Promise((resolve, reject) => {
         fs.readFile(__dirname+'/..'+dir+'/'+file, 'utf8', function(error, contents) {
             if (error) {

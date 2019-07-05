@@ -20,12 +20,22 @@ export const summariseText = async (rawText) => {
     const nounPhrases = parsed.match('#Adjective? #Noun #Verb #Adjective? #Noun?').out('array');
     const vector = await buildVector(nounPhrases);
     // Get the indexes of the top weighted phrases
-    const topPhraseIndexes = vector.map((v, k) => [k, v])
-        .sort((a, b) => (a[1] > b[1])?-1:1)
-        .slice(0, config.nPhrases)
-        .map((a) => a[0]);
-    const summaryPhrases = nounPhrases.filter((v, k) => topPhraseIndexes.indexOf(k) >= 0);
-    return summaryPhrases;
+    const topPhraseIndexes = vector
+        .map((v, k) => [k, v]) // Convert key => value array to array of [key, value]
+        .sort((a, b) => (a[1] > b[1])?-1:1) // sort by weighted value
+        .slice(0, config.nPhrases) // Reduce to top nPhrases
+        .map((a) => a[0]); // Convert to array of keys
+    // Return matching noun phrases
+    return (await listAllNounPhrasesInCorpus()).filter((v, k) => topPhraseIndexes.indexOf(k) >= 0);
+};
+
+/**
+ * List All Noun Phrases In Corpus
+ * @return {Promise<any[]>}
+ */
+const listAllNounPhrasesInCorpus = async () => {
+    const corpus = await getPhraseCorpus();
+    return corpus.vectorSpace.map((item) => Array.isArray(item.item)?item.item:item.item[0]);
 };
 
 /**
