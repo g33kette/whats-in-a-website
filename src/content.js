@@ -92,6 +92,7 @@ const hideContent = () => {
         $(document).ready(() => {
             const body = $('body');
             body.css('overflow', 'hidden');
+            body.css('height', '100vh');
             body.prepend(overlayFrame);
             setTimeout(() => { // Allow time for iFrame to load
                 page.show();
@@ -148,6 +149,7 @@ const removeOverlayFrame = () => {
     $(document).ready(() => {
         const body = $('body');
         body.css('overflow', 'auto');
+        body.css('height', 'auto');
         overlayFrame.remove();
     });
 };

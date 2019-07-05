@@ -86,18 +86,21 @@
 #bp {
     z-index: 999999999999999999999999999999999999999999999999999999999; /* Ensure this is displayed above ANY content */
     font-size: 20px;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
+    margin: 0;
     overflow: auto;
-    position: fixed;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     text-align: center;
 }
     #bp .main-content {
-        height: 100%;
+        margin: 100px 0;
     }
-        #bp .main-content .message {
-            margin-top: 10%;
-        }
+        #bp .main-content .message {}
+
         #bp .main-content .loading {
             position: relative;
             top: 35%;
@@ -133,6 +136,9 @@
                 border: dashed 1px #666;
                 padding: 20px;
             }
+    #bp .actions {
+        margin: 2em;
+    }
 /**
  * Scope "browser_action" menu within "bp_menu" ID
  */
@@ -145,6 +151,3 @@
 #bp_training {
     text-align: center;
 }
-    #bp .actions {
-        margin-top: 30vh;
-    }
