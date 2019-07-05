@@ -144,26 +144,3 @@ it('Should return correct tf-idf vector based on corpus', async () => {
     expect(result).toEqual([0.28083667479155255,0,0,0,0.5541151390857391,0,0.5541151390857391,0.5541151390857391]);
 });
 
-
-
-// Test analyseContent Method ---------------------------------------------------------------------------------------------------
-// TODO this is  more complicated, maybe can mock predictClassification result?
-// export const analyseContent = async (textVector) => {
-//     try {
-//         const prediction = await predictClassification(textVector);
-//         if (Object.keys(prediction.confidences).length < 2) {
-//             throw new Error();
-//         }
-//         return {
-//             safe: prediction.label === 'safe',
-//             summary: prediction.label,
-//             prediction: prediction,
-//         };
-//     } catch (e) {
-//         return {
-//             safe: null,
-//             summary: 'Cannot classify content without both safe and harmful examples.',
-//             prediction: null,
-//         };
-//     }
-// };
