@@ -4,7 +4,7 @@
   "description": "What's In A Website? Chrome Extension",
   "private": true,
   "scripts": {
-    "test": "jest --testPathPattern=^tests/integration/summarise.test.js",
+    "test": "jest --testPathPattern=^tests/integration",
     "evaluate": "jest --testPathPattern=^tests/evaluation",
     "e2e": "node ./node_modules/selenium-cucumber-js/index.js -f ./features/e2e -s ./features/step_definitions/steps.js -b ./features/driver.js",
     "prepare": "node ./node_modules/selenium-cucumber-js/index.js -f ./features/prep -s ./features/step_definitions/steps.js -b ./features/driver.js",
