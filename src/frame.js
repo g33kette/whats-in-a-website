@@ -99,7 +99,7 @@ const showAnalysis = (result, summary) => {
         const resultString = result.safe?'safe':(result.safe===null?'unknown':'harmful');
         if (resultString !== 'unknown') {
             // Only show result if the classification was successful
-            const resultElement = classificationContainerElement.find('.result');
+            const resultElement = classificationContainerElement.find('#result');
             const resultClass = resultString === 'unknown'?'warning':resultString;
             resultElement.html(result.classification);
             resultElement.addClass(resultClass);

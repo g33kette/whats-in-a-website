@@ -23,6 +23,15 @@ module.exports = function() {
     });
 
     /**
+     * Then I should see "... some text" in protection overlay
+     */
+    this.Then(/^I should see "([^"]*)" in protection overlay$/, function(arg1) {
+        return selectBpFrame(driver).then(() => {
+            return stepHelpers.elementWithTextExists(arg1, driver);
+        });
+    });
+
+    /**
      * Then I should see protection overlay
      */
     this.Then(/^I should see protection overlay$/, function() {
@@ -39,7 +48,7 @@ module.exports = function() {
     /**
      * When content analysis is complete
      */
-    this.When(/^content analysis is complete$/, function() {
+    this.When(/^content analysis is complete$/, {timeout: 60000}, function() {
         return selectBpFrame(driver).then(() => {
             return stepHelpers.contentAnalysisComplete(driver);
         });
@@ -68,6 +77,16 @@ module.exports = function() {
      */
     this.Then(/^I mark page as "([^"]*)"$/, function(classification) {
         return selectBpTrainingFrame(driver).then(() => {
+            return stepHelpers.setPageClassification(classification, driver, selectDefaultWindow);
+        });
+    });
+
+
+    /**
+     * Then I mark page as "safe" in protection overlay
+     */
+    this.Then(/^I mark page as "([^"]*)" in protection overlay$/, function(classification) {
+        return selectBpFrame(driver).then(() => {
             return stepHelpers.setPageClassification(classification, driver, selectDefaultWindow);
         });
     });
