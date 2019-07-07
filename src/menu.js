@@ -11,7 +11,7 @@ $(document).ready(function() {
     // Bind Event Listeners
     const body = $('body');
     body.on('submit', '.bp-menu-login', (e) => {
-        login();
+        login($('#username').val(), $('#password').val());
         e.preventDefault();
         return false;
     });
@@ -42,13 +42,17 @@ function showAuthenticatedStatus() {
 
 /**
  * Login
+ *
+ * @param {string} username
+ * @param {string} password
  */
-function login() {
+function login(username, password) {
     chrome.runtime.sendMessage({
         trigger: 'authenticate',
-        params: {username: 'bob', password: 'secret'}, // todo
+        params: {username: username, password: password},
     }, () => {
         showAuthenticatedStatus();
+        refreshStatus();
     });
 }
 

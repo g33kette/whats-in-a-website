@@ -25,5 +25,12 @@ export const setPhraseCorpus = (phraseCorpus, source) => ({type: SET_PHRASE_CORP
 export const SET_CLASSIFIER = 'setClassifier';
 export const setClassifier = (classifier, source) => ({type: SET_CLASSIFIER, classifier, source});
 
+export const SET_CLASSIFIER_DATA = 'setClassifierData';
+export const setClassifierData = (setClassifierData, source)=> ({
+    type: SET_CLASSIFIER_DATA,
+    setClassifierData,
+    source,
+});
+
 export const SET_TAB_CONTENT = 'setTabContent';
 export const setTabContent = (tabId, content, source) => ({type: SET_TAB_CONTENT, tabId, content, source});

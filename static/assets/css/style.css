@@ -106,7 +106,7 @@
         display: inline-block;
         padding: 10px;
         text-transform: capitalize;
-        font-weight: bold;
+        font-weight: normal;
         border-radius: 3px;
     }
         .browser-protect .result.safe {
@@ -250,6 +250,17 @@
     #bp_menu hr {
         margin-bottom: 15px;
     }
+    #bp_menu .bp-menu-login {}
+        #bp_menu .bp-menu-login > div {
+            margin: 15px;
+        }
+            #bp_menu .bp-menu-login > div label {
+                font-size: 1.3em;
+            }
+            #bp_menu .bp-menu-login > div input {
+                padding: 3px;
+                border-radius: 2px;
+            }
     #bp_menu .option {
         padding: 10px;
         background-color: #555;

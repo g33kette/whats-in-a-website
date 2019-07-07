@@ -112,6 +112,7 @@ async function triggerAuthenticate(params) {
         store.dispatch(setEncryptionToken(authenticated.token));
         store.dispatch(setUsername(params.username));
         store.dispatch(overrideStateParams(await loadStateParamsFromLocalStorage(params.username)));
+        await triggerToggleEnabled(true);
         return true;
     }
 }

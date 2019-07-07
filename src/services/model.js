@@ -1,4 +1,8 @@
-import {getClassifier as getClassifierFromStore, saveClassifier} from './accessors';
+import {
+    getClassifier as getClassifierFromStore,
+    getClassifierData as getClassifierDataFromStore,
+    saveClassifier,
+} from './accessors';
 import * as tf from '@tensorflow/tfjs';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
 
@@ -11,6 +15,19 @@ const getClassifier = async () => {
     }
     if (!classifier) {
         classifier = knnClassifier.create();
+        const classifierData = await getClassifierDataFromStore();
+        if (classifierData) {
+            classifier.setClassifierDataset({
+                safe: tf.tensor(
+                    classifierData.safe,
+                [classifierData.safe.length / fixedLength, fixedLength]
+                ),
+                harmful: tf.tensor(
+                    classifierData.harmful,
+                [classifierData.harmful.length / fixedLength, fixedLength]
+                ),
+            });
+        }
     }
     return classifier;
 };

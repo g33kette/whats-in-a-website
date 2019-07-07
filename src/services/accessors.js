@@ -10,6 +10,7 @@ import {
     setPhraseCorpus,
     setTabContent,
     setClassifier,
+    setClassifierData,
     setEnabled,
 } from './../store/actions';
 
@@ -83,6 +84,15 @@ export async function getClassifier() {
 }
 
 /**
+ * Get: Classifier Data
+ *
+ * @return {string}
+ */
+export async function getClassifierData() {
+    return (await store.getState()).classifierData;
+}
+
+/**
  * Get: Tab Content
  *
  * @param {int|string} tabId
@@ -119,13 +129,16 @@ export async function savePhraseCorpus(phraseCorpus) {
  *
  * @param {object} classifier
  */
-export function saveClassifier(classifier) {
+export async function saveClassifier(classifier) {
     store.dispatch(setClassifier(classifier));
-    // Get the full dataset, useful for saving state.
-    // classifier.getClassifierDataset(): {[label: string]: Tensor2D}
-    // Set the full dataset, useful for restoring state.
-    // classifier.setClassifierDataset(dataset: {[label: string]: Tensor2D})
-    // TODO persistToLocalStorage(getUsername(), 'classifier', classifier);
+    // Also save data set and persist to storage
+    const classifierDataSet = classifier.getClassifierDataset();
+    const classifierData = {
+        safe: classifierDataSet.safe?Array.from(classifierDataSet.safe.dataSync()):[],
+        harmful: classifierDataSet.harmful?Array.from(classifierDataSet.harmful.dataSync()):[],
+    };
+    store.dispatch(setClassifierData(classifierData));
+    persistToLocalStorage(await getUsername(), 'classifierData', classifierData);
 }
 
 /**
@@ -142,11 +155,11 @@ export function saveTabContent(tabId, content) {
 
 /**
  * Trigger: Toggle Enabled
- *
+ * @param {boolean|undefined} [forceState]
  * @return {boolean}
  */
-export async function triggerToggleEnabled() {
-    const enabled = !(await getEnabled());
+export async function triggerToggleEnabled(forceState) {
+    const enabled = typeof forceState === 'undefined'?!(await getEnabled()):forceState;
     store.dispatch(setEnabled(enabled));
     persistToLocalStorage(await getUsername(), 'enabled', enabled);
     return enabled;
@@ -190,8 +203,7 @@ export async function retrieveFromLocalStorage(username, key, defaultValue = nul
  */
 export async function loadStateParamsFromLocalStorage(username) {
     return {
-        enabled: await retrieveFromLocalStorage(username, 'enabled', false),
         corpus: await retrieveFromLocalStorage(username, 'corpus', {vectorSpace: [], numDocs: 0}),
-        // TODO classifier: await retrieveFromLocalStorage(username, 'classifier', null),
+        classifierData: await retrieveFromLocalStorage(username, 'classifierData', null),
     };
 }

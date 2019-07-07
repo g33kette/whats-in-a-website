@@ -119,7 +119,7 @@ export const updateAndReturnCorpusObject = async (items, corpus) => {
  * @return {object}
  */
 const updateAndReturnWordCorpus = async (words) => {
-    const updatedCorpus = updateAndReturnCorpusObject(words, await getCorpus());
+    const updatedCorpus = await updateAndReturnCorpusObject(words, await getCorpus());
     // Update saved version in local storage storage (no need to wait for save to finish)
     saveCorpus(updatedCorpus);
     return updatedCorpus;

@@ -63,7 +63,7 @@ const buildVector = async (nounPhrases) => {
  * @return {object}
  */
 const updateAndReturnPhraseCorpus = async (phrases) => {
-    const updatedCorpus = updateAndReturnCorpusObject(phrases, await getPhraseCorpus());
+    const updatedCorpus = await updateAndReturnCorpusObject(phrases, await getPhraseCorpus());
     // Update saved version in local storage storage (no need to wait for save to finish)
     savePhraseCorpus(updatedCorpus);
     return updatedCorpus;
