@@ -20,6 +20,7 @@ $(document).ready(function() {
         chrome.tabs.getCurrent((tab) => {
             chrome.tabs.sendMessage(tab.id, {trigger: 'markContentHarmful'});
             $('#actionClose').show();
+            $('.after-harmful-actions').show();
             $('.training-action').hide();
         });
     });

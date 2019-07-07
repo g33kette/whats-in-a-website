@@ -20,7 +20,20 @@ $(document).ready(function() {
     messageElement.show();
     completeElement.hide();
 
-    completeElement.on('click', '#actionContinue', function() {
+    completeElement.on('click', '.action-safe', function() {
+        chrome.tabs.getCurrent((tab) => {
+            chrome.tabs.sendMessage(tab.id, {trigger: 'markContentSafe'});
+            chrome.tabs.sendMessage(tab.id, {trigger: 'closeFrame'});
+        });
+    });
+    completeElement.on('click', '.action-harmful', function() {
+        chrome.tabs.getCurrent((tab) => {
+            chrome.tabs.sendMessage(tab.id, {trigger: 'markContentHarmful'});
+            completeElement.find('.classification-actions').hide();
+            completeElement.find('.after-harmful-actions').show();
+        });
+    });
+    completeElement.on('click', '.action-review', function() {
         chrome.tabs.getCurrent((tab) => {
             chrome.tabs.sendMessage(tab.id, {trigger: 'closeFrame'});
             chrome.tabs.sendMessage(tab.id, {trigger: 'showTrainingFrame'});
@@ -32,7 +45,6 @@ $(document).ready(function() {
             chrome.tabs.remove(tab.id);
         });
     });
-
     completeElement.on('click', '#actionGoBack', function() {
         chrome.tabs.getCurrent(() => {
             history.back();
@@ -83,9 +95,27 @@ const showAnalysis = (result, summary) => {
     }
     if (completeElement) {
         // Display classification result
-        const resultElement = completeElement.find('.result');
-        resultElement.html(result.summary);
-        resultElement.addClass(result.safe?'safe':(result.safe===null?'warning':'harmful'));
+        const classificationContainerElement = completeElement.find('.classification-container');
+        const resultString = result.safe?'safe':(result.safe===null?'unknown':'harmful');
+        if (resultString !== 'unknown') {
+            // Only show result if the classification was successful
+            const resultElement = classificationContainerElement.find('#result');
+            const resultClass = resultString === 'unknown'?'warning':resultString;
+            resultElement.html(result.classification);
+            resultElement.addClass(resultClass);
+        } else {
+            // If unknown, show classification required instructions
+            classificationContainerElement.hide();
+            completeElement.find('.classification-required').show();
+        }
+        // If message is returned then display message
+        if (result.message) {
+            const classificationMessageElement = completeElement.find('.classification-message');
+            classificationMessageElement.html(result.message);
+            classificationMessageElement.show();
+        }
+        // Display appropriate actions
+        completeElement.find('.classification-actions-'+resultString).show();
         // Display content summary
         if (summary && summary.length) {
             const summaryContainerElement = completeElement.find('.summary-container');

@@ -11,14 +11,22 @@
 <body class="browser-protect" id="bp_training">
     <div class="main-content">
         <div class="actions">
-            <button id="actionMarkSafe" class="training-action">Mark as Safe Content</button>
-            <button id="actionMarkHarmful" class="training-action">Mark as Harmful Content</button>
+            <div class="after-harmful-actions" style="display: none;">
+                <i class="fas fa-check"></i>
+                Thank you, this website has been marked as <span class="result harmful">harmful</span>
+            </div>
             <button id="actionClose" style="display: none;">Close Tab</button>
+            <button id="actionMarkSafe" class="training-action action-safe">Mark as Safe Content</button>
+            <button id="actionMarkHarmful" class="training-action action-harmful">Mark as Harmful Content</button>
             <button id="actionHideTrainingFrame">Hide Browser Protect</button>
         </div>
     </div>
     <div class="footer">
-        <p>Browsing Protected by <span class="bpText">BrowserProtect</span></p>
+        <p>
+            Browsing Protected by
+            <img src="../assets/img/logo24.png" class="logo" alt="Browser Protect Logo">
+            <span class="bpText">BrowserProtect</span>
+        </p>
     </div>
 </body>
 </html>

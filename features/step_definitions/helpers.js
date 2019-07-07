@@ -119,12 +119,12 @@ exports.contentAnalysisComplete = (driver) => {
  */
 exports.matchClassificationResult = (classification, driver) => {
     return driver.wait(async () => {
-        await driver.wait(until.elementsLocated(by.css('.result')));
-        const els = await driver.findElements(by.css('.result'));
+        await driver.wait(until.elementsLocated(by.css('#result')));
+        const els = await driver.findElements(by.css('#result'));
         if (!els.length) return false;
         const visible = await els[0].isDisplayed();
         const text = await els[0].getText();
-        return !!(visible && text === classification);
+        return !!(visible && text.toLowerCase() === classification.toLowerCase());
     });
 };
 
@@ -137,21 +137,21 @@ exports.matchClassificationResult = (classification, driver) => {
  */
 exports.checkClassificationResult = (classification, results, driver) => {
     return driver.wait(async () => {
-        await driver.wait(until.elementsLocated(by.css('.result')));
-        const els = await driver.findElements(by.css('.result'));
+        await driver.wait(until.elementsLocated(by.css('#result')));
+        const els = await driver.findElements(by.css('#result'));
         if (!els.length) return false;
         const visible = await els[0].isDisplayed();
         if (!visible) return false;
         const text = await els[0].getText();
         if (text === classification) {
-            if (classification === 'safe') {
+            if (classification.toLowerCase() === 'safe') {
                 results.tp++;
             } else {
                 results.tn++;
             }
             console.log('. ✓');
         } else {
-            if (classification === 'safe') {
+            if (classification.toLowerCase() === 'safe') {
                 results.fn++;
             } else {
                 results.fp++;
@@ -170,12 +170,19 @@ exports.checkClassificationResult = (classification, results, driver) => {
  */
 exports.clickContinueToWebsite = (driver, revertDriverCallback) => {
     return driver.wait(async () => {
-        await driver.wait(until.elementsLocated(by.css('#actionContinue')));
-        const els = await driver.findElements(by.css('#actionContinue'));
+        await driver.wait(until.elementsLocated(by.css('.action-review')));
+        const els = await driver.findElements(by.css('.action-review'));
         if (!els.length) return false;
-        const visible = await els[0].isDisplayed();
+        let visible;
+        let el;
+        for (el of els) {
+            visible = await el.isDisplayed();
+            if (visible) {
+                break;
+            }
+        }
         if (visible) {
-            await els[0].click();
+            await el.click();
             if (revertDriverCallback) {
                 await revertDriverCallback(driver);
             }
@@ -194,16 +201,23 @@ exports.clickContinueToWebsite = (driver, revertDriverCallback) => {
  * @return {Promise}
  */
 exports.setPageClassification = (classification, driver, revertDriverCallback) => {
-    const selector = classification === 'safe'?'#actionMarkSafe'
-        :(classification === 'harmful'?'#actionMarkHarmful'
+    let selector = classification === 'safe'?'#actionMarkSafe,.action-safe'
+        :(classification === 'harmful'?'#actionMarkHarmful,.action-harmful'
             :null);
     return driver.wait(async () => {
         await driver.wait(until.elementsLocated(by.css(selector)));
-        const els = await driver.findElements(by.css(selector));
+        let els = await driver.findElements(by.css(selector));
         if (!els.length) return false;
-        const visible = await els[0].isDisplayed();
+        let visible;
+        let el;
+        for (el of els) {
+            visible = await el.isDisplayed();
+            if (visible) {
+                break;
+            }
+        }
         if (visible) {
-            await els[0].click();
+            await el.click();
             if (revertDriverCallback) {
                 await revertDriverCallback(driver);
             }

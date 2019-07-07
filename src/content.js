@@ -25,7 +25,9 @@ const overlayFrame = $('<iframe ' +
  */
 const trainingFrame = $('<iframe ' +
     'id="bp_training_frame" ' +
-    'style="width: 100% !important; top: 0 !important; right: 0 !important; ' +
+    'style="width: 100% !important; top: 25vh !important; right: 0 !important; ' +
+    'border-top: solid 10px #7bff68 !important; border-bottom: solid 10px #7bff68 !important; ' +
+    'box-shadow: 0px 15px 10px #000, 0px -15px 10px #000 !important; ' +
     'position: fixed !important; z-index: 999999999999999999999999999999999999999999999999999999999 !important;" ' +
     'src="'+chrome.runtime.getURL('pages/training_overlay.html')+'"></iframe>');
 
@@ -92,6 +94,7 @@ const hideContent = () => {
         $(document).ready(() => {
             const body = $('body');
             body.css('overflow', 'hidden');
+            body.css('height', '100vh');
             body.prepend(overlayFrame);
             setTimeout(() => { // Allow time for iFrame to load
                 page.show();
@@ -148,6 +151,7 @@ const removeOverlayFrame = () => {
     $(document).ready(() => {
         const body = $('body');
         body.css('overflow', 'auto');
+        body.css('height', 'auto');
         overlayFrame.remove();
     });
 };

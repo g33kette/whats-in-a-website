@@ -194,13 +194,15 @@ export const analyseContent = async (textVector) => {
         }
         return {
             safe: prediction.label === 'safe',
-            summary: prediction.label,
+            classification: prediction.label,
+            message: null,
             prediction: prediction,
         };
     } catch (e) {
         return {
             safe: null,
-            summary: 'Cannot classify content without both safe and harmful examples.',
+            classification: 'unknown',
+            message: null,
             prediction: null,
         };
     }
