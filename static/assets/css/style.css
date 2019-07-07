@@ -16,6 +16,9 @@
 
     .browser-protect hr {
         border-color: #666666;
+        color: #666666;
+        border-style: solid;
+        border-width: 1px;
     }
 
     .browser-protect label {}
@@ -23,7 +26,7 @@
     .browser-protect .tag {
         display: inline-block;
         padding: 5px;
-        border-radius: 5px;
+        border-radius: 2px;
     }
         .browser-protect .tag.tag-success {
             background-color: #7bff68;
@@ -34,7 +37,7 @@
             color: #ffffff;
         }
         .browser-protect .tag.tag-disabled {
-            background-color: #666666;
+            background-color: #888888;
             color: #eeeeee;
         }
 
@@ -42,18 +45,21 @@
     .browser-protect a.button:active,
     .browser-protect a.button:focus,
     .browser-protect a.visited {
-        padding: 5px 10px;
+        padding: 7px 12px;
         border-radius: 5px;
-        background-color: #cccccc;
+        background-color: #bbbbbb;
         color: #000000;
         font-weight: bold;
         cursor: pointer;
         font-family: 'Share Tech Mono', monospace;
         text-decoration: none;
+        font-size: .9em;
+        border-width: 3px;
+        margin: .3em;
     }
     .browser-protect button:hover,
     .browser-protect a.button:hover {
-        background-color: #dddddd;
+        background-color: #eeeeee;
     }
 
     .browser-protect .align-left {
@@ -64,6 +70,7 @@
     }
     .browser-protect .clear-float {
         clear: both;
+        display: block;
     }
 
     .browser-protect .footer {
@@ -73,19 +80,23 @@
         background: #000;
         width: 100%;
         text-align: center;
+        border-bottom: solid 1px #7bff68;
     }
         .browser-protect .footer .bpText {
             font-weight: bold;
             font-style: italic;
-            color: #57b449;
+            color: #7ae721;
+        }
+        .browser-protect .footer .logo {
+            margin-bottom: -8px;
         }
 
-/**
- * Scope content overly within "bp" ID
- */
+    /**
+     * Scope content overly within "bp" ID
+     */
 #bp {
     z-index: 999999999999999999999999999999999999999999999999999999999; /* Ensure this is displayed above ANY content */
-    font-size: 20px;
+    font-size: 17px;
     height: 100%;
     min-height: 100vh;
     margin: 0;
@@ -111,18 +122,46 @@
                 color: #666666;
             }
         #bp .main-content .complete {}
-            #bp .main-content .complete h3 {
-                color: #cccccc;
+            #bp .main-content .complete .classification-container {
+                color: #ffffff;
             }
-            #bp .main-content .complete .result.safe {
-                color: #57b449;
-            }
-            #bp .main-content .complete .result.harmful {
-                color: #ff2c2c;
-            }
-            #bp .main-content .complete .result.warning {
-                color: #ffb15c;
-            }
+                #bp .main-content .complete .classification-container  h3 {
+                    font-weight: normal;
+                    display: inline-block;
+                }
+                #bp .main-content .complete .classification-container .classification-message {
+                    display: none;
+                    font-size: smaller;
+                    font-weight: normal;
+                }
+                #bp .main-content .complete .classification-container .classification-message.safe {
+                    color: #7bff68;
+                }
+                #bp .main-content .complete .classification-container .classification-message.harmful {
+                    color: #ff2c2c;
+                }
+                #bp .main-content .complete .classification-container .classification-message.warning {
+                    color: #ffb15c;
+                }
+                #bp .main-content .complete .classification-container .result {
+                    display: inline-block;
+                    padding: 10px;
+                    text-transform: capitalize;
+                    font-weight: bold;
+                    border-radius: 3px;
+                }
+                #bp .main-content .complete .classification-container .result.safe {
+                    background-color: #7bff68;
+                    color: #333;
+                }
+                #bp .main-content .complete .classification-container .result.harmful {
+                    background-color: #ff2c2c;
+                    color: #ffffff;
+                }
+                #bp .main-content .complete .classification-container .result.warning {
+                    background-color: #ffb15c;
+                    color: #333;
+                }
             #bp .main-content .complete .summary-container {
                 display: none;
                 text-align: left;
@@ -130,12 +169,29 @@
                 width: 800px;
                 margin: auto;
                 font-size: .9em;
-                max-height: 30vh;
-                overflow: auto;
                 max-width: 90%;
-                border: dashed 1px #666;
-                padding: 20px;
+                border-top: #000 solid 1px;
             }
+            #bp .main-content .complete .summary-container p {}
+            #bp .main-content .complete .summary-container ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+                #bp .main-content .complete .summary-container ul li {
+                        margin: 2px;
+                        background: #555;
+                        padding: 6px 12px;
+                        display: inline-block;
+                }
+                    #bp .main-content .complete .summary-container ul li:nth-child(odd) {
+                        background: #777;
+                    }
+                    #bp .main-content .complete .summary-container ul li:hover {
+                        background: #ccc;
+                        color: #333;
+                        cursor: default;
+                    }
     #bp .actions {
         margin: 2em;
     }
@@ -144,10 +200,51 @@
  */
 #bp_menu {
     width: 400px;
+    font-size: 12px;
 }
+    #bp_menu.browser-protect button, #bp_menu.browser-protect a.button  {
+        font-size: 1em;
+    }
+    #bp_menu hr {
+        margin-bottom: 15px;
+    }
+    #bp_menu .option {
+        padding: 10px;
+        background-color: #555;
+    }
+    #bp_menu .option:nth-child(odd) {
+        background-color: #444;
+    }
+        #bp_menu .option .option-label {
+            padding: 8px;
+            float: left;
+        }
+        #bp_menu .option .option-actions {
+            float: right;
+        }
 /**
  * Scope content overly within "bp_training" ID
  */
 #bp_training {
+    z-index: 999999999999999999999999999999999999999999999999999999999; /* Ensure this is displayed above ANY content */
+    font-size: 17px;
+    margin: 0;
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     text-align: center;
 }
+    #bp_training .main-content {
+        position: relative;
+        margin-top: 10px;
+        min-height: 80px;
+    }
+    #bp_training .main-content .actions {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+    }

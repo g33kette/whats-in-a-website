@@ -4,8 +4,8 @@
         <link href="../assets/css/style.css" rel="stylesheet">
         <script src="../menu.js"></script>
     </head>
-    <body class="browser-protect" id="bp_menu">
-        <h1>Browser Protect Options</h1>
+    <body id="bp_menu" class="browser-protect">
+        <h2>Browser Protect Options</h2>
         <hr>
         <div class="bp-menu-unauthenticated">
             <form class="bp-menu-login">
@@ -15,14 +15,16 @@
             </form>
         </div>
         <div class="bp-menu-authenticated" style="display: none;"><!-- By default the user is logged out -->
-            <div class="align-left">
-                <label>Status: </label>
-                <span class="tag bp-menu-status-tag"><!-- Status set on load --></span>
-            </div>
-            <div class="align-right">
-                <button style="margin-bottom: 5px;" class="bp-menu-status-toggle"><!-- Action set on load --></button>
+            <div class="option">
+                <div class="option-label">
+                    <label>Status: </label>
+                    <span class="tag bp-menu-status-tag"><!-- Status set on load --></span>
+                </div>
+                <div class="option-actions">
+                    <button style="margin-bottom: 5px;" class="bp-menu-status-toggle"><!-- Action set on load --></button>
+                </div>
+                <span class="clear-float"></span>
             </div>
         </div>
-        <hr class="clear-float">
     </body>
 </html>

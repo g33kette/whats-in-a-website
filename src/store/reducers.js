@@ -21,7 +21,7 @@ function getInitialStateValues() {
         // TODO The plugin needs to be auto-enabled for testing
         // username: null,
         // enabled: false,
-        username: 'null',
+        username: 'na',
         enabled: true,
         // TODO ----
         tabs: {},

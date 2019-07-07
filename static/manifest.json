@@ -32,7 +32,9 @@
     "default_icon": {
       "16": "assets/img/logo16.png",
       "24": "assets/img/logo24.png",
-      "32": "assets/img/logo32.png"
+      "32": "assets/img/logo32.png",
+      "64": "assets/img/logo64.png",
+      "128": "assets/img/logo128.png"
     },
     "default_title": "Browser Protect",
     "default_popup": "pages/menu.html"

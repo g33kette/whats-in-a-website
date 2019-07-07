@@ -84,8 +84,15 @@ const showAnalysis = (result, summary) => {
     if (completeElement) {
         // Display classification result
         const resultElement = completeElement.find('.result');
-        resultElement.html(result.summary);
-        resultElement.addClass(result.safe?'safe':(result.safe===null?'warning':'harmful'));
+        const resultClass = result.safe?'safe':(result.safe===null?'warning':'harmful');
+        resultElement.html(result.classification);
+        resultElement.addClass(resultClass);
+        if (result.message) {
+            const classificationMessageElement = completeElement.find('.classification-message');
+            classificationMessageElement.html(result.message);
+            classificationMessageElement.addClass(resultClass);
+            classificationMessageElement.show();
+        }
         // Display content summary
         if (summary && summary.length) {
             const summaryContainerElement = completeElement.find('.summary-container');
