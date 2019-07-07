@@ -22,14 +22,50 @@
         </div>
         <div class="complete">
             <div class="classification-container">
-                <h3>Page Classification:</h3>
+                <h3>Predicted Page Classification:</h3>
                 <p class="result"></p>
-                <p class="classification-message"></p>
             </div>
-            <div class="actions">
-                <button id="actionContinue">Continue to Website</button>
-                <button id="actionClose">Close Tab</button>
-                <button id="actionGoBack">Cancel and Go Back</button>
+            <p class="classification-message" style="display:none"></p> <!-- hidden by default -->
+            <div class="classification-required" style="display:none"> <!-- hidden by default -->
+                <p>This website cannot be classified.</p>
+                <p>
+                    Browser Protect requires training before it can predict
+                    whether a website is safe or harmful. To do this, please visit and classify websites that you
+                    consider safe and harmful, you must classify at least one of each.
+                </p>
+                <p>
+                    In the future, more training will make the predictions more accurate. Training is saved
+                    when you choose a <span class="result safe">Safe</span> or
+                    <span class="result harmful">Harmful</span> action.
+                </p>
+            </div>
+            <div class="classification-actions-container"><!-- Note, all children are initially hidden by CSS -->
+                <div class="actions classification-actions classification-actions-safe">
+                    <h2>Is the predicted classification correct?</h2>
+                    <button class="action-safe">Yes, Continue to Website</button>
+                    <button class="action-harmful">No, Mark as Harmful</button>
+                    <button class="action-review">Not Sure, Continue and Review</button>
+                </div>
+                <div class="actions classification-actions classification-actions-harmful">
+                    <h2>Is the predicted classification correct?</h2>
+                    <button class="action-safe">No, Mark as Safe and Continue</button>
+                    <button class="action-harmful">Yes, Save Harmful Classification</button>
+                    <button class="action-review">Not Sure, Continue and Review</button>
+                </div>
+                <div class="actions classification-actions classification-actions-unknown">
+                    <h2>Should this page be classified as safe?</h2>
+                    <button class="action-safe">Yes, Continue to Website</button>
+                    <button class="action-harmful">No, Mark as Harmful</button>
+                    <button class="action-review">Not Sure, Continue and Review</button>
+                </div>
+                <div class="actions after-harmful-actions">
+                    <p>
+                        <i class="fas fa-check"></i>
+                        Thank you, this website has been marked as <span class="result harmful">harmful</span>
+                    </p>
+                    <button id="actionClose">Close Tab</button>
+                    <button id="actionGoBack">Back to Previous Page</button>
+                </div>
             </div>
             <div class="summary-container">
                 <h3>Content Key Terms:</h3>

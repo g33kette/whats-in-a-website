@@ -62,6 +62,34 @@
         background-color: #eeeeee;
     }
 
+    .browser-protect .actions {}
+        .browser-protect .actions button.action-safe {
+            font-weight: normal;
+            background-color: #67d657;
+            border-color: #7bff68;
+        }
+        .browser-protect .actions button.action-safe:hover {
+            background-color: #7bff68;
+        }
+        .browser-protect .actions button.action-harmful {
+            font-weight: normal;
+            background-color: #cb2323;
+            color: #ffffff;
+            border-color: #ff2c2c;
+        }
+        .browser-protect .actions button.action-harmful:hover {
+            background-color: #ff2c2c;
+        }
+        .browser-protect .actions button.action-review {
+            font-weight: normal;
+            color: #ffb15c;
+            background-color: #555555;
+            border-color: #999999;
+        }
+        .browser-protect .actions button.action-review:hover {
+            background-color: #666666;
+        }
+
     .browser-protect .align-left {
         float: left;
     }
@@ -73,6 +101,35 @@
         display: block;
     }
 
+
+    .browser-protect .result {
+        display: inline-block;
+        padding: 10px;
+        text-transform: capitalize;
+        font-weight: bold;
+        border-radius: 3px;
+    }
+        .browser-protect .result.safe {
+            background-color: #7bff68;
+            color: #333;
+        }
+        .browser-protect .result.harmful {
+            background-color: #ff2c2c;
+            color: #ffffff;
+        }
+        .browser-protect .result.warning {
+            background-color: #ffb15c;
+            color: #333;
+        }
+
+    .browser-protect .after-harmful-actions {
+        color: #ccc;
+    }
+        .browser-protect .after-harmful-actions .result {
+            font-size: .9em;
+            font-weight: normal;
+        }
+
     .browser-protect .footer {
         color: #666666;
         position: fixed;
@@ -80,7 +137,6 @@
         background: #000;
         width: 100%;
         text-align: center;
-        border-bottom: solid 1px #7bff68;
     }
         .browser-protect .footer .bpText {
             font-weight: bold;
@@ -122,6 +178,16 @@
                 color: #666666;
             }
         #bp .main-content .complete {}
+
+            #bp .main-content .complete .classification-actions-container {}
+                #bp .main-content .complete .classification-actions-container .actions {
+                    display: none;
+                    color: #fff;
+                }
+                    #bp .main-content .complete .classification-actions-container .actions.after-harmful-actions {
+                        color: #ccc;
+                    }
+
             #bp .main-content .complete .classification-container {
                 color: #ffffff;
             }
@@ -129,38 +195,19 @@
                     font-weight: normal;
                     display: inline-block;
                 }
-                #bp .main-content .complete .classification-container .classification-message {
-                    display: none;
-                    font-size: smaller;
+            #bp .main-content .complete .classification-message,
+            #bp .main-content .complete .classification-required {
+                font-size: .9em;
+                font-weight: normal;
+                color: #999;
+                width: 800px;
+                max-width: 90%;
+                margin: auto;
+            }
+                #bp .main-content .complete .classification-message .result,
+                #bp .main-content .complete .classification-required .result {
+                    padding: 5px;
                     font-weight: normal;
-                }
-                #bp .main-content .complete .classification-container .classification-message.safe {
-                    color: #7bff68;
-                }
-                #bp .main-content .complete .classification-container .classification-message.harmful {
-                    color: #ff2c2c;
-                }
-                #bp .main-content .complete .classification-container .classification-message.warning {
-                    color: #ffb15c;
-                }
-                #bp .main-content .complete .classification-container .result {
-                    display: inline-block;
-                    padding: 10px;
-                    text-transform: capitalize;
-                    font-weight: bold;
-                    border-radius: 3px;
-                }
-                #bp .main-content .complete .classification-container .result.safe {
-                    background-color: #7bff68;
-                    color: #333;
-                }
-                #bp .main-content .complete .classification-container .result.harmful {
-                    background-color: #ff2c2c;
-                    color: #ffffff;
-                }
-                #bp .main-content .complete .classification-container .result.warning {
-                    background-color: #ffb15c;
-                    color: #333;
                 }
             #bp .main-content .complete .summary-container {
                 display: none;
@@ -186,11 +233,6 @@
                 }
                     #bp .main-content .complete .summary-container ul li:nth-child(odd) {
                         background: #777;
-                    }
-                    #bp .main-content .complete .summary-container ul li:hover {
-                        background: #ccc;
-                        color: #333;
-                        cursor: default;
                     }
     #bp .actions {
         margin: 2em;

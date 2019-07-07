@@ -202,7 +202,7 @@ export const analyseContent = async (textVector) => {
         return {
             safe: null,
             classification: 'unknown',
-            message: 'Cannot classify content without both safe and harmful examples.',
+            message: null,
             prediction: null,
         };
     }
