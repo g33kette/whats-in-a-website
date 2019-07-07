@@ -61,3 +61,14 @@ it('Should summarise text as list using bag of words implementation', async () =
         [ 'games like' ]
     ]);
 });
+
+// Test Bag of Words ---------------------------------------------------------------------------------------------------
+
+it('Should only contain phrases from current document', async () => {
+    summariseConfig.vectorType = 'bagOfWords';
+    await trainExamples(summariseConfig.vectorType);
+    const result = await summariseText(await getFileContent('/tests/data/examples', 'quick-brown-fox.txt'));
+    expect(result).toEqual([
+        [ 'quick brown fox jumps over' ]
+    ]);
+});
