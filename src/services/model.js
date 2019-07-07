@@ -2,7 +2,7 @@ import {getClassifier as getClassifierFromStore, saveClassifier} from './accesso
 import * as tf from '@tensorflow/tfjs';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
 
-const fixedLength = 5000;
+const fixedLength = 10000;
 
 let classifier;
 const getClassifier = async () => {

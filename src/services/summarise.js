@@ -17,13 +17,14 @@ export const config = {
 export const summariseText = async (rawText) => {
     const parsed = parseToNlpDoc(rawText);
     // Initial match pattern... const nounPhrases = parsed.match('#Noun #Verb').out('array');
-    const nounPhrases = parsed.match('#Adjective? #Noun #Verb #Adjective? #Noun?').out('array');
+    const nounPhrases = parsed.match('#Adjective? #Noun #Adjective? #Verb #Adjective? #Noun?').out('array');
     const vector = await buildVector(nounPhrases);
     // Get the indexes of the top weighted phrases
     const topPhraseIndexes = vector
         .map((v, k) => [k, v]) // Convert key => value array to array of [key, value]
         .sort((a, b) => (a[1] > b[1])?-1:1) // sort by weighted value
         .slice(0, config.nPhrases) // Reduce to top nPhrases
+        .filter((a) => a[1] > 0) // Ensure only positive values (ie. words in current vector) are returned
         .map((a) => a[0]); // Convert to array of keys
     // Return matching noun phrases
     return (await listAllNounPhrasesInCorpus()).filter((v, k) => topPhraseIndexes.indexOf(k) >= 0);
