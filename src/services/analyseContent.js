@@ -1,6 +1,7 @@
 import {getCorpus, saveCorpus} from './accessors';
 import {predictClassification} from './model';
 import l2Norm from 'compute-l2norm';
+const nlp = require('compromise');
 
 // * Options -----------------------------------------------------------------------------------------------------------
 
@@ -29,7 +30,6 @@ export const prepareText = async (content) => {
  * @return {object}
  */
 export const parseToNlpDoc = (content) => {
-    const nlp = require('compromise');
     return nlp(content).normalize();
 };
 

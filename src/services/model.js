@@ -8,11 +8,8 @@ import * as knnClassifier from '@tensorflow-models/knn-classifier';
 
 const fixedLength = 10000;
 
-let classifier;
 const getClassifier = async () => {
-    if (!classifier) {
-        classifier = await getClassifierFromStore();
-    }
+    let classifier = await getClassifierFromStore();
     if (!classifier) {
         classifier = knnClassifier.create();
         const classifierData = await getClassifierDataFromStore();

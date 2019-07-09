@@ -34,3 +34,6 @@ export const setClassifierData = (setClassifierData, source)=> ({
 
 export const SET_TAB_CONTENT = 'setTabContent';
 export const setTabContent = (tabId, content, source) => ({type: SET_TAB_CONTENT, tabId, content, source});
+
+export const CLEAR_MODEL_DATA = 'clearModelData';
+export const clearModelData = (source) => ({type: CLEAR_MODEL_DATA, source});

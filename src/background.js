@@ -21,6 +21,7 @@ import {
     saveTabContent,
     loadStateParamsFromLocalStorage,
     triggerToggleEnabled,
+    clearAllData,
 } from './services/accessors';
 import {summariseText} from './services/summarise';
 
@@ -40,6 +41,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         case 'toggleEnabled':
             (async () => {
                 sendResponse(await triggerToggleEnabled());
+            })();
+            return;
+        case 'clearData':
+            (async () => {
+                sendResponse(await clearAllData());
             })();
             return;
         case 'prepareProcessing':

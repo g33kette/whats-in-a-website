@@ -8,7 +8,7 @@ import {
     SET_PHRASE_CORPUS,
     SET_TAB_CONTENT,
     SET_CLASSIFIER,
-    SET_CLASSIFIER_DATA,
+    SET_CLASSIFIER_DATA, CLEAR_MODEL_DATA,
 } from './actions';
 
 /**
@@ -17,21 +17,32 @@ import {
  * @return {*}
  */
 function getInitialStateValues() {
-    return {
+    return Object.assign({}, getInitialModelStateValues(), {
         encryptionToken: null,
-        // TODO The plugin needs to be auto-logged in for testing
+        tabs: {},
+        // TODO The plugin needs to be auto-logged in for testing - remember to re-build after changing these values
         username: null,
         enabled: false,
         // username: 'na',
         // enabled: true,
-        // TODO ----
-        tabs: {},
+        // /TODO ----
+    });
+}
+
+/**
+ * Get Initial Model State Values
+ *
+ * @return {object}
+ */
+function getInitialModelStateValues() {
+    return {
         corpus: {vectorSpace: [], numDocs: 0},
         phraseCorpus: {vectorSpace: [], numDocs: 0},
         classifier: null,
-        classifierDataSet: null,
+        classifierData: null,
     };
 }
+
 /**
  * Get Initial State - Wraps getInitialStateValues in a promise.
  *
@@ -72,6 +83,8 @@ export function coreReducer(state = getInitialState(), action) {
         case SET_TAB_CONTENT:
             tabs = Object.assign({}, state.tabs, {[action.tabId]: action.content});
             return Object.assign({}, state, {tabs: tabs});
+        case CLEAR_MODEL_DATA:
+            return Object.assign({}, state, getInitialModelStateValues());
         default:
             return state;
     }

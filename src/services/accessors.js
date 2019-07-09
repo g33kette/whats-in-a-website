@@ -12,6 +12,7 @@ import {
     setClassifier,
     setClassifierData,
     setEnabled,
+    clearModelData,
 } from './../store/actions';
 
 let extensionLocalStorage;
@@ -151,6 +152,16 @@ export function saveTabContent(tabId, content) {
     store.dispatch(setTabContent(tabId, content));
 }
 
+/**
+ * Clear: Model Data
+ */
+export async function clearAllData() {
+    store.dispatch(clearModelData());
+    persistToLocalStorage(await getUsername(), 'corpus', await getCorpus());
+    persistToLocalStorage(await getUsername(), 'phraseCorpus', await getPhraseCorpus());
+    persistToLocalStorage(await getUsername(), 'classifierData', await getClassifierData());
+}
+
 // General Methods -----------------------------------------------------------------------------------------------------
 
 /**
@@ -204,6 +215,11 @@ export async function retrieveFromLocalStorage(username, key, defaultValue = nul
 export async function loadStateParamsFromLocalStorage(username) {
     return {
         corpus: await retrieveFromLocalStorage(username, 'corpus', {vectorSpace: [], numDocs: 0}),
+        phraseCorpus: await retrieveFromLocalStorage(
+            username,
+            'phraseCorpus',
+            {vectorSpace: [], numDocs: 0}
+        ),
         classifierData: await retrieveFromLocalStorage(username, 'classifierData', null),
     };
 }

@@ -12,6 +12,18 @@ import $ from 'jquery';
  *
  * @type {*|jQuery|HTMLElement}
  */
+const overlayScreen = $('<div ' +
+    'id="bp_overlay_screen" ' +
+    'style="width: 100% !important; height: 100vh !important; top: 0 !important; right: 0 !important; ' +
+    'background: #333333; ' +
+    'position: fixed !important; z-index: 99999999999999999999999999999999999999999999999999999999 !important;">' +
+    '</div>');
+
+/**
+ * IFrame overlay element
+ *
+ * @type {*|jQuery|HTMLElement}
+ */
 const overlayFrame = $('<iframe ' +
     'id="bp_overlay_frame" ' +
     'style="width: 100% !important; height: 100vh !important; top: 0 !important; right: 0 !important; ' +
@@ -41,7 +53,7 @@ chrome.runtime.sendMessage({get: 'enabled'}, (enabled) => {
         hideContent().then(async () => {
             chrome.runtime.sendMessage({trigger: 'prepareProcessing'});
             parseContent($('body')).then((content) => {
-                console.log('content', content); // todo this is only needed when running collect_content feature
+            //     console.log('content', content); // todo this is only needed when running collect_content feature
                 chrome.runtime.sendMessage({trigger: 'initialiseProcessing', content: content});
             });
         });
@@ -58,7 +70,7 @@ chrome.runtime.onMessage.addListener((request) => {
          */
         switch (request.trigger) {
             case 'closeFrame':
-                removeOverlayFrame();
+                removeOverlay();
                 return;
             case 'showTrainingFrame':
                 showTrainingFrame();
@@ -96,6 +108,7 @@ const hideContent = () => {
             body.css('overflow', 'hidden');
             body.css('height', '100vh');
             body.prepend(overlayFrame);
+            body.prepend(overlayScreen);
             setTimeout(() => { // Allow time for iFrame to load
                 page.show();
                 resolve();
@@ -147,12 +160,13 @@ const parseContent = (element) => {
 /**
  * Remove Overlay Frame
  */
-const removeOverlayFrame = () => {
+const removeOverlay = () => {
     $(document).ready(() => {
         const body = $('body');
         body.css('overflow', 'auto');
         body.css('height', 'auto');
         overlayFrame.remove();
+        overlayScreen.remove();
     });
 };
 
