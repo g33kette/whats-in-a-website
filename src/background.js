@@ -199,7 +199,7 @@ async function processAndAnalyseContent(tabId, content) {
  * @return {Promise<boolean>}
  */
 async function sendMessage(tabId, messageObj) {
-    console.log('sendMessage', tabId, messageObj);
+    // console.log('sendMessage', tabId, messageObj);
     chrome.tabs.sendMessage(tabId, messageObj);
     return true;
 }

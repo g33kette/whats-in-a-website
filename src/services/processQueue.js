@@ -37,7 +37,7 @@ export function ProcessQueue() {
      * @return {Promise}
      */
     async function run(process) {
-        console.log('ProcessQueue RUN', process.method, process.args);
+        // console.log('ProcessQueue RUN', process.method, process.args);
         await process.method(...process.args);
         return true;
     }
