@@ -12,11 +12,15 @@ import {
     setClassifier,
     setClassifierData,
     setEnabled,
-    clearModelData,
+    setQueue,
+    clearModelData, queueProcess,
 } from './../store/actions';
+import {ProcessQueue} from './processQueue';
 
 let extensionLocalStorage;
 configureLocalStorageApi();
+
+let processQueue = new ProcessQueue();
 
 /**
  * Configure Local Storage API - Can be manipulated when testing.
@@ -174,6 +178,32 @@ export async function triggerToggleEnabled(forceState) {
     store.dispatch(setEnabled(enabled));
     persistToLocalStorage(await getUsername(), 'enabled', enabled);
     return enabled;
+}
+
+/**
+ * Queue and Run Process
+ *
+ * @param {*} process
+ */
+export function queueAndRunProcess(process) {
+    store.dispatch(queueProcess(process));
+    processQueue.process();
+}
+
+/**
+ * Next Queued Process
+ *
+ * @return {*}
+ */
+export async function nextQueuedProcess() {
+    const queue = (await store.getState()).queue;
+    if (queue.length) {
+        const nextProcess = queue.shift();
+        store.dispatch(setQueue(queue));
+        return nextProcess;
+    }
+    // Else
+    return null;
 }
 
 /**

@@ -8,7 +8,7 @@ import {
     SET_PHRASE_CORPUS,
     SET_TAB_CONTENT,
     SET_CLASSIFIER,
-    SET_CLASSIFIER_DATA, CLEAR_MODEL_DATA,
+    SET_CLASSIFIER_DATA, CLEAR_MODEL_DATA, QUEUE_PROCESS, SET_QUEUE,
 } from './actions';
 
 /**
@@ -20,6 +20,7 @@ function getInitialStateValues() {
     return Object.assign({}, getInitialModelStateValues(), {
         encryptionToken: null,
         tabs: {},
+        queue: [],
         // TODO The plugin needs to be auto-logged in for testing - remember to re-build after changing these values
         username: null,
         enabled: false,
@@ -44,23 +45,15 @@ function getInitialModelStateValues() {
 }
 
 /**
- * Get Initial State - Wraps getInitialStateValues in a promise.
- *
- * @return {*}
- */
-export async function getInitialState() {
-    return getInitialStateValues();
-}
-
-/**
  * Browser Protect State
  *
  * @param {object} state
  * @param {object} action
  * @return {*}
  */
-export function coreReducer(state = getInitialState(), action) {
-    let tabs;
+export function coreReducer(state = getInitialStateValues(), action) {
+    let updatedState;
+    // console.log('coreReducer', action, state);
     switch (action.type) {
         case RESET:
             return Object.assign({}, getInitialStateValues());
@@ -81,10 +74,21 @@ export function coreReducer(state = getInitialState(), action) {
         case SET_CLASSIFIER_DATA:
             return Object.assign({}, state, {classifierData: action.classifierData});
         case SET_TAB_CONTENT:
-            tabs = Object.assign({}, state.tabs, {[action.tabId]: action.content});
-            return Object.assign({}, state, {tabs: tabs});
+            updatedState = Object.assign({}, state.tabs, {[action.tabId]: action.content});
+            return Object.assign({}, state, {tabs: updatedState});
         case CLEAR_MODEL_DATA:
             return Object.assign({}, state, getInitialModelStateValues());
+        case QUEUE_PROCESS:
+            updatedState = state.queue;
+            // Add new process to queue
+            updatedState.push(action.process);
+            // Re-order queue by priority
+            updatedState = updatedState.sort((a, b) => {
+                return (b.priority?b.priority:-1) - (a.priority?a.priority:-1);
+            });
+            return Object.assign({}, state, {queue: updatedState});
+        case SET_QUEUE:
+            return Object.assign({}, state, {queue: action.queue});
         default:
             return state;
     }
