@@ -1,7 +1,7 @@
 import {
     getClassifier as getClassifierFromStore,
     getClassifierData as getClassifierDataFromStore,
-    saveClassifier,
+    saveClassifier as saveClassifierToStore,
 } from './accessors';
 import * as tf from '@tensorflow/tfjs';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
@@ -25,6 +25,7 @@ const getClassifier = async () => {
                 ),
             });
         }
+        await saveClassifierToStore(classifier);
     }
     return classifier;
 };
@@ -37,7 +38,7 @@ const getClassifier = async () => {
  */
 export const trainModel = async (textVector, classification) => {
     (await getClassifier()).addExample(tf.tensor(fixLength(textVector)), classification);
-    saveClassifier(await getClassifier());
+    await saveClassifierToStore(await getClassifier());
 };
 
 /**
