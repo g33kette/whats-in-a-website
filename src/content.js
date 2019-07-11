@@ -16,7 +16,7 @@ const overlayScreen = $('<div ' +
     'id="bp_overlay_screen" ' +
     'style="width: 100% !important; height: 100vh !important; top: 0 !important; right: 0 !important; ' +
     'background: #333333; ' +
-    'position: fixed !important; z-index: 99999999999999999999999999999999999999999999999999999999 !important;">' +
+    'position: fixed !important; z-index: 999999999999999999999999999999999999999999999999999 !important;">' +
     '</div>');
 
 /**
@@ -24,11 +24,44 @@ const overlayScreen = $('<div ' +
  *
  * @type {*|jQuery|HTMLElement}
  */
-const overlayFrame = $('<iframe ' +
-    'id="bp_overlay_frame" ' +
-    'style="width: 100% !important; height: 100vh !important; top: 0 !important; right: 0 !important; ' +
-    'position: fixed !important; z-index: 999999999999999999999999999999999999999999999999999999999 !important;" ' +
-    'src="'+chrome.runtime.getURL('pages/protection_overlay.html')+'"></iframe>');
+const overlayFrames = [
+    $('<iframe ' +
+        'style="width: 100px !important; height: 100px !important; top: 0 !important; left: 0 !important; ' +
+        'position: absolute !important; background-color: magenta !important;' +
+        'z-index: 999999999999999999999999999999999999999999999999999999999 !important;">' +
+        '</iframe>'),
+    $('<iframe ' +
+        'style="width: 100px !important; height: 100px !important; top: 0 !important; left: 0 !important; ' +
+        'position: absolute !important; background-color: blue !important;' +
+        'z-index: 999999999999999999999999999999999999999999999999999999999 !important;">' +
+        '</iframe>'),
+    $('<iframe ' +
+        'style="width: 100px !important; height: 100px !important; top: 0 !important; left: 0 !important; ' +
+        'position: absolute !important; background-color: yellow !important;' +
+        'z-index: 999999999999999999999999999999999999999999999999999999999 !important;">' +
+        '</iframe>'),
+    $('<iframe ' +
+        'style="width: 100px !important; height: 100px !important; top: 0 !important; left: 0 !important; ' +
+        'position: absolute !important; background-color: orange !important;' +
+        'z-index: 999999999999999999999999999999999999999999999999999999999 !important;">' +
+        '</iframe>'),
+    $('<iframe ' +
+        'style="width: 100px !important; height: 100px !important; top: 0 !important; left: 0 !important; ' +
+        'position: absolute !important; background-color: cyan !important;' +
+        'z-index: 999999999999999999999999999999999999999999999999999999999 !important;">' +
+        '</iframe>'),
+    $('<iframe ' +
+        'style="width: 100px !important; height: 100px !important; top: 0 !important; left: 0 !important; ' +
+        'position: absolute !important; background-color: green !important;' +
+        'z-index: 999999999999999999999999999999999999999999999999999999999 !important;">' +
+        '</iframe>'),
+];
+let overlayFrame = overlayFrames[0];
+// const overlayFrame = $('<iframe ' +
+//     'id="bp_overlay_frame" ' +
+//     'style="width: 100% !important; height: 100vh !important; top: 0 !important; right: 0 !important; ' +
+//     'position: fixed !important; z-index: 999999999999999999999999999999999999999999999999999999999 !important;" ' +
+//     'src="'+chrome.runtime.getURL('pages/protection_overlay.html')+'"></iframe>');
 
 /**
  * IFrame training element
@@ -60,11 +93,17 @@ chrome.runtime.sendMessage({get: 'enabled'}, (enabled) => {
     }
 });
 
-window.addEventListener('message', (e) => {
-    if (e.origin === 'chrome-extension://'+chrome.runtime.id) {
-        console.log('RECEIVED', e);
-    }
-}, false);
+const changeFrame = (index) => {
+    overlayFrame.remove();
+    overlayFrame = overlayFrames[index];
+    $('body').append(overlayFrame);
+};
+//
+// window.addEventListener('message', (e) => {
+//     if (e.origin === 'chrome-extension://'+chrome.runtime.id) {
+//         console.log('RECEIVED', e);
+//     }
+// }, false);
 /**
  * Listens for events to be actioned on tab
  */
@@ -73,15 +112,17 @@ chrome.runtime.onMessage.addListener((request) => {
         /**
          * Trigger Events
          */
-        const frame = document.getElementById('bp_overlay_frame');
+        // const frame = document.getElementById('bp_overlay_frame');
         switch (request.trigger) {
             case 'showMessage':
-                console.log('CONTENT', request.message);
-                frame.contentWindow.document.open('text/html', 'replace');
-                frame.contentWindow.document.write('<p>'+request.message+'</p>');
-                frame.contentWindow.document.close();
-                frame.contentWindow.postMessage('request.message', '*');
+                console.log('CONTENT', parseInt(request.message.match(/^\[(\d+)\]/)[1]), request.message);
+                changeFrame(parseInt(request.message.match(/^\[(\d+)\]/)?request.message.match(/^\[(\d+)\]/)[1]:0));
                 return;
+            //     frame.contentWindow.document.open('text/html', 'replace');
+            //     frame.contentWindow.document.write('<p>'+request.message+'</p>');
+            //     frame.contentWindow.document.close();
+            //     frame.contentWindow.postMessage('request.message', '*');
+            //     return;
             case 'closeFrame':
                 removeOverlay();
                 return;
@@ -120,8 +161,8 @@ const hideContent = () => {
             const body = $('body');
             body.css('overflow', 'hidden');
             body.css('height', '100vh');
-            body.prepend(overlayFrame);
-            body.prepend(overlayScreen);
+            body.append(overlayScreen);
+            body.append(overlayFrame);
             setTimeout(() => { // Allow time for iFrame to load
                 page.show();
                 resolve();
@@ -189,7 +230,7 @@ const removeOverlay = () => {
 const showTrainingFrame = () => {
     $(document).ready(() => {
         const body = $('body');
-        body.prepend(trainingFrame);
+        body.append(trainingFrame);
     });
 };
 

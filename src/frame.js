@@ -12,7 +12,7 @@ let messageElement;
 let completeElement;
 
 $(document).ready(function() {
-    window.parent.postMessage('FRAME LOADED', '*');
+    // window.parent.postMessage('FRAME LOADED', '*');
 
     loadingElement = $('.loading');
     messageElement = $('.message');
@@ -22,64 +22,64 @@ $(document).ready(function() {
     messageElement.show();
     completeElement.hide();
 
-    completeElement.on('click', '.action-safe', function() {
-        chrome.tabs.getCurrent((tab) => {
-            chrome.tabs.sendMessage(tab.id, {trigger: 'markContentSafe'});
-            chrome.tabs.sendMessage(tab.id, {trigger: 'closeFrame'});
-        });
-    });
-    completeElement.on('click', '.action-harmful', function() {
-        chrome.tabs.getCurrent((tab) => {
-            chrome.tabs.sendMessage(tab.id, {trigger: 'markContentHarmful'});
-            completeElement.find('.classification-actions').hide();
-            completeElement.find('.after-harmful-actions').show();
-        });
-    });
-    completeElement.on('click', '.action-review', function() {
-        chrome.tabs.getCurrent((tab) => {
-            chrome.tabs.sendMessage(tab.id, {trigger: 'closeFrame'});
-            chrome.tabs.sendMessage(tab.id, {trigger: 'showTrainingFrame'});
-        });
-    });
-
-    completeElement.on('click', '#actionClose', function() {
-        chrome.tabs.getCurrent((tab) => {
-            chrome.tabs.remove(tab.id);
-        });
-    });
-    completeElement.on('click', '#actionGoBack', function() {
-        chrome.tabs.getCurrent(() => {
-            history.back();
-        });
-    });
+    // completeElement.on('click', '.action-safe', function() {
+    //     chrome.tabs.getCurrent((tab) => {
+    //         chrome.tabs.sendMessage(tab.id, {trigger: 'markContentSafe'});
+    //         chrome.tabs.sendMessage(tab.id, {trigger: 'closeFrame'});
+    //     });
+    // });
+    // completeElement.on('click', '.action-harmful', function() {
+    //     chrome.tabs.getCurrent((tab) => {
+    //         chrome.tabs.sendMessage(tab.id, {trigger: 'markContentHarmful'});
+    //         completeElement.find('.classification-actions').hide();
+    //         completeElement.find('.after-harmful-actions').show();
+    //     });
+    // });
+    // completeElement.on('click', '.action-review', function() {
+    //     chrome.tabs.getCurrent((tab) => {
+    //         chrome.tabs.sendMessage(tab.id, {trigger: 'closeFrame'});
+    //         chrome.tabs.sendMessage(tab.id, {trigger: 'showTrainingFrame'});
+    //     });
+    // });
+    //
+    // completeElement.on('click', '#actionClose', function() {
+    //     chrome.tabs.getCurrent((tab) => {
+    //         chrome.tabs.remove(tab.id);
+    //     });
+    // });
+    // completeElement.on('click', '#actionGoBack', function() {
+    //     chrome.tabs.getCurrent(() => {
+    //         history.back();
+    //     });
+    // });
 });
 
-window.addEventListener('message', (e) => {
-    // if (e.origin === 'chrome-extension://'+chrome.runtime.id) {
-        console.log('FRAME RECEIVED', e);
-    // }
-}, false);
+// window.addEventListener('message', (e) => {
+//     // if (e.origin === 'chrome-extension://'+chrome.runtime.id) {
+//         console.log('FRAME RECEIVED', e);
+//     // }
+// }, false);
 
 /**
  * Listens for events to be actioned on tab
  */
-chrome.runtime.onMessage.addListener((request) => {
-    // console.log('frame.js', request);
-    /**
-     * Trigger Events
-     */
-    switch (request.trigger) {
-        case 'showMessage':
-            console.log('FRAME', request.message);
-            updateMessage(request.message);
-            return;
-        case 'showAnalysis':
-            showAnalysis(request.result, request.summary);
-            return;
-        default:
-        // Do Nothing
-    }
-});
+// chrome.runtime.onMessage.addListener((request) => {
+//     // console.log('frame.js', request);
+//     /**
+//      * Trigger Events
+//      */
+//     switch (request.trigger) {
+//         case 'showMessage':
+//             console.log('FRAME', request.message);
+//             updateMessage(request.message);
+//             return;
+//         case 'showAnalysis':
+//             showAnalysis(request.result, request.summary);
+//             return;
+//         default:
+//         // Do Nothing
+//     }
+// });
 
 /**
  * Update Message
