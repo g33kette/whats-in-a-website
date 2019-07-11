@@ -12,6 +12,8 @@ let messageElement;
 let completeElement;
 
 $(document).ready(function() {
+    window.parent.postMessage('FRAME LOADED', '*');
+
     loadingElement = $('.loading');
     messageElement = $('.message');
     completeElement = $('.complete');
@@ -52,6 +54,12 @@ $(document).ready(function() {
     });
 });
 
+window.addEventListener('message', (e) => {
+    // if (e.origin === 'chrome-extension://'+chrome.runtime.id) {
+        console.log('FRAME RECEIVED', e);
+    // }
+}, false);
+
 /**
  * Listens for events to be actioned on tab
  */
@@ -62,6 +70,7 @@ chrome.runtime.onMessage.addListener((request) => {
      */
     switch (request.trigger) {
         case 'showMessage':
+            console.log('FRAME', request.message);
             updateMessage(request.message);
             return;
         case 'showAnalysis':

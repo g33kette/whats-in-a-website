@@ -60,6 +60,11 @@ chrome.runtime.sendMessage({get: 'enabled'}, (enabled) => {
     }
 });
 
+window.addEventListener('message', (e) => {
+    if (e.origin === 'chrome-extension://'+chrome.runtime.id) {
+        console.log('RECEIVED', e);
+    }
+}, false);
 /**
  * Listens for events to be actioned on tab
  */
@@ -68,7 +73,15 @@ chrome.runtime.onMessage.addListener((request) => {
         /**
          * Trigger Events
          */
+        const frame = document.getElementById('bp_overlay_frame');
         switch (request.trigger) {
+            case 'showMessage':
+                console.log('CONTENT', request.message);
+                frame.contentWindow.document.open('text/html', 'replace');
+                frame.contentWindow.document.write('<p>'+request.message+'</p>');
+                frame.contentWindow.document.close();
+                frame.contentWindow.postMessage('request.message', '*');
+                return;
             case 'closeFrame':
                 removeOverlay();
                 return;
