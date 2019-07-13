@@ -49,9 +49,11 @@ module.exports = function() {
      * When content analysis is complete
      */
     this.When(/^content analysis is complete$/, {timeout: 80000}, function() {
-        return selectBpFrame(driver).then(() => {
-            return stepHelpers.contentAnalysisComplete(driver);
-        });
+        return stepHelpers.keepUpdatingFrame(
+            selectBpFrame,
+            driver,
+            () => stepHelpers.contentAnalysisComplete(driver)
+        );
     });
 
     /**

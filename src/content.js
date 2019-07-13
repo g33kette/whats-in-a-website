@@ -199,7 +199,12 @@ async function changeFrame(type, params) {
             overlayFrame = await overlayFrameFactory.injectProcessingFrame(parent, params.message);
             break;
         case 'complete':
-            overlayFrame = await overlayFrameFactory.injectCompleteFrame(parent, params.result, params.summary);
+            overlayFrame = await overlayFrameFactory.injectCompleteFrame(
+                parent,
+                params.message,
+                params.result,
+                params.summary
+            );
             break;
         case 'training':
             trainingFrame = await overlayFrameFactory.injectTrainingFrame(parent);

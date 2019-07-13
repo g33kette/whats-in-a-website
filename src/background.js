@@ -183,9 +183,13 @@ async function processAndAnalyseContent(tabId, content) {
     const summary = await summariseText(content);
     await sendMessage(
         tabId,
-        {trigger: 'showMessage', message: 'Analysis Complete. Please review before continuing.'}
+        {
+            trigger: 'showAnalysis',
+            message: 'Analysis Complete. Please review before continuing.',
+            result: result,
+            summary: summary,
+        }
     );
-    await sendMessage(tabId, {trigger: 'showAnalysis', result: result, summary: summary});
     return true;
 }
 

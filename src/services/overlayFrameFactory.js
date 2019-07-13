@@ -39,14 +39,15 @@ export function OverlayFrameFactory(triggerAction) {
      * Inject Complete Frame
      *
      * @param {*} parent
+     * @param {string} message
      * @param {*} result
      * @param {*} summary
      * @return {Promise<*>}
      */
-    this.injectCompleteFrame = async (parent, result, summary) => {
+    this.injectCompleteFrame = async (parent, message, result, summary) => {
         const frame = newOverlayFrame('bp_overlay_frame');
         await injectContent(parent, frame, completeContent);
-        updateFrameWithAnalysisResult(frame, result, summary);
+        updateFrameWithAnalysisResult(frame, message, result, summary);
         return frame;
     };
 
@@ -164,10 +165,12 @@ export function OverlayFrameFactory(triggerAction) {
      * Show Analysis
      *
      * @param {object} frame
+     * @param {string} message
      * @param {object} result
      * @param {array} [summary]
      */
-    function updateFrameWithAnalysisResult(frame, result, summary) {
+    function updateFrameWithAnalysisResult(frame, message, result, summary) {
+        updateFrameWithMessage(frame, message);
         const frameBody = $('body', frame[0].contentWindow.document);
         const completeElement = frameBody.find('.complete');
         // Display classification result
