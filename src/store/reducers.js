@@ -11,7 +11,7 @@ import {
     SET_CLASSIFIER_DATA, CLEAR_MODEL_DATA, QUEUE_PROCESS, SET_QUEUE,
 } from './actions';
 
-export let testMode = true; // Remember to re-build after changing this value
+export let testMode = false; // Remember to re-build after changing this value
 
 /**
  * Get Initial State Values
