@@ -10,6 +10,14 @@
         <div class="bp-menu-unauthenticated">
             <form class="bp-menu-login">
                 <div>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" value="example" readonly disabled />
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" value="secret" readonly disabled />
+                </div>
+                <div>
                     <button type="submit">Login</button>
                 </div>
             </form>
@@ -22,6 +30,18 @@
                 </div>
                 <div class="option-actions">
                     <button style="margin-bottom: 5px;" class="bp-menu-status-toggle"><!-- Action set on load --></button>
+                </div>
+                <span class="clear-float"></span>
+            </div>
+            <div class="option">
+                <div class="option-label">
+                    <label>Reset Browser Protect Data: </label>
+                    <span class="tag bp-menu-clear-state-tag"><!-- Status set on load --></span>
+                </div>
+                <div class="option-actions">
+                    <button style="margin-bottom: 5px;" class="bp-menu-clear-state-action">
+                        Clear Data
+                    </button>
                 </div>
                 <span class="clear-float"></span>
             </div>

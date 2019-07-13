@@ -21,6 +21,8 @@ import {
     saveTabContent,
     loadStateParamsFromLocalStorage,
     triggerToggleEnabled,
+    clearAllData,
+    queueAndRunProcess,
 } from './services/accessors';
 import {summariseText} from './services/summarise';
 
@@ -42,12 +44,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 sendResponse(await triggerToggleEnabled());
             })();
             return;
+        case 'clearData':
+            (async () => {
+                sendResponse(await clearAllData());
+            })();
+            return;
         case 'prepareProcessing':
             triggerPrepareProcessing(sender.tab.id);
             sendResponse(sender.tab.id);
             return;
         case 'initialiseProcessing':
-            triggerInitialiseProcessing(sender.tab.id, request.content);
+            triggerQueueForProcessing(sender.tab.id, request.content);
             sendResponse(sender.tab.id);
             return;
         case 'markContentSafe':
@@ -112,6 +119,7 @@ async function triggerAuthenticate(params) {
         store.dispatch(setEncryptionToken(authenticated.token));
         store.dispatch(setUsername(params.username));
         store.dispatch(overrideStateParams(await loadStateParamsFromLocalStorage(params.username)));
+        await triggerToggleEnabled(true);
         return true;
     }
 }
@@ -122,31 +130,18 @@ async function triggerAuthenticate(params) {
  * @param {int} tabId
  */
 function triggerPrepareProcessing(tabId) {
-    chrome.tabs.sendMessage(tabId, {trigger: 'showMessage', message: '[1] Reading page...'});
+    sendMessage(tabId, {trigger: 'showMessage', message: '[1] Reading page...'});
 }
 
 /**
- * Trigger: Initialise Processing
+ * Trigger: Queue For Processing
  *
  * @param {int} tabId
  * @param {string} content
  */
-function triggerInitialiseProcessing(tabId, content) {
-    chrome.tabs.sendMessage(tabId, {trigger: 'showMessage', message: '[2] Processing page...'});
-    prepareText(content).then((textVector) => {
-        chrome.tabs.sendMessage(tabId, {trigger: 'showMessage', message: '[3] Analysing content...'});
-        saveTabContent(tabId, textVector);
-        analyseContent(textVector).then((result) => {
-            chrome.tabs.sendMessage(tabId, {trigger: 'showMessage', message: '[4] Summarising content...'});
-            summariseText(content).then((summary) => {
-                chrome.tabs.sendMessage(
-                    tabId,
-                    {trigger: 'showMessage', message: 'Analysis Complete. Please review before continuing.'}
-                );
-                chrome.tabs.sendMessage(tabId, {trigger: 'showAnalysis', result: result, summary: summary});
-            });
-        });
-    });
+function triggerQueueForProcessing(tabId, content) {
+    sendMessage(tabId, {trigger: 'showMessage', message: '[2] Queued for processing...'});
+    queueAndRunProcess({method: processAndAnalyseContent, args: [tabId, content]});
 }
 
 /**
@@ -167,4 +162,48 @@ async function triggerMarkContentSafe(tabId) {
 async function triggerMarkContentHarmful(tabId) {
     // The following calls promise but does not need to wait for resolution
     trainModel(await getTabContent(tabId), 'harmful');
+}
+
+// General Methods -----------------------------------------------------------------------------------------------------
+
+/**
+ * Initialise Processing
+ *
+ * @param {int} tabId
+ * @param {string} content
+ * @return {Promise}
+ */
+async function processAndAnalyseContent(tabId, content) {
+    await sendMessage(tabId, {trigger: 'showMessage', message: '[3] Processing page...'});
+    const textVector = await prepareText(content);
+    await sendMessage(tabId, {trigger: 'showMessage', message: '[4] Analysing content...'});
+    await saveTabContent(tabId, textVector);
+    const result = await analyseContent(textVector);
+    await sendMessage(tabId, {trigger: 'showMessage', message: '[5] Summarising content...'});
+    const summary = await summariseText(content);
+    await sendMessage(
+        tabId,
+        {
+            trigger: 'showAnalysis',
+            message: 'Analysis Complete. Please review before continuing.',
+            result: result,
+            summary: summary,
+        }
+    );
+    return true;
+}
+
+/**
+ * Send Message
+ *
+ * Wrapper for chrome.tabs.sendMessage to convert to Promise
+ *
+ * @param {int} tabId
+ * @param {object} messageObj
+ * @return {Promise<boolean>}
+ */
+async function sendMessage(tabId, messageObj) {
+    // console.log('sendMessage', tabId, messageObj);
+    chrome.tabs.sendMessage(tabId, messageObj);
+    return true;
 }

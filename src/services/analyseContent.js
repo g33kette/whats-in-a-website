@@ -1,6 +1,7 @@
 import {getCorpus, saveCorpus} from './accessors';
 import {predictClassification} from './model';
 import l2Norm from 'compute-l2norm';
+const nlp = require('compromise');
 
 // * Options -----------------------------------------------------------------------------------------------------------
 
@@ -29,7 +30,6 @@ export const prepareText = async (content) => {
  * @return {object}
  */
 export const parseToNlpDoc = (content) => {
-    const nlp = require('compromise');
     return nlp(content).normalize();
 };
 
@@ -119,7 +119,7 @@ export const updateAndReturnCorpusObject = async (items, corpus) => {
  * @return {object}
  */
 const updateAndReturnWordCorpus = async (words) => {
-    const updatedCorpus = updateAndReturnCorpusObject(words, await getCorpus());
+    const updatedCorpus = await updateAndReturnCorpusObject(words, await getCorpus());
     // Update saved version in local storage storage (no need to wait for save to finish)
     saveCorpus(updatedCorpus);
     return updatedCorpus;

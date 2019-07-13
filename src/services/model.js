@@ -1,16 +1,31 @@
-import {getClassifier as getClassifierFromStore, saveClassifier} from './accessors';
+import {
+    getClassifier as getClassifierFromStore,
+    getClassifierData as getClassifierDataFromStore,
+    saveClassifier as saveClassifierToStore,
+} from './accessors';
 import * as tf from '@tensorflow/tfjs';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
 
 const fixedLength = 10000;
 
-let classifier;
 const getClassifier = async () => {
-    if (!classifier) {
-        classifier = await getClassifierFromStore();
-    }
+    let classifier = await getClassifierFromStore();
     if (!classifier) {
         classifier = knnClassifier.create();
+        const classifierData = await getClassifierDataFromStore();
+        if (classifierData) {
+            classifier.setClassifierDataset({
+                safe: tf.tensor(
+                    classifierData.safe,
+                [classifierData.safe.length / fixedLength, fixedLength]
+                ),
+                harmful: tf.tensor(
+                    classifierData.harmful,
+                [classifierData.harmful.length / fixedLength, fixedLength]
+                ),
+            });
+        }
+        await saveClassifierToStore(classifier);
     }
     return classifier;
 };
@@ -23,7 +38,7 @@ const getClassifier = async () => {
  */
 export const trainModel = async (textVector, classification) => {
     (await getClassifier()).addExample(tf.tensor(fixLength(textVector)), classification);
-    saveClassifier(await getClassifier());
+    await saveClassifierToStore(await getClassifier());
 };
 
 /**

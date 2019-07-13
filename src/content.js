@@ -6,30 +6,29 @@
  */
 
 import $ from 'jquery';
+import {OverlayFrameFactory} from './services/overlayFrameFactory';
+import {testMode} from './store/reducers';
+
+const overlayFrameFactory = new OverlayFrameFactory(triggerActionFromFrame);
+overlayFrameFactory.preloadContent();
+
+let overlayFrame;
+let trainingFrame;
 
 /**
- * IFrame overlay element
+ * Div overlay screen - needed to ensure content is always hidden whilst iframes are swapping out
  *
  * @type {*|jQuery|HTMLElement}
  */
-const overlayFrame = $('<iframe ' +
-    'id="bp_overlay_frame" ' +
-    'style="width: 100% !important; height: 100vh !important; top: 0 !important; right: 0 !important; ' +
-    'position: fixed !important; z-index: 999999999999999999999999999999999999999999999999999999999 !important;" ' +
-    'src="'+chrome.runtime.getURL('pages/protection_overlay.html')+'"></iframe>');
-
-/**
- * IFrame training element
- *
- * @type {*|jQuery|HTMLElement}
- */
-const trainingFrame = $('<iframe ' +
-    'id="bp_training_frame" ' +
-    'style="width: 100% !important; top: 25vh !important; right: 0 !important; ' +
-    'border-top: solid 10px #7bff68 !important; border-bottom: solid 10px #7bff68 !important; ' +
-    'box-shadow: 0px 15px 10px #000, 0px -15px 10px #000 !important; ' +
-    'position: fixed !important; z-index: 999999999999999999999999999999999999999999999999999999999 !important;" ' +
-    'src="'+chrome.runtime.getURL('pages/training_overlay.html')+'"></iframe>');
+const overlayScreen = $('<div></div>');
+overlayScreen.css('width', '100%');
+overlayScreen.css('height', '100vh');
+overlayScreen.css('top', '0');
+overlayScreen.css('left', '0');
+overlayScreen.css('background', '#333333');
+overlayScreen.css('position', 'fixed');
+overlayScreen.css('z-index', '99999999999999999999999999999999999999999999999999999999999999999999999999999999999999');
+overlayScreen.attr('id', 'bp_overlay_screen');
 
 /**
  * On Load Event
@@ -41,7 +40,9 @@ chrome.runtime.sendMessage({get: 'enabled'}, (enabled) => {
         hideContent().then(async () => {
             chrome.runtime.sendMessage({trigger: 'prepareProcessing'});
             parseContent($('body')).then((content) => {
-                console.log('content', content); // todo this is only needed when running collect_content feature
+                if (testMode) { // This is only needed when running collect_content feature/test
+                    console.log('content', content);
+                }
                 chrome.runtime.sendMessage({trigger: 'initialiseProcessing', content: content});
             });
         });
@@ -57,8 +58,14 @@ chrome.runtime.onMessage.addListener((request) => {
          * Trigger Events
          */
         switch (request.trigger) {
+            case 'showMessage':
+                changeFrame('processing', request);
+                return;
+            case 'showAnalysis':
+                changeFrame('complete', request);
+                return;
             case 'closeFrame':
-                removeOverlayFrame();
+                removeOverlay();
                 return;
             case 'showTrainingFrame':
                 showTrainingFrame();
@@ -95,11 +102,11 @@ const hideContent = () => {
             const body = $('body');
             body.css('overflow', 'hidden');
             body.css('height', '100vh');
-            body.prepend(overlayFrame);
-            setTimeout(() => { // Allow time for iFrame to load
+            body.append(overlayScreen);
+            setTimeout(() => { // Allow time for overlayScreen to append and then "show" content underneath
                 page.show();
                 resolve();
-            }, 500);
+            }, 200);
         });
     });
 };
@@ -147,12 +154,15 @@ const parseContent = (element) => {
 /**
  * Remove Overlay Frame
  */
-const removeOverlayFrame = () => {
+const removeOverlay = () => {
     $(document).ready(() => {
         const body = $('body');
         body.css('overflow', 'auto');
         body.css('height', 'auto');
-        overlayFrame.remove();
+        overlayScreen.remove();
+        if (overlayFrame) {
+            overlayFrame.remove();
+        }
     });
 };
 
@@ -160,10 +170,7 @@ const removeOverlayFrame = () => {
  * Show Training Frame
  */
 const showTrainingFrame = () => {
-    $(document).ready(() => {
-        const body = $('body');
-        body.prepend(trainingFrame);
-    });
+    changeFrame('training');
 };
 
 /**
@@ -172,3 +179,69 @@ const showTrainingFrame = () => {
 const removeTrainingFrame = () => {
     trainingFrame.remove();
 };
+
+/**
+ * Change Frame
+ *
+ * @param {string} type
+ * @param {*} [params]
+ * @return {Promise<void>}
+ */
+async function changeFrame(type, params) {
+    if (overlayFrame) {
+        overlayFrame.remove();
+    }
+    if (trainingFrame) {
+        trainingFrame.remove();
+    }
+    const parent = $('body');
+    switch (type) {
+        case 'processing':
+            overlayFrame = await overlayFrameFactory.injectProcessingFrame(parent, params.message);
+            break;
+        case 'complete':
+            overlayFrame = await overlayFrameFactory.injectCompleteFrame(
+                parent,
+                params.message,
+                params.result,
+                params.summary
+            );
+            break;
+        case 'training':
+            trainingFrame = await overlayFrameFactory.injectTrainingFrame(parent);
+            break;
+        default:
+        // Do nothing
+    }
+}
+
+/**
+ * Trigger Action From Frame
+ *
+ * @param {string} trigger
+ * @param {*} args
+ */
+function triggerActionFromFrame(trigger, ...args) {
+    switch (trigger) {
+        case 'closeTab':
+            window.close();
+            return;
+        case 'closeOverlayFrame':
+            removeOverlay();
+            return;
+        case 'showTrainingFrame':
+            showTrainingFrame();
+            return;
+        case 'removeTrainingFrame':
+            removeTrainingFrame();
+            return;
+        case 'sendMessage':
+            chrome.runtime.sendMessage(...args);
+            return;
+        case 'goBack':
+            history.back();
+            return;
+        default:
+        // Un-recognised, do nothing
+    }
+}

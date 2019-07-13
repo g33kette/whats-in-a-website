@@ -11,12 +11,20 @@ $(document).ready(function() {
     // Bind Event Listeners
     const body = $('body');
     body.on('submit', '.bp-menu-login', (e) => {
-        login();
+        login($('#username').val(), $('#password').val());
         e.preventDefault();
         return false;
     });
     body.on('click', '.bp-menu-status-toggle', () => {
         toggleStatus();
+    });
+    body.on('click', '.bp-menu-clear-state-action', () => {
+        if (confirm(
+            'Are you sure you want to reset the extension and clear ALL data?' +
+            'This cannot be undone and you will need to re-train the extension from scratch.'
+        )) {
+            clearData();
+        }
     });
 
     // On-Load:
@@ -42,13 +50,17 @@ function showAuthenticatedStatus() {
 
 /**
  * Login
+ *
+ * @param {string} username
+ * @param {string} password
  */
-function login() {
+function login(username, password) {
     chrome.runtime.sendMessage({
         trigger: 'authenticate',
-        params: {username: 'bob', password: 'secret'}, // todo
+        params: {username: username, password: password},
     }, () => {
         showAuthenticatedStatus();
+        refreshStatus();
     });
 }
 
@@ -85,5 +97,12 @@ function updateStatusDisplay(enabled) {
         statusTag.removeClass('tag-success').addClass('tag-disabled').text('Disabled');
         toggleStatusButton.text('Enable');
     }
+}
+
+/**
+ * Clear Data
+ */
+function clearData() {
+    chrome.runtime.sendMessage({trigger: 'clearData'});
 }
 

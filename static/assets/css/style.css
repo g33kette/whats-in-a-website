@@ -106,7 +106,7 @@
         display: inline-block;
         padding: 10px;
         text-transform: capitalize;
-        font-weight: bold;
+        font-weight: normal;
         border-radius: 3px;
     }
         .browser-protect .result.safe {
@@ -151,16 +151,9 @@
      * Scope content overly within "bp" ID
      */
 #bp {
-    z-index: 999999999999999999999999999999999999999999999999999999999; /* Ensure this is displayed above ANY content */
     font-size: 17px;
-    height: 100%;
-    min-height: 100vh;
     margin: 0;
     overflow: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     text-align: center;
 }
     #bp .main-content {
@@ -250,6 +243,17 @@
     #bp_menu hr {
         margin-bottom: 15px;
     }
+    #bp_menu .bp-menu-login {}
+        #bp_menu .bp-menu-login > div {
+            margin: 15px;
+        }
+            #bp_menu .bp-menu-login > div label {
+                font-size: 1.3em;
+            }
+            #bp_menu .bp-menu-login > div input {
+                padding: 3px;
+                border-radius: 2px;
+            }
     #bp_menu .option {
         padding: 10px;
         background-color: #555;
@@ -268,14 +272,9 @@
  * Scope content overly within "bp_training" ID
  */
 #bp_training {
-    z-index: 999999999999999999999999999999999999999999999999999999999; /* Ensure this is displayed above ANY content */
     font-size: 17px;
     margin: 0;
     overflow: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     text-align: center;
 }
     #bp_training .main-content {

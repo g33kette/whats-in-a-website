@@ -50,6 +50,7 @@ Feature: Collect Training Data
       | https://www.tripadvisor.co.uk/	                                                            | safe    |
       | https://www.airbnb.co.uk/s/Lake-District-National-Park--Lakes--South-Lakeland-District/homes?refinement_paths%5B%5D=%2Fhomes&query=Lake%20District%20National%20Park%2C%20Lakes%2C%20South%20Lakeland%20District	| safe    |
       | https://www.booking.com/index.en-gb.html	                                                | safe    |
+      | https://www.bitbucket.org               	                                                | safe    |
 
     And training content is extracted for the following websites
       | https://www.bbc.co.uk/sport/football/teams/manchester-united	                            | harmful |
