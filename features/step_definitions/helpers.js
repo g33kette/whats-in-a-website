@@ -102,12 +102,47 @@ exports.saveParsedContentToFile = (url, classification, contentType, driver) => 
  * @param {*} driver
  * @return {Promise}
  */
-exports.contentAnalysisComplete = (driver) => {
-    return driver.wait(async () => {
-        await driver.wait(until.elementsLocated(by.css('.complete')));
-        const els = await driver.findElements(by.css('.complete'));
-        if (!els.length) return false;
-        return await els[0].isDisplayed();
+exports.contentAnalysisComplete = async (driver) => {
+    const els = await driver.findElements(by.css('.complete'));
+    if (!els.length || !await els[0].isDisplayed()) {
+        throw new Error();
+    }
+    // Else
+    return true;
+};
+
+/**
+ * Update Frame
+ *
+ * @param {function} selectFrameFunction
+ * @param {*} driver
+ * @param {function} callBack
+ * @param {int} [timeout] - Time in future that loop should expire
+ * @return {Promise}
+ */
+exports.keepUpdatingFrame = (selectFrameFunction, driver, callBack, timeout) => {
+    if (!timeout) {
+        timeout = (new Date().getTime()) + 30000; // 30 seconds
+    }
+    return new Promise((resolve, reject) => {
+        selectFrameFunction(driver)
+            .then(() => {
+                return callBack();
+            })
+            .then((result) => {
+                resolve(result);
+            })
+            .catch((error) => {
+                if (timeout < (new Date().getTime())) {
+                    // Time to stop
+                    reject(error);
+                } else {
+                    // Loop
+                    return exports.keepUpdatingFrame(selectFrameFunction, driver, callBack, timeout);
+                }
+            })
+            .then((result) => resolve(result))
+            .catch((error) => reject(error));
     });
 };
 

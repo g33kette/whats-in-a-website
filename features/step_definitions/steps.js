@@ -49,9 +49,11 @@ module.exports = function() {
      * When content analysis is complete
      */
     this.When(/^content analysis is complete$/, {timeout: 80000}, function() {
-        return selectBpFrame(driver).then(() => {
-            return stepHelpers.contentAnalysisComplete(driver);
-        });
+        return stepHelpers.keepUpdatingFrame(
+            selectBpFrame,
+            driver,
+            () => stepHelpers.contentAnalysisComplete(driver)
+        );
     });
 
     /**
@@ -109,8 +111,11 @@ module.exports = function() {
                 // Go to URL
                 await stepHelpers.goToUrl(url);
                 // Wait for processing to complete
-                await selectBpFrame(driver);
-                await stepHelpers.contentAnalysisComplete(driver);
+                await stepHelpers.keepUpdatingFrame(
+                    selectBpFrame,
+                    driver,
+                    () => stepHelpers.contentAnalysisComplete(driver)
+                );
                 // Click to continue to view site
                 await stepHelpers.clickContinueToWebsite(driver, selectDefaultWindow);
                 // Click classification
@@ -148,8 +153,11 @@ module.exports = function() {
                     // Go to URL
                     await stepHelpers.goToUrl(url);
                     // Wait for processing to complete
-                    await selectBpFrame(driver);
-                    await stepHelpers.contentAnalysisComplete(driver);
+                    await stepHelpers.keepUpdatingFrame(
+                        selectBpFrame,
+                        driver,
+                        () => stepHelpers.contentAnalysisComplete(driver)
+                    );
 
                     // Save content from console logs to file
                     await stepHelpers.saveParsedContentToFile(url, classification, contentType, driver);
@@ -177,8 +185,11 @@ module.exports = function() {
                 // Go to URL
                 await stepHelpers.goToUrl(url);
                 // Wait for processing to complete
-                await selectBpFrame(driver);
-                await stepHelpers.contentAnalysisComplete(driver);
+                await stepHelpers.keepUpdatingFrame(
+                    selectBpFrame,
+                    driver,
+                    () => stepHelpers.contentAnalysisComplete(driver)
+                );
                 // Check Classification
                 await stepHelpers.checkClassificationResult(classification, results, driver);
             }
