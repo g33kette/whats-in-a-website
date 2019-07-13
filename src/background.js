@@ -4,14 +4,7 @@
  * This script is run constantly in the background when the extension is enabled.
  * It listens for events and manages overall state.
  */
-
-import store from './store/store';
-import {
-    setEncryptionToken,
-    setUsername,
-    overrideStateParams,
-} from './store/actions';
-import {authenticate} from './services/authentication';
+import {authenticate, logout} from './services/authentication';
 import {analyseContent, prepareText} from './services/analyseContent';
 import {trainModel} from './services/model';
 import {
@@ -19,12 +12,19 @@ import {
     getTabContent,
     getUsername,
     saveTabContent,
-    loadStateParamsFromLocalStorage,
     triggerToggleEnabled,
     clearAllData,
     queueAndRunProcess,
+    resetState,
+    overrideStateParamsForUsername,
+    setAuthenticatedUser,
 } from './services/accessors';
 import {summariseText} from './services/summarise';
+import {testMode} from './store/reducers';
+if (testMode) {
+    // If in test mode then need to automatically log in.
+    triggerAuthenticate({username: 'test', password: 'test'});
+}
 
 /**
  * Custom Event Listeners
@@ -39,6 +39,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 sendResponse(await triggerAuthenticate(request.params));
             })();
             return true; // Keeps async open
+        case 'logout':
+            (async () => {
+                sendResponse(await triggerLogout());
+            })();
+            return;
         case 'toggleEnabled':
             (async () => {
                 sendResponse(await triggerToggleEnabled());
@@ -112,16 +117,25 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 async function triggerAuthenticate(params) {
     const authenticated = await authenticate(params.username, params.password);
     if (!authenticated || authenticated === null || typeof authenticated.token === 'undefined') {
-        store.dispatch(setEncryptionToken(null));
-        store.dispatch(setUsername(null));
+        await triggerLogout();
         return false;
     } else {
-        store.dispatch(setEncryptionToken(authenticated.token));
-        store.dispatch(setUsername(params.username));
-        store.dispatch(overrideStateParams(await loadStateParamsFromLocalStorage(params.username)));
+        await setAuthenticatedUser(params.username, authenticated.token);
+        await overrideStateParamsForUsername(params.username);
         await triggerToggleEnabled(true);
         return true;
     }
+}
+
+/**
+ * Trigger: Logout
+ *
+ * @return {Promise<boolean>}
+ */
+async function triggerLogout() {
+    await resetState();
+    await logout();
+    return true;
 }
 
 /**

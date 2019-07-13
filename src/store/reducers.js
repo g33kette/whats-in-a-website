@@ -23,9 +23,8 @@ function getInitialStateValues() {
         encryptionToken: null,
         tabs: {},
         queue: [],
-        // The plugin needs to be auto-logged in for testing
-        username: testMode?'na':null,
-        enabled: !!(testMode),
+        username: null,
+        enabled: false,
     });
 }
 

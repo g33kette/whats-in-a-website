@@ -239,6 +239,7 @@
 }
     #bp_menu.browser-protect button, #bp_menu.browser-protect a.button  {
         font-size: 1em;
+        min-width: 100px;
     }
     #bp_menu hr {
         margin-bottom: 15px;
