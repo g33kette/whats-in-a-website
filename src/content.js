@@ -7,6 +7,7 @@
 
 import $ from 'jquery';
 import {OverlayFrameFactory} from './services/overlayFrameFactory';
+import {testMode} from './store/reducers';
 
 const overlayFrameFactory = new OverlayFrameFactory(triggerActionFromFrame);
 overlayFrameFactory.preloadContent();
@@ -39,7 +40,9 @@ chrome.runtime.sendMessage({get: 'enabled'}, (enabled) => {
         hideContent().then(async () => {
             chrome.runtime.sendMessage({trigger: 'prepareProcessing'});
             parseContent($('body')).then((content) => {
-            //     console.log('content', content); // todo this is only needed when running collect_content feature
+                if (testMode) { // This is only needed when running collect_content feature/test
+                    console.log('content', content);
+                }
                 chrome.runtime.sendMessage({trigger: 'initialiseProcessing', content: content});
             });
         });
