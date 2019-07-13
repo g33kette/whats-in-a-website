@@ -6,7 +6,15 @@ import {
 import * as tf from '@tensorflow/tfjs';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';
 
-const fixedLength = 10000;
+// * Options -----------------------------------------------------------------------------------------------------------
+
+// Exported so can be set in tests
+export const config = {
+    fixedLength: 10000,
+    k: 3,
+};
+
+// * Classifier Methods  -----------------------------------------------------------------------------------------------
 
 const getClassifier = async () => {
     let classifier = await getClassifierFromStore();
@@ -17,11 +25,11 @@ const getClassifier = async () => {
             classifier.setClassifierDataset({
                 safe: tf.tensor(
                     classifierData.safe,
-                [classifierData.safe.length / fixedLength, fixedLength]
+                [classifierData.safe.length / config.fixedLength, config.fixedLength]
                 ),
                 harmful: tf.tensor(
                     classifierData.harmful,
-                [classifierData.harmful.length / fixedLength, fixedLength]
+                [classifierData.harmful.length / config.fixedLength, config.fixedLength]
                 ),
             });
         }
@@ -49,7 +57,7 @@ export const trainModel = async (textVector, classification) => {
  */
 export const predictClassification = async (textVector) => {
     const classifier = await getClassifier();
-    return await classifier.predictClass(tf.tensor(fixLength(textVector)));
+    return await classifier.predictClass(tf.tensor(fixLength(textVector)), config.k);
 };
 
 /**
@@ -59,12 +67,12 @@ export const predictClassification = async (textVector) => {
  * @return {array}
  */
 function fixLength(vector) {
-    if (vector.length > fixedLength) {
-        return vector.slice(0, fixedLength);
+    if (vector.length > config.fixedLength) {
+        return vector.slice(0, config.fixedLength);
     } else {
         const expanded = [];
         expanded.push(...vector);
-        expanded.push(...(new Array(fixedLength-vector.length)).fill(0));
+        expanded.push(...(new Array(config.fixedLength-vector.length)).fill(0));
         return expanded;
     }
 }
