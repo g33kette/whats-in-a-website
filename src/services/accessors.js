@@ -13,7 +13,9 @@ import {
     setClassifierData,
     setEnabled,
     setQueue,
-    clearModelData, queueProcess,
+    clearModelData,
+    queueProcess,
+    reset, setUsername, setEncryptionToken, overrideStateParams,
 } from './../store/actions';
 import {ProcessQueue} from './processQueue';
 
@@ -181,6 +183,36 @@ export async function triggerToggleEnabled(forceState) {
 }
 
 /**
+ * Set Authenticated User
+ *
+ * @param {string} username
+ * @param {string} token
+ */
+export async function setAuthenticatedUser(username, token) {
+    store.dispatch(setUsername(username));
+    store.dispatch(setEncryptionToken(token));
+    return true;
+}
+
+/**
+ * Override State Params For Username
+ *
+ * @param {string} username
+ */
+export async function overrideStateParamsForUsername(username) {
+    store.dispatch(overrideStateParams(await loadStateParamsFromLocalStorage(username)));
+    return true;
+}
+
+/**
+ * Reset State
+ */
+export async function resetState() {
+    store.dispatch(reset());
+    return true;
+}
+
+/**
  * Queue and Run Process
  *
  * @param {*} process
@@ -213,7 +245,10 @@ export async function nextQueuedProcess() {
  * @param {string} key
  * @param {*} value
  */
-export function persistToLocalStorage(username, key, value) {
+function persistToLocalStorage(username, key, value) {
+    if (!username) {
+        throw new Error('User is not logged in, cannot save data.');
+    }
     let assignValue = {};
     assignValue[username+'.'+key] = value;
     extensionLocalStorage.set(assignValue);
@@ -227,8 +262,11 @@ export function persistToLocalStorage(username, key, value) {
  * @param {*} defaultValue
  * @return {Promise<void>}
  */
-export async function retrieveFromLocalStorage(username, key, defaultValue = null) {
-    return new Promise((resolve) => {
+async function retrieveFromLocalStorage(username, key, defaultValue = null) {
+    return new Promise((resolve, reject) => {
+        if (!username) {
+            reject(new Error('User is not logged in, cannot retrieve data.'));
+        }
         let storageKey = username+'.'+key;
         extensionLocalStorage.get([storageKey], (results) => {
             resolve(typeof results[storageKey] !== 'undefined'?results[storageKey]:defaultValue);

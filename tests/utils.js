@@ -2,7 +2,7 @@
 
 import {prepareText, config as analyseContentConfig} from '../src/services/analyseContent';
 import store from '../src/store/store';
-import {reset} from './../src/store/actions';
+import {reset, setUsername} from './../src/store/actions';
 import {predictClassification, trainModel} from '../src/services/model';
 import fs from 'fs';
 
@@ -13,6 +13,7 @@ import fs from 'fs';
  */
 export async function resetStore() {
     await store.dispatch(reset());
+    await store.dispatch(setUsername('test'));
 }
 
 /**

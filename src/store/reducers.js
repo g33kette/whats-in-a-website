@@ -11,7 +11,7 @@ import {
     SET_CLASSIFIER_DATA, CLEAR_MODEL_DATA, QUEUE_PROCESS, SET_QUEUE,
 } from './actions';
 
-export let testMode = false; // Remember to re-build after changing this value
+export let testMode = true; // Remember to re-build after changing this value
 
 /**
  * Get Initial State Values
@@ -23,9 +23,8 @@ function getInitialStateValues() {
         encryptionToken: null,
         tabs: {},
         queue: [],
-        // The plugin needs to be auto-logged in for testing
-        username: testMode?'na':null,
-        enabled: !!(testMode),
+        username: null,
+        enabled: false,
     });
 }
 

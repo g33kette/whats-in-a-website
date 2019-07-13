@@ -15,6 +15,9 @@ $(document).ready(function() {
         e.preventDefault();
         return false;
     });
+    body.on('click', '.bp-menu-logout', () => {
+        logout();
+    });
     body.on('click', '.bp-menu-status-toggle', () => {
         toggleStatus();
     });
@@ -38,6 +41,7 @@ function showAuthenticatedStatus() {
     chrome.runtime.sendMessage({get: 'username'}, (username) => {
         if (username) {
             $('.bp-menu-authenticated').show();
+            $('.bp-menu-logged-in-tag').html(username);
             $('.bp-menu-unauthenticated').hide();
         } else {
             $('.bp-menu-authenticated').hide();
@@ -58,6 +62,18 @@ function login(username, password) {
     chrome.runtime.sendMessage({
         trigger: 'authenticate',
         params: {username: username, password: password},
+    }, () => {
+        showAuthenticatedStatus();
+        refreshStatus();
+    });
+}
+
+/**
+ * Logout
+ */
+function logout() {
+    chrome.runtime.sendMessage({
+        trigger: 'logout',
     }, () => {
         showAuthenticatedStatus();
         refreshStatus();
