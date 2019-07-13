@@ -12,14 +12,66 @@ export function OverlayFrameFactory(triggerAction) {
     let style;
     let processingContent;
     let completeContent;
+    let trainingContent;
+
+    /**
+     * Pre-Load Content
+     *
+     * @return {Promise<any>}
+     */
+    this.preloadContent = () => initialise();
+
+    /**
+     * Inject Processing Frame
+     *
+     * @param {*} parent
+     * @param {string}  message
+     * @return {Promise<*>}
+     */
+    this.injectProcessingFrame = async (parent, message) => {
+        const frame = newOverlayFrame('bp_overlay_frame');
+        await injectContent(parent, frame, processingContent);
+        updateFrameWithMessage(frame, message);
+        return frame;
+    };
+
+    /**
+     * Inject Complete Frame
+     *
+     * @param {*} parent
+     * @param {*} result
+     * @param {*} summary
+     * @return {Promise<*>}
+     */
+    this.injectCompleteFrame = async (parent, result, summary) => {
+        const frame = newOverlayFrame('bp_overlay_frame');
+        await injectContent(parent, frame, completeContent);
+        updateFrameWithAnalysisResult(frame, result, summary);
+        return frame;
+    };
+
+    /**
+     * Inject Training Frame
+     *
+     * @param {*} parent
+     * @return {Promise<*>}
+     */
+    this.injectTrainingFrame = async (parent) => {
+        const frame = newOverlayFrame('bp_training_frame');
+        await injectContent(parent, frame, trainingContent);
+        updateFrameWithTrainingOptions(frame);
+        return frame;
+    };
+
+    // Private Methods -------------------------------------------------------------------------------------------------
 
     /**
      * New Overlay Frame
      *
-     * @param {string} page
+     * @param {string} id
      * @return {Promise<*>}
      */
-    function newOverlayFrame(page) {
+    function newOverlayFrame(id) {
         const iframe = $('<iframe></iframe>');
         iframe.css('width', '100%');
         iframe.css('height', '100%');
@@ -27,6 +79,7 @@ export function OverlayFrameFactory(triggerAction) {
         iframe.css('left', '0');
         iframe.css('position', 'fixed');
         iframe.css('z-index', '99999999999999999999999999999999999999999999999999999999999999999999999999999999999999');
+        iframe.attr('id', id);
         return iframe;
     }
 
@@ -46,23 +99,9 @@ export function OverlayFrameFactory(triggerAction) {
         const context = frame[0].contentWindow.document;
         $('body', context).append(style);
         $('body', context).append(content);
+        $('body', context).css('margin', 0);
+        $('body', context).addClass('browser-protect');
     }
-
-    this.preloadContent = () => initialise();
-    this.injectProcessingFrame = async (parent, message) => {
-        const frame = newOverlayFrame('reading');
-        await injectContent(parent, frame, processingContent);
-        const frameBody = $('body', frame[0].contentWindow.document);
-        frameBody.find('.message').html(message);
-        return frame;
-    };
-
-    this.injectCompleteFrame = async (parent, result, summary) => {
-        const frame = newOverlayFrame('reading');
-        await injectContent(parent, frame, completeContent);
-        updateFrameWithAnalysisResult(frame, result, summary);
-        return frame;
-    };
 
     /**
      * Initialise
@@ -75,9 +114,12 @@ export function OverlayFrameFactory(triggerAction) {
                 $.get(chrome.runtime.getURL('assets/css/style.css')).then((css) => {
                     $.get(chrome.runtime.getURL('pages/protection_overlay_processing.html')).then((processingHtml) => {
                         $.get(chrome.runtime.getURL('pages/protection_overlay_complete.html')).then((completeHtml) => {
-                            style = $('<style>'+css+'</style>');
-                            processingContent = $(processingHtml);
-                            completeContent = $(completeHtml);
+                            $.get(chrome.runtime.getURL('pages/training_overlay.html')).then((trainingHtml) => {
+                                style = $('<style>'+css+'</style>');
+                                processingContent = $(processingHtml);
+                                completeContent = $(completeHtml);
+                                trainingContent = $(trainingHtml);
+                            });
                         });
                     });
                     resolve();
@@ -101,10 +143,21 @@ export function OverlayFrameFactory(triggerAction) {
                 if (style) {
                     resolve();
                 } else {
-                    waitForInitialisation();
+                    waitForInitialisation().then(() => resolve());
                 }
             }, 200);
         });
+    }
+
+    /**
+     * Show Message
+     *
+     * @param {object} frame
+     * @param {string} message
+     */
+    function updateFrameWithMessage(frame, message) {
+        const frameBody = $('body', frame[0].contentWindow.document);
+        frameBody.find('.message').html(message);
     }
 
     /**
@@ -165,6 +218,41 @@ export function OverlayFrameFactory(triggerAction) {
         });
         completeElement.on('click', '#actionGoBack', function() {
             triggerAction('goBack');
+        });
+    }
+
+    /**
+     * Show Training Options
+     *
+     * @param {object} frame
+     */
+    function updateFrameWithTrainingOptions(frame) {
+        // Move iFrame location, this one does not need to fill screen
+        frame.css('top', '25vh');
+        frame.css('border-top', 'solid 10px #7bff68');
+        frame.css('border-bottom', 'solid 10px #7bff68');
+        frame.css('box-shadow', '0px 15px 10px #000, 0px -15px 10px #000');
+        frame.css('height', 'auto');
+
+        const frameBody = $('body', frame[0].contentWindow.document);
+        const trainingElement = frameBody.find('#bp_training');
+
+        // Bind events for buttons
+        trainingElement.on('click', '#actionMarkSafe', function() {
+            triggerAction('sendMessage', {trigger: 'markContentSafe'});
+            triggerAction('removeTrainingFrame');
+        });
+        trainingElement.on('click', '#actionMarkHarmful', function() {
+            triggerAction('sendMessage', {trigger: 'markContentHarmful'});
+                trainingElement.find('#actionClose').show();
+                trainingElement.find('.after-harmful-actions').show();
+                trainingElement.find('.training-action').hide();
+        });
+        trainingElement.on('click', '#actionHideTrainingFrame', function() {
+            triggerAction('removeTrainingFrame');
+        });
+        trainingElement.on('click', '#actionClose', function() {
+            triggerAction('closeTab');
         });
     }
 

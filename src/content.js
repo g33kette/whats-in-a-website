@@ -11,30 +11,23 @@ import {OverlayFrameFactory} from './services/overlayFrameFactory';
 const overlayFrameFactory = new OverlayFrameFactory(triggerActionFromFrame);
 overlayFrameFactory.preloadContent();
 
+let overlayFrame;
+let trainingFrame;
+
 /**
  * Div overlay screen - needed to ensure content is always hidden whilst iframes are swapping out
  *
  * @type {*|jQuery|HTMLElement}
  */
-const overlayScreen = $('<div ' +
-    'id="bp_overlay_screen" ' +
-    'style="width: 100% !important; height: 100vh !important; top: 0 !important; right: 0 !important; ' +
-    'background: #333333; ' +
-    'position: fixed !important; z-index: 999999999999999999999999999999999999999999999999999 !important;">' +
-    '</div>');
-
-/**
- * IFrame training element
- *
- * @type {*|jQuery|HTMLElement}
- */
-const trainingFrame = $('<iframe ' +
-    'id="bp_training_frame" ' +
-    'style="width: 100% !important; top: 25vh !important; right: 0 !important; ' +
-    'border-top: solid 10px #7bff68 !important; border-bottom: solid 10px #7bff68 !important; ' +
-    'box-shadow: 0px 15px 10px #000, 0px -15px 10px #000 !important; ' +
-    'position: fixed !important; z-index: 999999999999999999999999999999999999999999999999999999999 !important;" ' +
-    'src="'+chrome.runtime.getURL('pages/training_overlay.html')+'"></iframe>');
+const overlayScreen = $('<div></div>');
+overlayScreen.css('width', '100%');
+overlayScreen.css('height', '100vh');
+overlayScreen.css('top', '0');
+overlayScreen.css('left', '0');
+overlayScreen.css('background', '#333333');
+overlayScreen.css('position', 'fixed');
+overlayScreen.css('z-index', '99999999999999999999999999999999999999999999999999999999999999999999999999999999999999');
+overlayScreen.attr('id', 'bp_overlay_screen');
 
 /**
  * On Load Event
@@ -53,29 +46,6 @@ chrome.runtime.sendMessage({get: 'enabled'}, (enabled) => {
     }
 });
 
-let overlayFrame;
-const changeFrame = async (type, params) => {
-    if (overlayFrame) {
-        overlayFrame.remove();
-    }
-    const parent = $('body');
-    switch (type) {
-        case 'processing':
-            overlayFrame = await overlayFrameFactory.injectProcessingFrame(parent, params.message);
-            break;
-        case 'complete':
-            overlayFrame = await overlayFrameFactory.injectCompleteFrame(parent, params.result, params.summary);
-            break;
-        default:
-            // Do nothing
-    }
-};
-//
-// window.addEventListener('message', (e) => {
-//     if (e.origin === 'chrome-extension://'+chrome.runtime.id) {
-//         console.log('RECEIVED', e);
-//     }
-// }, false);
 /**
  * Listens for events to be actioned on tab
  */
@@ -199,10 +169,7 @@ const removeOverlay = () => {
  * Show Training Frame
  */
 const showTrainingFrame = () => {
-    $(document).ready(() => {
-        const body = $('body');
-        body.append(trainingFrame);
-    });
+    changeFrame('training');
 };
 
 /**
@@ -211,6 +178,36 @@ const showTrainingFrame = () => {
 const removeTrainingFrame = () => {
     trainingFrame.remove();
 };
+
+/**
+ * Change Frame
+ *
+ * @param {string} type
+ * @param {*} [params]
+ * @return {Promise<void>}
+ */
+async function changeFrame(type, params) {
+    if (overlayFrame) {
+        overlayFrame.remove();
+    }
+    if (trainingFrame) {
+        trainingFrame.remove();
+    }
+    const parent = $('body');
+    switch (type) {
+        case 'processing':
+            overlayFrame = await overlayFrameFactory.injectProcessingFrame(parent, params.message);
+            break;
+        case 'complete':
+            overlayFrame = await overlayFrameFactory.injectCompleteFrame(parent, params.result, params.summary);
+            break;
+        case 'training':
+            trainingFrame = await overlayFrameFactory.injectTrainingFrame(parent);
+            break;
+        default:
+        // Do nothing
+    }
+}
 
 /**
  * Trigger Action From Frame
