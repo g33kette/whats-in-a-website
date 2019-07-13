@@ -22,10 +22,10 @@ function getInitialStateValues() {
         tabs: {},
         queue: [],
         // TODO The plugin needs to be auto-logged in for testing - remember to re-build after changing these values
-        // username: null,
-        // enabled: false,
-        username: 'na',
-        enabled: true,
+        username: null,
+        enabled: false,
+        // username: 'na',
+        // enabled: true,
         // /TODO ----
     });
 }

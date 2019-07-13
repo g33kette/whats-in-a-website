@@ -100,12 +100,10 @@ const hideContent = () => {
             body.css('overflow', 'hidden');
             body.css('height', '100vh');
             body.append(overlayScreen);
-            // changeFrame(overlayFrameFactory.newReadingFrame()).then(() => {
-                setTimeout(() => { // Allow time for iFrame to load
-                    page.show();
-                    resolve();
-                }, 500);
-            // });
+            setTimeout(() => { // Allow time for overlayScreen to append and then "show" content underneath
+                page.show();
+                resolve();
+            }, 200);
         });
     });
 };
