@@ -204,13 +204,18 @@ export function OverlayFrameFactory(triggerAction) {
         }
         // Bind events for buttons
         completeElement.on('click', '.action-safe', function() {
-            triggerAction('sendMessage', {trigger: 'markContentSafe'});
-            triggerAction('closeOverlayFrame');
+            frameBody.find('.processing-training').show();
+            triggerAction('sendMessage', {trigger: 'markContentSafe'}, () => {
+                triggerAction('closeOverlayFrame');
+            });
         });
         completeElement.on('click', '.action-harmful', function() {
-            triggerAction('sendMessage', {trigger: 'markContentHarmful'});
-            completeElement.find('.classification-actions').hide();
-            completeElement.find('.after-harmful-actions').show();
+            frameBody.find('.processing-training').show();
+            triggerAction('sendMessage', {trigger: 'markContentHarmful'}, () => {
+                frameBody.find('.processing-training').hide();
+                completeElement.find('.classification-actions').hide();
+                completeElement.find('.after-harmful-actions').show();
+            });
         });
         completeElement.on('click', '.action-review', function() {
             triggerAction('closeOverlayFrame');
@@ -242,14 +247,19 @@ export function OverlayFrameFactory(triggerAction) {
 
         // Bind events for buttons
         trainingElement.on('click', '#actionMarkSafe', function() {
-            triggerAction('sendMessage', {trigger: 'markContentSafe'});
-            triggerAction('removeTrainingFrame');
+            trainingElement.find('.processing-training').show();
+            triggerAction('sendMessage', {trigger: 'markContentSafe'}, () => {
+                triggerAction('removeTrainingFrame');
+            });
         });
         trainingElement.on('click', '#actionMarkHarmful', function() {
-            triggerAction('sendMessage', {trigger: 'markContentHarmful'});
+            trainingElement.find('.processing-training').show();
+            triggerAction('sendMessage', {trigger: 'markContentHarmful'}, () => {
+                trainingElement.find('.processing-training').hide();
                 trainingElement.find('#actionClose').show();
                 trainingElement.find('.after-harmful-actions').show();
                 trainingElement.find('.training-action').hide();
+            });
         });
         trainingElement.on('click', '#actionHideTrainingFrame', function() {
             triggerAction('removeTrainingFrame');
