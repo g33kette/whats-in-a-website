@@ -182,6 +182,11 @@
             }
         #bp .main-content .complete {}
 
+        #bp .main-content .complete .classification-model-details-container {
+            font-size: .8em;
+            color: #999;
+        }
+
             #bp .main-content .complete .classification-actions-container {}
                 #bp .main-content .complete .classification-actions-container .actions {
                     display: none;

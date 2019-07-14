@@ -23,7 +23,7 @@ const getClassifier = async () => {
         if (!classifier) {
             classifier = new brain.NeuralNetwork();
             const classifierData = await getClassifierDataFromStore();
-            if (classifierData) {
+            if (classifierData && Object.keys(classifierData).length) {
                 restoreClassifierData(classifier, classifierData);
             }
             await saveClassifierToStore(classifier, extractClassifierData(classifier));
@@ -52,16 +52,16 @@ export const trainModel = async (textVector, classification) => {
  * Predict Classification
  *
  * @param {array} textVector
- * @return {Promise}
+ * @return {Promise<{label: string, confidence: number}|null>}
  */
 export const predictClassification = async (textVector) => {
     const classifier = await getClassifier();
     const output = classifier.run(fixLength(textVector));
-    let prediction = null; // { label: null, value: null, confidences: [] };
+    let prediction = null;
     for (const label in output) {
         if (output.hasOwnProperty(label)) {
-            if (!prediction || prediction.value < output[label]) {
-                prediction = {label: label, value: output[label], confidences: output};
+            if (!prediction || prediction.confidence < output[label]) {
+                prediction = {label: label, confidence: output[label]};
             }
         }
     }

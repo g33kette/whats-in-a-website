@@ -1,5 +1,5 @@
 import {getCorpus, saveCorpus} from './accessors';
-import {predictClassification} from './model';
+import {predictClassification, config as modelConfig} from './model';
 import l2Norm from 'compute-l2norm';
 const nlp = require('compromise');
 
@@ -187,24 +187,29 @@ export const tfIdfVector = async (words, corpus) => {
  * @return {Promise}
  */
 export const analyseContent = async (textVector) => {
+    let response;
     try {
         const prediction = await predictClassification(textVector);
-        if (!prediction || Object.keys(prediction.confidences).length < 2) {
-            throw new Error('Prediction is empty or more than one category has not been trained.');
+        if (!prediction) {
+            throw new Error('Classification could not be assigned, probably more training required.');
         }
-        return {
+        response = {
             safe: prediction.label === 'safe',
             classification: prediction.label,
+            confidence: Math.round(parseFloat(prediction.confidence)*100)/100,
+            model: modelConfig.modelTypes[modelConfig.modelType],
             message: null,
-            prediction: prediction,
         };
     } catch (e) {
-        // console.error('AnalyseContent', e);
-        return {
+        // console.error('AnalyseContent', 'error', e);
+        response = {
             safe: null,
             classification: 'unknown',
+            confidence: null,
+            model: modelConfig.modelTypes[modelConfig.modelType],
             message: null,
-            prediction: null,
         };
     }
+    // console.log('AnalyseContent', 'response', response);
+    return response;
 };
