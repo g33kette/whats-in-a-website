@@ -52,7 +52,8 @@ module.exports = function() {
         return stepHelpers.keepUpdatingFrame(
             selectBpFrame,
             driver,
-            () => stepHelpers.contentAnalysisComplete(driver)
+            () => stepHelpers.contentAnalysisComplete(driver),
+            80000
         );
     });
 

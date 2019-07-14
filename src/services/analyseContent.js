@@ -199,6 +199,7 @@ export const analyseContent = async (textVector) => {
             prediction: prediction,
         };
     } catch (e) {
+        // console.error('AnalyseContent', e);
         return {
             safe: null,
             classification: 'unknown',
