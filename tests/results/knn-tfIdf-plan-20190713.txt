@@ -1,0 +1,826 @@
+"C:\Program Files\nodejs\node.exe" "C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js" run evaluate --scripts-prepend-node-path=auto
+
+> Extension@1.0.0 evaluate E:\Localhost\dissertation\Extension
+> jest --testPathPattern=^tests/evaluation/knn-tfIdf-plain.test.js
+
+  console.log tests/evaluation/knn-tfIdf-plain.test.js:12
+    Start Run: Sat Jul 13 2019 17:08:37 GMT+0100 (British Summer Time)
+
+  console.warn node_modules/@tensorflow/tfjs-core/dist/log.js:26
+
+    ============================
+    Hi there 👋. Looks like you are running TensorFlow.js in Node.js. To speed things up dramatically, install our node backend, which binds to TensorFlow C++, by running npm i @tensorflow/tfjs-node, or npm i @tensorflow/tfjs-node-gpu if you have CUDA. Then call require('@tensorflow/tfjs-node'); (-gpu suffix for CUDA) at the start of your program. Visit https://github.com/tensorflow/tfjs-node for more details.
+    ============================
+
+
+  console.log tests/utils.js:93
+    Training complete. 2019-07-13T17:07:51.906Z
+
+  console.log tests/evaluation/knn-tfIdf-plain.test.js:24
+    Start Scenario: Sat Jul 13 2019 18:07:51 GMT+0100 (British Summer Time)
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T17:08:40.603Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T17:09:10.217Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T17:09:27.152Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T17:09:51.926Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T17:10:22.230Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T17:10:39.042Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T17:11:39.095Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T17:12:29.703Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T17:18:13.354Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T17:36:06.689Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T17:36:22.627Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T17:39:13.798Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T17:39:30.197Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T17:40:29.643Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T17:40:58.682Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T17:44:14.421Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T17:44:30.309Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T17:45:07.154Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T17:45:28.959Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T17:46:01.926Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T17:46:28.717Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T17:47:02.297Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T17:47:45.758Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T17:48:09.883Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T17:48:29.279Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T17:49:42.573Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T17:50:02.941Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T17:50:32.286Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T17:51:58.645Z
+
+  console.log src/services/model.js:59
+    1
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T17:53:18.359Z
+
+  console.log tests/utils.js:229
+    Final correct score: 16/30
+
+  console.log tests/utils.js:230
+    Final accuracy score: 53.333333333333336%
+
+  console.log tests/utils.js:231
+    Final sensitivity score: 0.5
+
+  console.log tests/utils.js:232
+    Final specificity score: 0.6
+
+  console.log tests/utils.js:233
+    Final precision score: 0.7142857142857143
+
+  console.log tests/evaluation/knn-tfIdf-plain.test.js:24
+    Start Scenario: Sat Jul 13 2019 18:53:18 GMT+0100 (British Summer Time)
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T17:54:06.444Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T17:54:37.011Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T17:54:53.035Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T17:55:16.278Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T17:55:44.706Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T17:56:01.028Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T17:56:59.843Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T17:57:50.977Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T18:03:44.627Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T18:20:45.146Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T18:20:58.109Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T18:23:33.672Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T18:23:48.128Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T18:24:42.307Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T18:25:08.903Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T18:28:04.922Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T18:28:18.239Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T18:28:50.222Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T18:29:09.660Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T18:29:38.716Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T18:30:01.406Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T18:30:30.589Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T18:31:08.517Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T18:31:29.551Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T18:31:46.881Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T18:32:54.012Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T18:33:10.928Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T18:33:37.131Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T18:34:55.681Z
+
+  console.log src/services/model.js:59
+    3
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T18:36:07.173Z
+
+  console.log tests/utils.js:229
+    Final correct score: 20/30
+
+  console.log tests/utils.js:230
+    Final accuracy score: 66.66666666666666%
+
+  console.log tests/utils.js:231
+    Final sensitivity score: 0.75
+
+  console.log tests/utils.js:232
+    Final specificity score: 0.5
+
+  console.log tests/utils.js:233
+    Final precision score: 0.75
+
+  console.log tests/evaluation/knn-tfIdf-plain.test.js:24
+    Start Scenario: Sat Jul 13 2019 19:36:07 GMT+0100 (British Summer Time)
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T18:36:51.882Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T18:37:19.806Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T18:37:34.800Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T18:37:56.145Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T18:38:22.355Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T18:38:37.953Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T18:39:31.821Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T18:40:17.276Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T18:45:33.201Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T19:01:27.547Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:01:40.565Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:04:16.157Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T19:04:31.347Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:05:24.833Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T19:05:51.304Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:08:47.359Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:08:59.980Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:09:32.664Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:09:51.930Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:10:21.300Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T19:10:43.876Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T19:11:13.086Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T19:11:50.705Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T19:12:11.250Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T19:12:28.041Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T19:13:34.783Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T19:13:51.431Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T19:14:17.119Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T19:15:34.235Z
+
+  console.log src/services/model.js:59
+    5
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T19:16:45.814Z
+
+  console.log tests/utils.js:229
+    Final correct score: 21/30
+
+  console.log tests/utils.js:230
+    Final accuracy score: 70%
+
+  console.log tests/utils.js:231
+    Final sensitivity score: 0.75
+
+  console.log tests/utils.js:232
+    Final specificity score: 0.6
+
+  console.log tests/utils.js:233
+    Final precision score: 0.7894736842105263
+
+  console.log tests/evaluation/knn-tfIdf-plain.test.js:24
+    Start Scenario: Sat Jul 13 2019 20:16:45 GMT+0100 (British Summer Time)
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:17:30.675Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:17:57.380Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:18:12.563Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T19:18:33.736Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T19:19:00.107Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:19:14.623Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:20:08.313Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:20:53.797Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:26:13.040Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:42:01.767Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:42:15.546Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:44:51.169Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T19:45:06.948Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T19:46:02.165Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:142
+    . X harmful 2019-07-13T19:46:29.588Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:49:31.402Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:49:45.380Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:50:18.496Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:50:37.782Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:139
+    . ✓ safe 2019-07-13T19:51:07.517Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T19:51:30.118Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T19:51:59.527Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T19:52:36.911Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T19:52:57.386Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T19:53:14.207Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T19:54:20.214Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T19:54:37.110Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T19:55:02.916Z
+
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:154
+    . X safe 2019-07-13T19:56:20.198Z
+
+ PASS  tests/evaluation/knn-tfIdf-plain.test.js (13735.773s)
+  √ Should run evaluation of model against test data for k = 1 (2726455ms)
+  √ Should run evaluation of model against test data for k = 3 (2568814ms)
+  √ Should run evaluation of model against test data for k = 5 (2438637ms)
+  √ Should run evaluation of model against test data for k = 10 (2445206ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        13735.828s
+Ran all test suites matching /tests\\evaluation\\knn-tfIdf-plain.test.js/i.
+  console.log src/services/model.js:59
+    10
+
+  console.log tests/utils.js:151
+    . ✓ harmful 2019-07-13T19:57:31.019Z
+
+  console.log tests/utils.js:229
+    Final correct score: 20/30
+
+  console.log tests/utils.js:230
+    Final accuracy score: 66.66666666666666%
+
+  console.log tests/utils.js:231
+    Final sensitivity score: 0.75
+
+  console.log tests/utils.js:232
+    Final specificity score: 0.5
+
+  console.log tests/utils.js:233
+    Final precision score: 0.75
+
+  console.log tests/evaluation/knn-tfIdf-plain.test.js:29
+    Complete Run: Sat Jul 13 2019 20:57:31 GMT+0100 (British Summer Time)
+
+
+Process finished with exit code 0

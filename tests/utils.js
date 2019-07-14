@@ -90,7 +90,7 @@ export function sleep(s) {
 export async function trainFromFiles(safeFilesDirectory, harmfulFilesDirectory, vectorType, wordType, limit) {
     await trainCategorisationFiles('safe', safeFilesDirectory, vectorType, wordType, limit);
     await trainCategorisationFiles('harmful', harmfulFilesDirectory, vectorType, wordType, limit);
-    console.log('Training complete.', (new Date()).toISOString());
+    console.log('Training complete.', new Date());
 }
 
 /**
@@ -122,34 +122,38 @@ export async function prepareVectorsFromFiles(filesDirectory, vectorType, wordTy
  * @param {string} dataDir
  * @param {string} vectorType
  * @param {string} wordType
+ * @param {int} r
  * @return {Promise<void>}
  */
-export async function runClassificationEvaluation(dataDir, vectorType, wordType) {
+export async function runClassificationEvaluation(dataDir, vectorType, wordType, r) {
     let classification;
     let vector;
     const results = {tp: 0, tn: 0, fp: 0, fn: 0};
+    let n = 0;
     const evaluateSafeFiles = await listFiles(dataDir + '/safe');
     for (const safeFile of evaluateSafeFiles) {
+        n++;
         vector = await prepareVectorFromFile(dataDir + '/safe', safeFile, vectorType, wordType);
         classification = await predictClassification(vector);
         if (classification.label === 'safe') {
             results.tp++;
-            console.log('. ✓', classification.label, (new Date()).toISOString());
+            console.log('. ✓', 'n = '+n+', r = '+r, classification.label, new Date());
         } else {
             results.fn++;
-            console.log('. X', classification.label, (new Date()).toISOString());
+            console.log('. X', 'n = '+n+', r = '+r, classification.label, new Date());
         }
     }
     const evaluateHarmfulFiles = await listFiles(dataDir + '/harmful');
     for (const harmfulFile of evaluateHarmfulFiles) {
+        n++;
         vector = await prepareVectorFromFile(dataDir + '/harmful', harmfulFile, vectorType, wordType);
         classification = await predictClassification(vector);
         if (classification.label === 'harmful') {
             results.tn++;
-            console.log('. ✓', classification.label, (new Date()).toISOString());
+            console.log('. ✓', 'n = '+n+', r = '+r, classification.label, new Date());
         } else {
             results.fp++;
-            console.log('. X', classification.label, (new Date()).toISOString());
+            console.log('. X', 'n = '+n+', r = '+r, classification.label, new Date());
         }
     }
     outputModelEvaluationResults(results);
@@ -185,7 +189,7 @@ const trainCategorisationFiles = async (category, filesDirectory, vectorType, wo
     const files = await listFiles(filesDirectory);
     limit = limit?limit:files.length;
     for (const file of files) {
-        // console.log(category, file);
+        console.log(category, file, new Date());
         await trainCategorisationFromFile(category, filesDirectory, file, vectorType, wordType);
         if (!--limit) {
             break;
