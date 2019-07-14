@@ -19,7 +19,12 @@ import {
 // Exported so can be set in tests
 export const config = {
     fixedLength: 10000,
-    modelType: 'knn',
+    modelTypes: {
+        knn: 'k-Nearest Neighbour',
+        nn: 'Neural Network',
+        nbayes: 'Naive Bayes',
+    },
+    modelType: 'knn', // Remember to re-build and clear model data if this is changed
 };
 
 // * Classifier Methods  -----------------------------------------------------------------------------------------------

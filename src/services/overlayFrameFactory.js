@@ -182,6 +182,13 @@ export function OverlayFrameFactory(triggerAction) {
             const resultClass = resultString === 'unknown'?'warning':resultString;
             resultElement.html(result.classification);
             resultElement.addClass(resultClass);
+            // Also show confidences
+            completeElement.find('.classification-model').html(result.model);
+            if (result.confidence) {
+                completeElement.find('.classification-confidence').html(result.confidence);
+            } else {
+                completeElement.find('.classification-confidence-container').hide();
+            }
         } else {
             // If unknown, show classification required instructions
             classificationContainerElement.hide();

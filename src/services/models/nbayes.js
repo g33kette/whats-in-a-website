@@ -65,10 +65,10 @@ export const trainModel = async (textVector, classification) => {
  * Predict Classification
  *
  * @param {array} textVector
- * @return {Promise}
+ * @return {Promise<{label: string, confidence: number}|null>}
  */
 export const predictClassification = async (textVector) => {
     const classifier = await getClassifier();
-    const output = classifier.predict([fixLength(textVector)])[0];
-    return {label: output?'safe':'harmful', value: output, confidences: [0, 1]};
+    const result = classifier.predict([fixLength(textVector)]);
+    return {label: result[0]?'safe':'harmful', confidence: 0};
 };

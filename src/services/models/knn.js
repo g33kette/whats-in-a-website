@@ -21,7 +21,7 @@ const getClassifier = async () => {
     if (!classifier) {
         classifier = knnClassifier.create();
         const classifierData = await getClassifierDataFromStore();
-        if (classifierData) {
+        if (classifierData && Object.keys(classifierData).length) {
             restoreClassifierData(classifier, classifierData);
         }
         await saveClassifierToStore(classifier, extractClassifierData(classifier));
@@ -45,11 +45,15 @@ export const trainModel = async (textVector, classification) => {
  * Predict Classification
  *
  * @param {array} textVector
- * @return {Promise}
+ * @return {Promise<{label: string, confidence: number}|null>}
  */
 export const predictClassification = async (textVector) => {
     const classifier = await getClassifier();
-    return await classifier.predictClass(tf.tensor(fixLength(textVector)), config.k);
+    const prediction = await classifier.predictClass(tf.tensor(fixLength(textVector)), config.k);
+    if (!prediction || Object.keys(prediction.confidences).length < 2) {
+        return null;
+    }
+    return {label: prediction.label, confidence: prediction.confidences[prediction.label]};
 };
 
 /**
