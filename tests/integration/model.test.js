@@ -80,3 +80,37 @@ it('Should train and classify very basic text using nn classifier', async () => 
     );
     expect(prediction.label).toBe('harmful');
 });
+
+// Test Nbayes -----------------------------------------------------------------------------------------------
+
+it('Should train and classify very basic text using nbayes classifier', async () => {
+    modelConfig.modelType = 'nbayes';
+    await train([
+        'The quick brown fox',
+        'The quick fish',
+        'The quick cat',
+    ], [
+        'The lazy dog',
+        'The stupid dog',
+    ], 'bagOfWords', 'plain');
+    const prediction = await predictClassification(
+        await prepareVector('Very lazy dog', 'bagOfWords', 'plain')
+    );
+    expect(prediction.label).toBe('harmful');
+});
+
+it('Should train and classify very basic text using nbayes classifier', async () => {
+    modelConfig.modelType = 'nbayes';
+    await train([
+        'The quick brown fox',
+        'The quick fish',
+        'The quick cat',
+    ], [
+        'The lazy dog',
+        'The stupid dog',
+    ], 'tfIdf', 'plain');
+    const prediction = await predictClassification(
+        await prepareVector('Very lazy dog', 'tfIdf', 'plain')
+    );
+    expect(prediction.label).toBe('harmful');
+});

@@ -9,6 +9,11 @@ import {
     predictClassification as nnPredictClassification,
 } from './models/nn';
 
+import {
+    trainModel as nbayesTrainModel,
+    predictClassification as nbayesPredictClassification,
+} from './models/nbayes';
+
 // * Options -----------------------------------------------------------------------------------------------------------
 
 // Exported so can be set in tests
@@ -22,12 +27,14 @@ export const config = {
 export const trainModel = async (textVector, classification) => await
     config.modelType === 'knn'?knnTrainModel(textVector, classification)
     :(config.modelType === 'nn'?nnTrainModel(textVector, classification)
-        :null);
+        :(config.modelType === 'nbayes'?nbayesTrainModel(textVector, classification)
+            :null));
 
 export const predictClassification = async (textVector) => await
     config.modelType === 'knn'?knnPredictClassification(textVector)
     :(config.modelType === 'nn'?nnPredictClassification(textVector)
-        :null);
+        :(config.modelType === 'nbayes'?nbayesPredictClassification(textVector)
+            :null));
 
 /**
  * Fix Length
