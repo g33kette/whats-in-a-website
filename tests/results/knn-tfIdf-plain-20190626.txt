@@ -1,4 +1,4 @@
-"C:\Program Files\nodejs\node.exe" --require "C:\Program Files\JetBrains\WebStorm 2018.3.5\plugins\JavaScriptLanguage\helpers\jest-intellij\lib\jest-intellij-stdin-fix.js" E:\Localhost\dissertation\Extension\node_modules\jest\bin\jest.js --colors --reporters "C:\Program Files\JetBrains\WebStorm 2018.3.5\plugins\JavaScriptLanguage\helpers\jest-intellij\lib\jest-intellij-reporter.js" --verbose --runTestsByPath E:/Localhost/dissertation/Extension/tests/evaluation/tfIdf-plain.test.js
+"C:\Program Files\nodejs\node.exe" --require "C:\Program Files\JetBrains\WebStorm 2018.3.5\plugins\JavaScriptLanguage\helpers\jest-intellij\lib\jest-intellij-stdin-fix.js" E:\Localhost\dissertation\Extension\node_modules\jest\bin\jest.js --colors --reporters "C:\Program Files\JetBrains\WebStorm 2018.3.5\plugins\JavaScriptLanguage\helpers\jest-intellij\lib\jest-intellij-reporter.js" --verbose --runTestsByPath E:/Localhost/dissertation/Extension/tests/evaluation/knn-tfIdf-plain.test.js
   console.warn node_modules/@tensorflow/tfjs-core/dist/log.js:26
 
     ============================
