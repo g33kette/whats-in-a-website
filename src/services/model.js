@@ -1,64 +1,45 @@
+
 import {
-    getClassifier as getClassifierFromStore,
-    getClassifierData as getClassifierDataFromStore,
-    saveClassifier as saveClassifierToStore,
-} from './accessors';
-import * as tf from '@tensorflow/tfjs';
-import * as knnClassifier from '@tensorflow-models/knn-classifier';
+    trainModel as knnTrainModel,
+    predictClassification as knnPredictClassification,
+} from './models/knn';
+
+import {
+    trainModel as nnTrainModel,
+    predictClassification as nnPredictClassification,
+} from './models/nn';
+
+import {
+    trainModel as nbayesTrainModel,
+    predictClassification as nbayesPredictClassification,
+} from './models/nbayes';
 
 // * Options -----------------------------------------------------------------------------------------------------------
 
 // Exported so can be set in tests
 export const config = {
     fixedLength: 10000,
-    k: 3,
+    modelTypes: {
+        knn: 'k-Nearest Neighbour',
+        nn: 'Neural Network',
+        nbayes: 'Naive Bayes',
+    },
+    modelType: 'knn', // Remember to re-build and clear model data if this is changed
 };
 
 // * Classifier Methods  -----------------------------------------------------------------------------------------------
 
-const getClassifier = async () => {
-    let classifier = await getClassifierFromStore();
-    if (!classifier) {
-        classifier = knnClassifier.create();
-        const classifierData = await getClassifierDataFromStore();
-        if (classifierData) {
-            classifier.setClassifierDataset({
-                safe: tf.tensor(
-                    classifierData.safe,
-                [classifierData.safe.length / config.fixedLength, config.fixedLength]
-                ),
-                harmful: tf.tensor(
-                    classifierData.harmful,
-                [classifierData.harmful.length / config.fixedLength, config.fixedLength]
-                ),
-            });
-        }
-        await saveClassifierToStore(classifier);
-    }
-    return classifier;
-};
+export const trainModel = async (textVector, classification) => await
+    config.modelType === 'knn'?knnTrainModel(textVector, classification)
+    :(config.modelType === 'nn'?nnTrainModel(textVector, classification)
+        :(config.modelType === 'nbayes'?nbayesTrainModel(textVector, classification)
+            :null));
 
-/**
- * Train Model
- *
- * @param {array} textVector
- * @param {string} classification
- */
-export const trainModel = async (textVector, classification) => {
-    (await getClassifier()).addExample(tf.tensor(fixLength(textVector)), classification);
-    await saveClassifierToStore(await getClassifier());
-};
-
-/**
- * Predict Classification
- *
- * @param {array} textVector
- * @return {Promise}
- */
-export const predictClassification = async (textVector) => {
-    const classifier = await getClassifier();
-    return await classifier.predictClass(tf.tensor(fixLength(textVector)), config.k);
-};
+export const predictClassification = async (textVector) => await
+    config.modelType === 'knn'?knnPredictClassification(textVector)
+    :(config.modelType === 'nn'?nnPredictClassification(textVector)
+        :(config.modelType === 'nbayes'?nbayesPredictClassification(textVector)
+            :null));
 
 /**
  * Fix Length
@@ -66,7 +47,7 @@ export const predictClassification = async (textVector) => {
  * @param {array} vector
  * @return {array}
  */
-function fixLength(vector) {
+export function fixLength(vector) {
     if (vector.length > config.fixedLength) {
         return vector.slice(0, config.fixedLength);
     } else {

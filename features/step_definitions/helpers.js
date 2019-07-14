@@ -117,12 +117,16 @@ exports.contentAnalysisComplete = async (driver) => {
  * @param {function} selectFrameFunction
  * @param {*} driver
  * @param {function} callBack
- * @param {int} [timeout] - Time in future that loop should expire
+ * @param {int} [timeout] - Timeout value defaults to 30s
+ * @param {int} [stop] - Time in future that loop should expire
  * @return {Promise}
  */
-exports.keepUpdatingFrame = (selectFrameFunction, driver, callBack, timeout) => {
+exports.keepUpdatingFrame = (selectFrameFunction, driver, callBack, timeout, stop) => {
     if (!timeout) {
-        timeout = (new Date().getTime()) + 30000; // 30 seconds
+        timeout = 30000; // 30 seconds
+    }
+    if (!stop) {
+        stop = (new Date().getTime()) + timeout;
     }
     return new Promise((resolve, reject) => {
         selectFrameFunction(driver)
@@ -133,12 +137,12 @@ exports.keepUpdatingFrame = (selectFrameFunction, driver, callBack, timeout) => 
                 resolve(result);
             })
             .catch((error) => {
-                if (timeout < (new Date().getTime())) {
+                if (stop < (new Date().getTime())) {
                     // Time to stop
                     reject(error);
                 } else {
                     // Loop
-                    return exports.keepUpdatingFrame(selectFrameFunction, driver, callBack, timeout);
+                    return exports.keepUpdatingFrame(selectFrameFunction, driver, callBack, timeout, stop);
                 }
             })
             .then((result) => resolve(result))

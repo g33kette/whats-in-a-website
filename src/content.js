@@ -52,7 +52,7 @@ chrome.runtime.sendMessage({get: 'enabled'}, (enabled) => {
 /**
  * Listens for events to be actioned on tab
  */
-chrome.runtime.onMessage.addListener((request) => {
+chrome.runtime.onMessage.addListener((request, callback = () => {}) => {
     return new Promise((resolve) => {
         /**
          * Trigger Events
@@ -74,10 +74,10 @@ chrome.runtime.onMessage.addListener((request) => {
                 removeTrainingFrame();
                 return;
             case 'markContentSafe':
-                chrome.runtime.sendMessage({trigger: 'markContentSafe'});
+                chrome.runtime.sendMessage({trigger: 'markContentSafe'}, callback);
                 return;
             case 'markContentHarmful':
-                chrome.runtime.sendMessage({trigger: 'markContentHarmful'});
+                chrome.runtime.sendMessage({trigger: 'markContentHarmful'}, callback);
                 return;
             default:
             // Do Nothing

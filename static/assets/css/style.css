@@ -137,6 +137,7 @@
         background: #000;
         width: 100%;
         text-align: center;
+        z-index: 5;
     }
         .browser-protect .footer .bpText {
             font-weight: bold;
@@ -161,6 +162,15 @@
     }
         #bp .main-content .message {}
 
+        #bp .main-content .processing-training {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: #333;
+            z-index: 1;
+        }
         #bp .main-content .loading {
             position: relative;
             top: 35%;
@@ -171,6 +181,11 @@
                 color: #666666;
             }
         #bp .main-content .complete {}
+
+        #bp .main-content .complete .classification-model-details-container {
+            font-size: .8em;
+            color: #999;
+        }
 
             #bp .main-content .complete .classification-actions-container {}
                 #bp .main-content .complete .classification-actions-container .actions {
@@ -282,6 +297,22 @@
         position: relative;
         margin-top: 10px;
         min-height: 80px;
+    }
+    #bp_training .main-content .processing-training {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: #333;
+        z-index: 1;
+    }
+    #bp_training .main-content .loading {}
+    #bp_training .main-content .loading h2 { margin: 10px; }
+    #bp_training .main-content .loading i {
+        font-size: 30px;
+        margin: 10px 5px;
+        color: #666666;
     }
     #bp_training .main-content .actions {
         position: absolute;
