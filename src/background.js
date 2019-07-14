@@ -6,7 +6,7 @@
  */
 import {authenticate, logout} from './services/authentication';
 import {analyseContent, prepareText} from './services/analyseContent';
-import {trainModel} from './services/model';
+import {trainModel} from './services/brainjs';
 import {
     getEnabled,
     getTabContent,
@@ -63,15 +63,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             sendResponse(sender.tab.id);
             return;
         case 'markContentSafe':
-            // The following calls promise but does not need to wait for resolution
-            triggerMarkContentSafe(sender.tab.id);
-            sendResponse(sender.tab.id);
-            return;
+            (async () => {
+                await triggerMarkContentSafe(sender.tab.id);
+                sendResponse(sender.tab.id);
+            })();
+            return true;
         case 'markContentHarmful':
-            // The following calls promise but does not need to wait for resolution
-            triggerMarkContentHarmful(sender.tab.id);
-            sendResponse(sender.tab.id);
-            return;
+            (async () => {
+                await triggerMarkContentHarmful(sender.tab.id);
+                sendResponse(sender.tab.id);
+            })();
+            return true;
         default:
         // Do nothing
     }
@@ -164,8 +166,8 @@ function triggerQueueForProcessing(tabId, content) {
  * @param {int} tabId
  */
 async function triggerMarkContentSafe(tabId) {
-    // The following calls promise but does not need to wait for resolution
-    trainModel(await getTabContent(tabId), 'safe');
+    await trainModel(await getTabContent(tabId), 'safe');
+    return true;
 }
 
 /**
@@ -174,8 +176,8 @@ async function triggerMarkContentSafe(tabId) {
  * @param {int} tabId
  */
 async function triggerMarkContentHarmful(tabId) {
-    // The following calls promise but does not need to wait for resolution
-    trainModel(await getTabContent(tabId), 'harmful');
+    await trainModel(await getTabContent(tabId), 'harmful');
+    return true;
 }
 
 // General Methods -----------------------------------------------------------------------------------------------------

@@ -49,6 +49,7 @@
   "dependencies": {
     "@tensorflow-models/knn-classifier": "^1.1.0",
     "@tensorflow/tfjs": "^1.1.0",
+    "brainjs": "^0.7.4",
     "compromise": "^11.13.0",
     "compute-l2norm": "^1.1.0",
     "jquery": "^3.4.0",

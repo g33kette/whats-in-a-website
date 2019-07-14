@@ -139,13 +139,13 @@ export async function savePhraseCorpus(phraseCorpus) {
 export async function saveClassifier(classifier) {
     store.dispatch(setClassifier(classifier));
     // Also save data set and persist to storage
-    const classifierDataSet = classifier.getClassifierDataset();
-    const classifierData = {
-        safe: classifierDataSet.safe?Array.from(classifierDataSet.safe.dataSync()):[],
-        harmful: classifierDataSet.harmful?Array.from(classifierDataSet.harmful.dataSync()):[],
-    };
-    store.dispatch(setClassifierData(classifierData));
-    persistToLocalStorage(await getUsername(), 'classifierData', classifierData);
+    // const classifierDataSet = classifier.getClassifierDataset();
+    // const classifierData = {
+    //     safe: classifierDataSet.safe?Array.from(classifierDataSet.safe.dataSync()):[],
+    //     harmful: classifierDataSet.harmful?Array.from(classifierDataSet.harmful.dataSync()):[],
+    // };
+    // store.dispatch(setClassifierData(classifierData));
+    // persistToLocalStorage(await getUsername(), 'classifierData', classifierData);
 }
 
 /**

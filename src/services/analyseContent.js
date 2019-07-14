@@ -1,5 +1,5 @@
 import {getCorpus, saveCorpus} from './accessors';
-import {predictClassification} from './model';
+import {predictClassification} from './brainjs';
 import l2Norm from 'compute-l2norm';
 const nlp = require('compromise');
 
@@ -189,8 +189,8 @@ export const tfIdfVector = async (words, corpus) => {
 export const analyseContent = async (textVector) => {
     try {
         const prediction = await predictClassification(textVector);
-        if (Object.keys(prediction.confidences).length < 2) {
-            throw new Error();
+        if (!prediction || Object.keys(prediction.confidences).length < 2) {
+            throw new Error('Prediction is empty or more than one category has not been trained.');
         }
         return {
             safe: prediction.label === 'safe',
