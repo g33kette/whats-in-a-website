@@ -5,7 +5,7 @@ import {resetStore, trainFromFiles, runClassificationEvaluation} from '../utils'
 jest.setTimeout(14400000); // 4 hours
 
 const vectorType = 'tfIdf';
-const wordType = 'plain';
+const wordType = 'tagged';
 const limit = 0;
 
 beforeAll(async () => {
