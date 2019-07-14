@@ -1,17 +1,20 @@
+/**
+ * https://www.npmjs.com/package/brainjs
+ */
+
 import {
     getClassifier as getClassifierFromStore,
     getClassifierData as getClassifierDataFromStore,
     saveClassifier as saveClassifierToStore,
-} from './accessors';
+} from '../accessors';
 import * as brain from 'brainjs';
+import {fixLength} from '../model';
 
 
 // * Options -----------------------------------------------------------------------------------------------------------
 
 // Exported so can be set in tests
-export const config = {
-    fixedLength: 10000,
-};
+export const config = {};
 
 // * Classifier Methods  -----------------------------------------------------------------------------------------------
 
@@ -19,20 +22,11 @@ const getClassifier = async () => {
     let classifier = await getClassifierFromStore();
         if (!classifier) {
             classifier = new brain.NeuralNetwork();
-            // const classifierData = await getClassifierDataFromStore();
-            // if (classifierData) {
-            //     classifier.setClassifierDataset({
-            //         safe: tf.tensor(
-            //             classifierData.safe,
-            //             [classifierData.safe.length / config.fixedLength, config.fixedLength]
-            //         ),
-            //         harmful: tf.tensor(
-            //             classifierData.harmful,
-            //             [classifierData.harmful.length / config.fixedLength, config.fixedLength]
-            //         ),
-            //     });
-            // }
-            await saveClassifierToStore(classifier);
+            const classifierData = await getClassifierDataFromStore();
+            if (classifierData) {
+                restoreClassifierData(classifier, classifierData);
+            }
+            await saveClassifierToStore(classifier, extractClassifierData(classifier));
     }
     return classifier;
 };
@@ -49,7 +43,8 @@ export const trainModel = async (textVector, classification) => {
         output: {safe: classification==='safe'?1:0, harmful: classification==='safe'?0:1},
     }];
     (await getClassifier()).train(trainingData);
-    await saveClassifierToStore(await getClassifier());
+    const classifier = await getClassifier();
+    await saveClassifierToStore(classifier, extractClassifierData(classifier));
     return true;
 };
 
@@ -73,19 +68,23 @@ export const predictClassification = async (textVector) => {
     return prediction;
 };
 
+
 /**
- * Fix Length
+ * Extract Classifier Data
  *
- * @param {array} vector
- * @return {array}
+ * @param {*} classifier
+ * @return {{safe: any, harmful: any}}
  */
-function fixLength(vector) {
-    if (vector.length > config.fixedLength) {
-        return vector.slice(0, config.fixedLength);
-    } else {
-        const expanded = [];
-        expanded.push(...vector);
-        expanded.push(...(new Array(config.fixedLength-vector.length)).fill(0));
-        return expanded;
-    }
+function extractClassifierData(classifier) {
+    return classifier.toJSON();
+}
+
+/**
+ * Restore Classifier Data
+ *
+ * @param {*} classifier
+ * @param {*} classifierData
+ */
+function restoreClassifierData(classifier, classifierData) {
+    classifier.fromJSON(classifierData);
 }

@@ -6,7 +6,7 @@
  */
 import {authenticate, logout} from './services/authentication';
 import {analyseContent, prepareText} from './services/analyseContent';
-import {trainModel} from './services/brainjs';
+import {trainModel} from './services/model';
 import {
     getEnabled,
     getTabContent,

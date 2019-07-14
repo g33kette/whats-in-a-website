@@ -1,5 +1,5 @@
 import {getCorpus, saveCorpus} from './accessors';
-import {predictClassification} from './brainjs';
+import {predictClassification} from './model';
 import l2Norm from 'compute-l2norm';
 const nlp = require('compromise');
 
