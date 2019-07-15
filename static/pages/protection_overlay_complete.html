@@ -4,11 +4,29 @@
           crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
     <div class="main-content">
+        <div class="processing-training" style="display: none;">
+            <div class="loading">
+                <h2>Saving...</h2>
+                <div class="loading-status">
+                    <i class="fas fa-cog fa-spin"></i>
+                    <i class="fas fa-cog fa-spin"></i>
+                    <i class="fas fa-cog fa-spin"></i>
+                </div>
+            </div>
+        </div>
         <h2 class="message"></h2>
         <div class="complete">
             <div class="classification-container">
                 <h3>Predicted Page Classification:</h3>
                 <p class="result" id="result"></p>
+            </div>
+            <div class="classification-model-details-container">
+                <p class="classification-model-container">
+                    Model Type: <span class="classification-model"></span>
+                </p>
+                <p class="classification-confidence-container">
+                    Confidence: <span class="classification-confidence"></span>
+                </p>
             </div>
             <p class="classification-message" style="display:none"></p> <!-- hidden by default -->
             <div class="classification-required" style="display:none"> <!-- hidden by default -->

@@ -26,7 +26,7 @@ export const SET_CLASSIFIER = 'setClassifier';
 export const setClassifier = (classifier) => ({type: SET_CLASSIFIER, classifier});
 
 export const SET_CLASSIFIER_DATA = 'setClassifierData';
-export const setClassifierData = (setClassifierData)=> ({type: SET_CLASSIFIER_DATA, setClassifierData});
+export const setClassifierData = (classifierData)=> ({type: SET_CLASSIFIER_DATA, classifierData});
 
 export const SET_TAB_CONTENT = 'setTabContent';
 export const setTabContent = (tabId, content) => ({type: SET_TAB_CONTENT, tabId, content});

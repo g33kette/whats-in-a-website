@@ -3,7 +3,7 @@
 import {prepareText, config as analyseContentConfig} from '../src/services/analyseContent';
 import store from '../src/store/store';
 import {reset, setUsername} from './../src/store/actions';
-import {predictClassification, trainModel, config as modelConfig} from '../src/services/model';
+import {predictClassification, trainModel} from '../src/services/model';
 import fs from 'fs';
 
 /**
@@ -122,13 +122,12 @@ export async function prepareVectorsFromFiles(filesDirectory, vectorType, wordTy
  * @param {string} dataDir
  * @param {string} vectorType
  * @param {string} wordType
- * @param {int} k
+ * @param {int} r
  * @return {Promise<void>}
  */
-export async function runClassificationEvaluation(dataDir, vectorType, wordType, k) {
+export async function runClassificationEvaluation(dataDir, vectorType, wordType, r) {
     let classification;
     let vector;
-    modelConfig.k = k;
     const results = {tp: 0, tn: 0, fp: 0, fn: 0};
     let n = 0;
     const evaluateSafeFiles = await listFiles(dataDir + '/safe');
@@ -138,10 +137,10 @@ export async function runClassificationEvaluation(dataDir, vectorType, wordType,
         classification = await predictClassification(vector);
         if (classification.label === 'safe') {
             results.tp++;
-            console.log('. ✓', 'n = '+n+', k = '+k, classification.label, new Date());
+            console.log('. ✓', 'n = '+n+', r = '+r, classification.label, new Date());
         } else {
             results.fn++;
-            console.log('. X', 'n = '+n+', k = '+k, classification.label, new Date());
+            console.log('. X', 'n = '+n+', r = '+r, classification.label, new Date());
         }
     }
     const evaluateHarmfulFiles = await listFiles(dataDir + '/harmful');
@@ -151,10 +150,10 @@ export async function runClassificationEvaluation(dataDir, vectorType, wordType,
         classification = await predictClassification(vector);
         if (classification.label === 'harmful') {
             results.tn++;
-            console.log('. ✓', 'n = '+n+', k = '+k, classification.label, new Date());
+            console.log('. ✓', 'n = '+n+', r = '+r, classification.label, new Date());
         } else {
             results.fp++;
-            console.log('. X', 'n = '+n+', k = '+k, classification.label, new Date());
+            console.log('. X', 'n = '+n+', r = '+r, classification.label, new Date());
         }
     }
     outputModelEvaluationResults(results);

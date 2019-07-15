@@ -1,12 +1,15 @@
 /* eslint-disable */
 
 import {resetStore, trainFromFiles, runClassificationEvaluation} from '../utils';
+import {config as modelConfig} from '../../src/services/model';
+import {config as knnConfig} from '../../src/services/models/knn';
 
 jest.setTimeout(14400000); // 4 hours
 
 const vectorType = 'tfIdf';
 const wordType = 'plain';
 const limit = 0;
+modelConfig.modelType = 'knn';
 
 beforeAll(async () => {
     console.log('Start Run: '+new Date());
@@ -30,19 +33,23 @@ afterAll( async () => {
 });
 
 it('Should run evaluation of model against test data for k = 1', async () => {
-    await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, 1);
+    knnConfig.k = 1;
+    await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, knnConfig.k);
 });
 
 it('Should run evaluation of model against test data for k = 3', async () => {
-    await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, 3);
+    knnConfig.k = 3;
+    await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, knnConfig.k);
 });
 
 it('Should run evaluation of model against test data for k = 5', async () => {
-    await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, 5);
+    knnConfig.k = 5;
+    await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, knnConfig.k);
 });
 
 it('Should run evaluation of model against test data for k = 10', async () => {
-    await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, 10);
+    knnConfig.k = 10;
+    await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, knnConfig.k);
 });
 
 // Not to be run until final evaluation

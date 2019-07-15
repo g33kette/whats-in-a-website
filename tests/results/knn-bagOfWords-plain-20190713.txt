@@ -1,6 +1,6 @@
 
 > Extension@1.0.0 evaluate E:\Localhost\dissertation\Extension
-> jest --testPathPattern=^tests/evaluation/bagOfWords-plain.test.js
+> jest --testPathPattern=^tests/evaluation/knn-bagOfWords-plain.test.js
 
   console.warn node_modules/@tensorflow/tfjs-core/dist/log.js:26
 
@@ -577,7 +577,7 @@ re('@tensorflow/tfjs-node'); (-gpu suffix for CUDA) at the start of your program
   console.log tests/utils.js:154
     . X safe 2019-07-13T15:59:38.702Z
 
- PASS  tests/evaluation/bagOfWords-plain.test.js (11317.376s)
+ PASS  tests/evaluation/knn-bagOfWords-plain.test.js (11317.376s)
   √ Should run evaluation of model against test data for k = 1 (2529732ms)
   √ Should run evaluation of model against test data for k = 3 (2562680ms)
   √ Should run evaluation of model against test data for k = 10 (2604641ms)
@@ -586,7 +586,7 @@ Test Suites: 1 passed, 1 total
 Tests:       3 passed, 3 total
 Snapshots:   0 total
 Time:        11317.436s
-Ran all test suites matching /tests\\evaluation\\bagOfWords-plain.test.js/i.
+Ran all test suites matching /tests\\evaluation\\knn-bagOfWords-plain.test.js/i.
   console.log src/services/model.js:59
     10
 

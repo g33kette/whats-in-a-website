@@ -1,9 +1,9 @@
 "C:\Program Files\nodejs\node.exe" "C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js" run evaluate --scripts-prepend-node-path=auto
 
 > Extension@1.0.0 evaluate E:\Localhost\dissertation\Extension
-> jest --testPathPattern=^tests/evaluation/tfIdf-plain.test.js
+> jest --testPathPattern=^tests/evaluation/knn-tfIdf-plain.test.js
 
-  console.log tests/evaluation/tfIdf-plain.test.js:12
+  console.log tests/evaluation/knn-tfIdf-plain.test.js:12
     Start Run: Sat Jul 13 2019 17:08:37 GMT+0100 (British Summer Time)
 
   console.warn node_modules/@tensorflow/tfjs-core/dist/log.js:26
@@ -16,7 +16,7 @@
   console.log tests/utils.js:93
     Training complete. 2019-07-13T17:07:51.906Z
 
-  console.log tests/evaluation/tfIdf-plain.test.js:24
+  console.log tests/evaluation/knn-tfIdf-plain.test.js:24
     Start Scenario: Sat Jul 13 2019 18:07:51 GMT+0100 (British Summer Time)
 
   console.log src/services/model.js:59
@@ -214,7 +214,7 @@
   console.log tests/utils.js:233
     Final precision score: 0.7142857142857143
 
-  console.log tests/evaluation/tfIdf-plain.test.js:24
+  console.log tests/evaluation/knn-tfIdf-plain.test.js:24
     Start Scenario: Sat Jul 13 2019 18:53:18 GMT+0100 (British Summer Time)
 
   console.log src/services/model.js:59
@@ -412,7 +412,7 @@
   console.log tests/utils.js:233
     Final precision score: 0.75
 
-  console.log tests/evaluation/tfIdf-plain.test.js:24
+  console.log tests/evaluation/knn-tfIdf-plain.test.js:24
     Start Scenario: Sat Jul 13 2019 19:36:07 GMT+0100 (British Summer Time)
 
   console.log src/services/model.js:59
@@ -610,7 +610,7 @@
   console.log tests/utils.js:233
     Final precision score: 0.7894736842105263
 
-  console.log tests/evaluation/tfIdf-plain.test.js:24
+  console.log tests/evaluation/knn-tfIdf-plain.test.js:24
     Start Scenario: Sat Jul 13 2019 20:16:45 GMT+0100 (British Summer Time)
 
   console.log src/services/model.js:59
@@ -787,7 +787,7 @@
   console.log tests/utils.js:154
     . X safe 2019-07-13T19:56:20.198Z
 
- PASS  tests/evaluation/tfIdf-plain.test.js (13735.773s)
+ PASS  tests/evaluation/knn-tfIdf-plain.test.js (13735.773s)
   √ Should run evaluation of model against test data for k = 1 (2726455ms)
   √ Should run evaluation of model against test data for k = 3 (2568814ms)
   √ Should run evaluation of model against test data for k = 5 (2438637ms)
@@ -797,7 +797,7 @@ Test Suites: 1 passed, 1 total
 Tests:       4 passed, 4 total
 Snapshots:   0 total
 Time:        13735.828s
-Ran all test suites matching /tests\\evaluation\\tfIdf-plain.test.js/i.
+Ran all test suites matching /tests\\evaluation\\knn-tfIdf-plain.test.js/i.
   console.log src/services/model.js:59
     10
 
@@ -819,7 +819,7 @@ Ran all test suites matching /tests\\evaluation\\tfIdf-plain.test.js/i.
   console.log tests/utils.js:233
     Final precision score: 0.75
 
-  console.log tests/evaluation/tfIdf-plain.test.js:29
+  console.log tests/evaluation/knn-tfIdf-plain.test.js:29
     Complete Run: Sat Jul 13 2019 20:57:31 GMT+0100 (British Summer Time)
 
 
