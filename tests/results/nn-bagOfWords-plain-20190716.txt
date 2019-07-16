@@ -1,0 +1,50 @@
+"C:\Program Files\JetBrains\PhpStorm 2018.2.4\bin\runnerw.exe" "C:\Program Files\nodejs\node.exe" "C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js" run evaluate --scripts-prepend-node-path=auto
+
+> Extension@1.0.0 evaluate C:\Users\Jo\Desktop\chrome-plugin
+> jest --testPathPattern=^tests/evaluation/nn-bagOfWords-plain.test.js
+
+  console.log tests/evaluation/nn-bagOfWords-plain.test.js:14
+    Start Run: Tue Jul 16 2019 13:43:46 GMT+0100 (GMT Summer Time)
+
+  console.log tests/utils.js:192
+    safe http..www.anglianwater.co.uk 2019-07-16T12:43:46.195Z
+
+  console.log tests/utils.js:192
+    safe http..www.argos.co.uk 2019-07-16T12:48:04.935Z
+
+  console.log tests/utils.js:192
+    safe http..www.finnpathologists.co.uk 2019-07-16T13:12:30.290Z
+
+  console.log tests/utils.js:192
+    safe http..www.gamertagnation.com 2019-07-16T13:27:15.357Z
+
+FATAL ERROR: CALL_AND_RETRY_LAST Allocation failed - JavaScript heap out of memory
+ 1: node_module_register
+ 2: v8::internal::FatalProcessOutOfMemory
+ 3: v8::internal::FatalProcessOutOfMemory
+ 4: v8::internal::Factory::NewCodeRaw
+ 5: v8::internal::Factory::NewCode
+ 6: v8::internal::modulo
+ 7: v8::internal::compiler::ControlFlowOptimizer::TryBuildSwitch
+ 8: v8::internal::interpreter::HandlerTableBuilder::HandlerTableBuilder
+ 9: v8::internal::compiler::Pipeline::AllocateRegistersForTesting
+10: v8::internal::compiler::ValueNumberingReducer::operator=
+11: v8::internal::CompilationJob::FinalizeJob
+12: v8::internal::compiler::JSTypedLowering::isolate
+13: v8::internal::Compiler::FinalizeCompilationJob
+14: v8::internal::OptimizingCompileDispatcher::InstallOptimizedFunctions
+15: v8::internal::StackGuard::HandleInterrupts
+16: v8::internal::wasm::WasmOpcodes::TrapReasonMessage
+17: 000003FECA1043C1
+npm ERR! code ELIFECYCLE
+npm ERR! errno 3
+npm ERR! Extension@1.0.0 evaluate: `jest --testPathPattern=^tests/evaluation/nn-bagOfWords-plain.test.js`
+npm ERR! Exit status 3
+npm ERR!
+npm ERR! Failed at the Extension@1.0.0 evaluate script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     C:\Users\Jo\AppData\Roaming\npm-cache\_logs\2019-07-16T13_27_50_665Z-debug.log
+
+Process finished with exit code 3
