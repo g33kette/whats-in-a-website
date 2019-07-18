@@ -3,7 +3,6 @@
  */
 
 import {
-    getClassifier as getClassifierFromStore,
     getClassifierData as getClassifierDataFromStore,
     saveClassifier as saveClassifierToStore,
 } from '../accessors';
@@ -18,33 +17,47 @@ export const config = {};
 
 // * Classifier Methods  -----------------------------------------------------------------------------------------------
 
+/**
+ * Get Classifier
+ *
+ * @return {Promise<brain.NeuralNetwork>}
+ */
 const getClassifier = async () => {
-    let classifier = await getClassifierFromStore();
-        if (!classifier) {
-            classifier = new brain.NeuralNetwork();
-            const classifierData = await getClassifierDataFromStore();
-            if (classifierData && Object.keys(classifierData).length) {
-                restoreClassifierData(classifier, classifierData);
-            }
-            await saveClassifierToStore(classifier, extractClassifierData(classifier));
+    let classifierData = await getClassifierData();
+        if (classifierData) {
+            const classifier = new brain.NeuralNetwork();
+            classifier.train(classifierData);
+            return classifier;
     }
-    return classifier;
+    return null;
+};
+
+/**
+ * Get Classifier Data
+ *
+ * @return {Promise<[]>}
+ */
+const getClassifierData = async () => {
+    const classifierData = await getClassifierDataFromStore();
+    return classifierData&&Object.keys(classifierData).length?classifierData:[];
 };
 
 /**
  * Train Model
  *
+ * For this implementation, all we do is update data array.
+ *
  * @param {array} textVector
  * @param {string} classification
  */
 export const trainModel = async (textVector, classification) => {
-    const trainingData = [{
+    const trainingData = {
         input: fixLength(textVector),
         output: {safe: classification==='safe'?1:0, harmful: classification==='safe'?0:1},
-    }];
-    (await getClassifier()).train(trainingData);
-    const classifier = await getClassifier();
-    await saveClassifierToStore(classifier, extractClassifierData(classifier));
+    };
+    const classifierData = await getClassifierData();
+    classifierData.push(trainingData);
+    await saveClassifierToStore(null, classifierData);
     return true;
 };
 
@@ -67,24 +80,3 @@ export const predictClassification = async (textVector) => {
     }
     return prediction;
 };
-
-
-/**
- * Extract Classifier Data
- *
- * @param {*} classifier
- * @return {{safe: any, harmful: any}}
- */
-function extractClassifierData(classifier) {
-    return classifier.toJSON();
-}
-
-/**
- * Restore Classifier Data
- *
- * @param {*} classifier
- * @param {*} classifierData
- */
-function restoreClassifierData(classifier, classifierData) {
-    classifier.fromJSON(classifierData);
-}
