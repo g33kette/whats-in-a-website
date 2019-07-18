@@ -23,10 +23,14 @@ it('Should train and classify very basic text using knn classifier with frequenc
         'The lazy dog',
         'The stupid dog',
     ], 'bagOfWords', 'plain');
-    const prediction = await predictClassification(
+    const harmfulPrediction = await predictClassification(
         await prepareVector('Very lazy dog', 'bagOfWords', 'plain')
     );
-    expect(prediction.label).toBe('harmful');
+    expect(harmfulPrediction.label).toBe('harmful');
+    const safePrediction = await predictClassification(
+        await prepareVector('The happy fish', 'bagOfWords', 'plain')
+    );
+    expect(safePrediction.label).toBe('safe');
 });
 
 it('Should train and classify very basic text using knn classifier with tf-idf weightings', async () => {
@@ -39,10 +43,14 @@ it('Should train and classify very basic text using knn classifier with tf-idf w
         'The lazy dog',
         'The stupid dog',
     ], 'tfIdf', 'plain');
-    const prediction = await predictClassification(
+    const harmfulPrediction = await predictClassification(
         await prepareVector('Very lazy dog', 'tfIdf', 'plain')
     );
-    expect(prediction.label).toBe('harmful');
+    expect(harmfulPrediction.label).toBe('harmful');
+    const safePrediction = await predictClassification(
+        await prepareVector('The happy fish', 'tfIdf', 'plain')
+    );
+    expect(safePrediction.label).toBe('safe');
 });
 
 // Test Nn -----------------------------------------------------------------------------------------------
@@ -58,10 +66,14 @@ it('Should train and classify very basic text using nn classifier with frequency
         'The lazy dog',
         'The stupid dog',
     ], 'bagOfWords', 'plain');
-    const prediction = await predictClassification(
+    const harmfulPrediction = await predictClassification(
         await prepareVector('Very lazy dog', 'bagOfWords', 'plain')
     );
-    expect(prediction.label).toBe('harmful');
+    expect(harmfulPrediction.label).toBe('harmful');
+    const safePrediction = await predictClassification(
+        await prepareVector('The happy fish', 'bagOfWords', 'plain')
+    );
+    expect(safePrediction.label).toBe('safe');
 });
 
 it('Should train and classify very basic text using nn classifier with tf-idf weightings', async () => {
@@ -75,10 +87,14 @@ it('Should train and classify very basic text using nn classifier with tf-idf we
         'The lazy dog',
         'The stupid dog',
     ], 'tfIdf', 'plain');
-    const prediction = await predictClassification(
+    const harmfulPrediction = await predictClassification(
         await prepareVector('Very lazy dog', 'tfIdf', 'plain')
     );
-    expect(prediction.label).toBe('harmful');
+    expect(harmfulPrediction.label).toBe('harmful');
+    const safePrediction = await predictClassification(
+        await prepareVector('The happy fish', 'tfIdf', 'plain')
+    );
+    expect(safePrediction.label).toBe('safe');
 });
 
 // Test Nbayes -----------------------------------------------------------------------------------------------
@@ -93,10 +109,14 @@ it('Should train and classify very basic text using nbayes classifier with frequ
         'The lazy dog',
         'The stupid dog',
     ], 'bagOfWords', 'plain');
-    const prediction = await predictClassification(
+    const harmfulPrediction = await predictClassification(
         await prepareVector('Very lazy dog', 'bagOfWords', 'plain')
     );
-    expect(prediction.label).toBe('harmful');
+    expect(harmfulPrediction.label).toBe('harmful');
+    const safePrediction = await predictClassification(
+        await prepareVector('The happy fish', 'bagOfWords', 'plain')
+    );
+    expect(safePrediction.label).toBe('safe');
 });
 
 it('Should train and classify very basic text using nbayes classifier with tf-idf weightings', async () => {
@@ -109,8 +129,12 @@ it('Should train and classify very basic text using nbayes classifier with tf-id
         'The lazy dog',
         'The stupid dog',
     ], 'tfIdf', 'plain');
-    const prediction = await predictClassification(
+    const harmfulPrediction = await predictClassification(
         await prepareVector('Very lazy dog', 'tfIdf', 'plain')
     );
-    expect(prediction.label).toBe('harmful');
+    expect(harmfulPrediction.label).toBe('harmful');
+    const safePrediction = await predictClassification(
+        await prepareVector('The happy fish', 'tfIdf', 'plain')
+    );
+    expect(safePrediction.label).toBe('safe');
 });
