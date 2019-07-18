@@ -1,0 +1,697 @@
+"C:\Program Files\nodejs\node.exe" "C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js" run evaluate --scripts-prepend-node-path=auto
+
+> Extension@1.0.0 evaluate E:\Localhost\dissertation\Extension
+> jest --testPathPattern=^tests/evaluation/bagOfWords-tagged.test.js
+
+  console.log tests/evaluation/bagOfWords-tagged.test.js:12
+    Start Run: Sun Jul 14 2019 08:53:21 GMT+0100 (British Summer Time)
+
+  console.log tests/utils.js:193
+    safe http..www.anglianwater.co.uk 2019-07-14T07:53:21.106Z
+
+  console.warn node_modules/@tensorflow/tfjs-core/dist/log.js:26
+
+    ============================
+    Hi there 👋. Looks like you are running TensorFlow.js in Node.js. To speed things up dramatically, install our node backend, which binds to TensorFlow C++, by running npm i @tensorflow/tfjs-node, or npm i @tensorflow/tfjs-node-gpu if you have CUDA. Then call require('@tensorflow/tfjs-node'); (-gpu suffix for CUDA) at the start of your program. Visit https://github.com/tensorflow/tfjs-node for more details.
+    ============================
+
+
+  console.log tests/utils.js:193
+    safe http..www.argos.co.uk 2019-07-14T07:53:37.685Z
+
+  console.log tests/utils.js:193
+    safe http..www.finnpathologists.co.uk 2019-07-14T07:53:48.780Z
+
+  console.log tests/utils.js:193
+    safe http..www.gamertagnation.com 2019-07-14T07:53:54.327Z
+
+  console.log tests/utils.js:193
+    safe http..www.nathab.com.travelerresources 2019-07-14T07:54:15.250Z
+
+  console.log tests/utils.js:193
+    safe http..www.newsnow.co.uk.itfc 2019-07-14T07:54:34.658Z
+
+  console.log tests/utils.js:193
+    safe http..www.ourburystedmunds.com.whitsunfayre 2019-07-14T07:54:36.002Z
+
+  console.log tests/utils.js:193
+    safe http..www.pexels.com 2019-07-14T07:54:56.903Z
+
+  console.log tests/utils.js:193
+    safe http..www.pivotaltracker.com 2019-07-14T07:55:32.765Z
+
+  console.log tests/utils.js:193
+    safe http..www.sortitoutsi.net 2019-07-14T07:55:38.905Z
+
+  console.log tests/utils.js:193
+    safe http..www.topcashback.co.uk 2019-07-14T07:56:12.438Z
+
+  console.log tests/utils.js:193
+    safe http..www.vodafone.co.uk 2019-07-14T07:56:25.607Z
+
+  console.log tests/utils.js:193
+    safe http..www.westsuffolk.gov.uk 2019-07-14T07:57:30.607Z
+
+  console.log tests/utils.js:193
+    safe https..computationx.wordpress.com.2019.05.23.fivethingsivelearnedaboutpairprogramming 2019-07-14T07:57:54.203Z
+
+  console.log tests/utils.js:193
+    safe https..duckduckgo.com 2019-07-14T07:58:24.830Z
+
+  console.log tests/utils.js:193
+    safe https..talksport.com.football.page.2 2019-07-14T07:58:30.017Z
+
+  console.log tests/utils.js:193
+    safe https..twitter.com.explore 2019-07-14T07:59:00.597Z
+
+  console.log tests/utils.js:193
+    safe https..www.airbnb.co.uk.s.LakeDistrictNationalParkLakesSouthLakelandDistrict.homes+refinement_paths5B5D=2Fhomes&query=Lake20District20National20Park2C20Lakes2C20South20Lakeland20Di 2019-07-14T07:59:45.912Z
+
+  console.log tests/utils.js:193
+    safe https..www.amazon.co.uk 2019-07-14T08:00:07.883Z
+
+  console.log tests/utils.js:193
+    safe https..www.argos.co.uk 2019-07-14T08:02:15.142Z
+
+  console.log tests/utils.js:193
+    safe https..www.argos.co.uk.features.deliverycollectionguide+tag=arpropbarsamedaydelivery 2019-07-14T08:02:29.956Z
+
+  console.log tests/utils.js:193
+    safe https..www.bbc.co.uk.news 2019-07-14T08:03:05.990Z
+
+  console.log tests/utils.js:193
+    safe https..www.bbc.co.uk.news.newsbeat48352581 2019-07-14T08:05:24.452Z
+
+  console.log tests/utils.js:193
+    safe https..www.bbc.co.uk.news.technology 2019-07-14T08:06:23.800Z
+
+  console.log tests/utils.js:193
+    safe https..www.bbc.co.uk.news.uk 2019-07-14T08:07:19.819Z
+
+  console.log tests/utils.js:193
+    safe https..www.bbc.co.uk.sport.football 2019-07-14T08:08:18.886Z
+
+  console.log tests/utils.js:193
+    safe https..www.bbc.co.uk.sport.football.teams.stokecity 2019-07-14T08:09:59.674Z
+
+  console.log tests/utils.js:193
+    safe https..www.bbc.co.uk.weather 2019-07-14T08:11:35.602Z
+
+  console.log tests/utils.js:193
+    safe https..www.bitbucket.org 2019-07-14T08:12:06.354Z
+
+  console.log tests/utils.js:193
+    safe https..www.boohoo.com.womens.trousers 2019-07-14T08:12:37.497Z
+
+  console.log tests/utils.js:193
+    safe https..www.booking.com.index.engb.html 2019-07-14T08:19:36.838Z
+
+  console.log tests/utils.js:193
+    safe https..www.dailymail.co.uk.sport.football.index.html 2019-07-14T08:21:05.971Z
+
+  console.log tests/utils.js:193
+    safe https..www.edp24.co.uk.home 2019-07-14T08:29:33.626Z
+
+  console.log tests/utils.js:193
+    safe https..www.express.co.uk.sport.football.1129109.ManCitynewspunditrevealsONEteamcanchallengenextseasonPepGuardiolatreble 2019-07-14T08:32:59.702Z
+
+  console.log tests/utils.js:193
+    safe https..www.google.com 2019-07-14T08:38:37.975Z
+
+  console.log tests/utils.js:193
+    safe https..www.google.com.maps.place.Longjie+Inn.28.3123828109.603200412z.data=4m121m63m51s0x3699e00bdd955bf30x18c3371b1c8afa9c2sDehang+Restaurant8m23d28.3431354d109.5870363m41s0x00xae 2019-07-14T08:38:39.803Z
+
+  console.log tests/utils.js:193
+    safe https..www.hippychick.com 2019-07-14T08:38:50.038Z
+
+  console.log tests/utils.js:193
+    safe https..www.meetup.com.phpcambridge.events.261757326 2019-07-14T08:40:03.747Z
+
+  console.log tests/utils.js:193
+    safe https..www.newlook.com.uk.c.blackwovenharemtrousers.p.374021301 2019-07-14T08:41:07.689Z
+
+  console.log tests/utils.js:193
+    safe https..www.tesco.com.groceries 2019-07-14T08:41:54.770Z
+
+  console.log tests/utils.js:193
+    safe https..www.theguardian.com.football 2019-07-14T08:42:19.741Z
+
+  console.log tests/utils.js:193
+    safe https..www.theguardian.com.uk.sport 2019-07-14T08:44:49.423Z
+
+  console.log tests/utils.js:193
+    safe https..www.tripadvisor.co.uk 2019-07-14T08:47:37.028Z
+
+  console.log tests/utils.js:193
+    safe https..www.vodafone.co.uk.broadband 2019-07-14T08:51:52.374Z
+
+  console.log tests/utils.js:193
+    safe https..www.youtube.com.results+search_query=game+of+thrones 2019-07-14T08:54:13.274Z
+
+  console.log tests/utils.js:193
+    safe https..yogawithadriene.com 2019-07-14T08:56:11.063Z
+
+  console.log tests/utils.js:193
+    harmful http..www.mufcinfo.com.manupag.az_player_archive.legegendsexunitedm.html 2019-07-14T08:56:28.955Z
+
+  console.log tests/utils.js:193
+    harmful http..www.mufoundation.org.PrimaryStarsTournament 2019-07-14T08:58:20.213Z
+
+  console.log tests/utils.js:193
+    harmful https..en.wikipedia.org.wiki.List_of_Manchester_United_F.C._players_25E2809399_appearances 2019-07-14T08:58:41.824Z
+
+  console.log tests/utils.js:193
+    harmful https..en.wikipedia.org.wiki.List_of_Manchester_United_F.C.appearances 2019-07-14T09:19:49.676Z
+
+  console.log tests/utils.js:193
+    harmful https..en.wikipedia.org.wiki.Manchester_United_F.C 2019-07-14T09:40:58.325Z
+
+  console.log tests/utils.js:193
+    harmful https..en.wikipedia.org.wiki.Manchester_United_Premier_Cup 2019-07-14T10:14:42.370Z
+
+  console.log tests/utils.js:193
+    harmful https..store.manutd.com.stores.manutd.en.+CMP=PPCManUnitedDirectBrand&msclkid=d1f9b4d44e2a18626b24e9d11965128f&gclid=CLSkuYqs7OICFdKRGwod6GENFg&gclsrc=ds 2019-07-14T10:17:11.693Z
+
+  console.log tests/utils.js:193
+    harmful https..talksport.com.football.545799.transfernewslivemanunitedmancityspursfekirdeligt 2019-07-14T10:18:01.665Z
+
+  console.log tests/utils.js:193
+    harmful https..talksport.com.football.548784.manchesterunitedtransfernewsreddevilsoutoftheracetosignajaxcaptainmatthijsdeligtreports 2019-07-14T10:21:41.991Z
+
+  console.log tests/utils.js:193
+    harmful https..twitter.com.ManUtd 2019-07-14T10:23:24.554Z
+
+  console.log tests/utils.js:193
+    harmful https..www.amazon.co.uk.s+k=manchester+united&i=kitchen&hvadid=80195697990945&hvbmt=be&hvdev=c&hvqmt=e&tag=mh0a921&ref=pd_sl_8xen9cnloj_e 2019-07-14T10:26:48.527Z
+
+  console.log tests/utils.js:193
+    harmful https..www.bbc.co.uk.sport.football.teams.manchesterunited 2019-07-14T10:29:35.132Z
+
+  console.log tests/utils.js:193
+    harmful https..www.caughtoffside.com.2019.06.15.manchesterunitedcoulduseuseclevertricktomeetstars60mvaluation 2019-07-14T10:32:26.513Z
+
+  console.log tests/utils.js:193
+    harmful https..www.dailymail.co.uk.sport.football.article7071895.ManUnitedmissKalidouKoulibalyturnattentionsRubenDias.html 2019-07-14T10:33:55.879Z
+
+  console.log tests/utils.js:193
+    harmful https..www.ea.com.engb.news.fifa17manchesterunitedfcplayertournament 2019-07-14T10:38:43.226Z
+
+  console.log tests/utils.js:193
+    harmful https..www.google.com.search+q=manchester+united&rlz=1C1CHBF_enGB839GB839&oq=manchester+united&aqs=chrome..69i57j0l2j69i59j0l2.4223j0j4&sourceid=chrome&ie=UTF8 2019-07-14T10:39:22.682Z
+
+  console.log tests/utils.js:193
+    harmful https..www.internationalchampionscup.com.en.teams.manchesterunitedtab_teamstats=defence&tab_teamplayersstats=general&tab_team=overview 2019-07-14T10:41:57.537Z
+
+  console.log tests/utils.js:193
+    harmful https..www.livefootballtickets.com.englishpremiership.manchesterunitedtickets.html 2019-07-14T10:44:05.092Z
+
+  console.log tests/utils.js:193
+    harmful https..www.manutd.com 2019-07-14T10:46:57.776Z
+
+  console.log tests/utils.js:193
+    harmful https..www.manutd.com.en.news.detail.epltournamentlookingformanutdfifaplayers 2019-07-14T10:50:22.212Z
+
+  console.log tests/utils.js:193
+    harmful https..www.manutd.com.en.ticketsandhospitality.matchtickets+t=y&int_source=muwebsite&int_medium=meganav&int_campaign=matchtickets&int_content=thnav&int_term=matchtickets 2019-07-14T10:52:15.735Z
+
+  console.log tests/utils.js:193
+    harmful https..www.newsnow.co.uk.h.Sport.Football.Premier+League.Manchester+United 2019-07-14T10:54:17.494Z
+
+  console.log tests/utils.js:193
+    harmful https..www.premierleague.com.clubs.12.ManchesterUnited.overview 2019-07-14T10:58:19.635Z
+
+  console.log tests/utils.js:193
+    harmful https..www.ranker.com.list.bestmanchesterunitedplayersofalltime.rankersoccer 2019-07-14T11:00:15.596Z
+
+  console.log tests/utils.js:193
+    harmful https..www.theguardian.com.football.manchesterunited 2019-07-14T11:12:31.428Z
+
+  console.log tests/utils.js:193
+    harmful https..www.ticketmaster.co.uk.manchesterunitedtickets.artist.862031 2019-07-14T11:14:44.515Z
+
+  console.log tests/utils.js:193
+    harmful https..www.transfermarkt.com.manchesterunited.startseite.verein.985 2019-07-14T11:15:01.657Z
+
+  console.log tests/utils.js:193
+    harmful https..www.transfermarkt.com.manchesterunited.transfers.verein.985 2019-07-14T11:21:34.121Z
+
+  console.log tests/utils.js:193
+    harmful https..www.viagogo.co.uk.SportsTickets.Football.BarclaysPremierLeague.ManchesterUnitedTickets 2019-07-14T11:26:03.562Z
+
+  console.log tests/utils.js:193
+    harmful https..www.worldfootball.net.teams.manchesterunited.10 2019-07-14T11:27:49.272Z
+
+  console.log tests/utils.js:193
+    harmful https..www.youtube.com.results+search_query=manchester+united 2019-07-14T11:51:41.323Z
+
+  console.log tests/utils.js:93
+    Training complete. 2019-07-14T11:53:21.815Z
+
+  console.log tests/evaluation/bagOfWords-tagged.test.js:24
+    Start Scenario: Sun Jul 14 2019 12:53:21 GMT+0100 (British Summer Time)
+
+  console.log tests/utils.js:141
+    . ✓ n = 1, k = 1 safe 2019-07-14T11:56:54.860Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 2, k = 1 safe 2019-07-14T11:59:28.902Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 3, k = 1 safe 2019-07-14T12:00:52.502Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 4, k = 1 safe 2019-07-14T12:02:46.072Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 5, k = 1 safe 2019-07-14T12:05:08.707Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 6, k = 1 safe 2019-07-14T12:06:25.446Z
+
+  console.log tests/utils.js:144
+    . X n = 7, k = 1 harmful 2019-07-14T12:10:32.182Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 8, k = 1 safe 2019-07-14T12:14:07.712Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 9, k = 1 safe 2019-07-14T12:39:09.862Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 10, k = 1 safe 2019-07-14T13:53:41.848Z
+
+  console.log tests/utils.js:144
+    . X n = 11, k = 1 harmful 2019-07-14T13:54:57.493Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 12, k = 1 safe 2019-07-14T14:09:14.255Z
+
+  console.log tests/utils.js:144
+    . X n = 13, k = 1 harmful 2019-07-14T14:10:53.449Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 14, k = 1 safe 2019-07-14T14:16:12.112Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 15, k = 1 safe 2019-07-14T14:18:28.293Z
+
+  console.log tests/utils.js:144
+    . X n = 16, k = 1 harmful 2019-07-14T14:33:59.964Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 17, k = 1 safe 2019-07-14T14:35:19.079Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 18, k = 1 safe 2019-07-14T14:38:08.950Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 19, k = 1 safe 2019-07-14T14:39:57.207Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 20, k = 1 safe 2019-07-14T14:42:56.360Z
+
+  console.log tests/utils.js:157
+    . X n = 21, k = 1 safe 2019-07-14T14:44:42.524Z
+
+  console.log tests/utils.js:157
+    . X n = 22, k = 1 safe 2019-07-14T14:47:05.190Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 23, k = 1 harmful 2019-07-14T14:50:32.172Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 24, k = 1 harmful 2019-07-14T14:52:33.540Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 25, k = 1 harmful 2019-07-14T14:54:16.969Z
+
+  console.log tests/utils.js:157
+    . X n = 26, k = 1 safe 2019-07-14T15:00:42.089Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 27, k = 1 harmful 2019-07-14T15:02:21.737Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 28, k = 1 harmful 2019-07-14T15:04:49.169Z
+
+  console.log tests/utils.js:157
+    . X n = 29, k = 1 safe 2019-07-14T15:12:32.482Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 30, k = 1 harmful 2019-07-14T15:21:28.550Z
+
+  console.log tests/utils.js:232
+    Final correct score: 22/30
+
+  console.log tests/utils.js:233
+    Final accuracy score: 73.33333333333333%
+
+  console.log tests/utils.js:234
+    Final sensitivity score: 0.8
+
+  console.log tests/utils.js:235
+    Final specificity score: 0.6
+
+  console.log tests/utils.js:236
+    Final precision score: 0.8
+
+  console.log tests/evaluation/bagOfWords-tagged.test.js:24
+    Start Scenario: Sun Jul 14 2019 16:21:28 GMT+0100 (British Summer Time)
+
+  console.log tests/utils.js:144
+    . X n = 1, k = 3 harmful 2019-07-14T15:25:04.189Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 2, k = 3 safe 2019-07-14T15:27:33.715Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 3, k = 3 safe 2019-07-14T15:28:57.940Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 4, k = 3 safe 2019-07-14T15:30:45.932Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 5, k = 3 safe 2019-07-14T15:33:07.504Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 6, k = 3 safe 2019-07-14T15:34:28.416Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 7, k = 3 safe 2019-07-14T15:38:26.713Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 8, k = 3 safe 2019-07-14T15:42:12.291Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 9, k = 3 safe 2019-07-14T16:06:55.502Z
+
+  console.log tests/utils.js:144
+    . X n = 10, k = 3 harmful 2019-07-14T17:21:02.947Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 11, k = 3 safe 2019-07-14T17:22:18.796Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 12, k = 3 safe 2019-07-14T17:36:55.544Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 13, k = 3 safe 2019-07-14T17:38:36.144Z
+
+  console.log tests/utils.js:144
+    . X n = 14, k = 3 harmful 2019-07-14T17:44:05.479Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 15, k = 3 safe 2019-07-14T17:46:24.536Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 16, k = 3 safe 2019-07-14T18:02:17.992Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 17, k = 3 safe 2019-07-14T18:03:34.559Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 18, k = 3 safe 2019-07-14T18:06:31.884Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 19, k = 3 safe 2019-07-14T18:08:20.891Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 20, k = 3 safe 2019-07-14T18:11:21.529Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 21, k = 3 harmful 2019-07-14T18:13:06.911Z
+
+  console.log tests/utils.js:157
+    . X n = 22, k = 3 safe 2019-07-14T18:15:25.405Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 23, k = 3 harmful 2019-07-14T18:18:48.247Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 24, k = 3 harmful 2019-07-14T18:20:47.146Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 25, k = 3 harmful 2019-07-14T18:22:28.809Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 26, k = 3 harmful 2019-07-14T18:28:58.304Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 27, k = 3 harmful 2019-07-14T18:30:38.405Z
+
+  console.log tests/utils.js:157
+    . X n = 28, k = 3 safe 2019-07-14T18:33:05.743Z
+
+  console.log tests/utils.js:157
+    . X n = 29, k = 3 safe 2019-07-14T18:40:47.665Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 30, k = 3 harmful 2019-07-14T18:49:40.905Z
+
+  console.log tests/utils.js:232
+    Final correct score: 24/30
+
+  console.log tests/utils.js:233
+    Final accuracy score: 80%
+
+  console.log tests/utils.js:234
+    Final sensitivity score: 0.85
+
+  console.log tests/utils.js:235
+    Final specificity score: 0.7
+
+  console.log tests/utils.js:236
+    Final precision score: 0.85
+
+  console.log tests/evaluation/bagOfWords-tagged.test.js:24
+    Start Scenario: Sun Jul 14 2019 19:49:40 GMT+0100 (British Summer Time)
+
+  console.log tests/utils.js:141
+    . ✓ n = 1, k = 5 safe 2019-07-14T18:53:16.858Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 2, k = 5 safe 2019-07-14T18:55:47.571Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 3, k = 5 safe 2019-07-14T18:57:12.748Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 4, k = 5 safe 2019-07-14T18:59:01.037Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 5, k = 5 safe 2019-07-14T19:01:25.531Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 6, k = 5 safe 2019-07-14T19:02:43.396Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 7, k = 5 safe 2019-07-14T19:06:50.440Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 8, k = 5 safe 2019-07-14T19:10:42.931Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 9, k = 5 safe 2019-07-14T19:35:11.277Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 10, k = 5 safe 2019-07-14T20:49:36.489Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 11, k = 5 safe 2019-07-14T20:50:51.978Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 12, k = 5 safe 2019-07-14T21:05:27.101Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 13, k = 5 safe 2019-07-14T21:07:04.717Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 14, k = 5 safe 2019-07-14T21:12:37.458Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 15, k = 5 safe 2019-07-14T21:14:55.515Z
+
+  console.log tests/utils.js:144
+    . X n = 16, k = 5 harmful 2019-07-14T21:30:16.046Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 17, k = 5 safe 2019-07-14T21:31:39.660Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 18, k = 5 safe 2019-07-14T21:34:35.908Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 19, k = 5 safe 2019-07-14T21:36:30.826Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 20, k = 5 safe 2019-07-14T21:39:42.980Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 21, k = 5 harmful 2019-07-14T21:41:33.402Z
+
+  console.log tests/utils.js:157
+    . X n = 22, k = 5 safe 2019-07-14T21:44:03.834Z
+
+  console.log tests/utils.js:157
+    . X n = 23, k = 5 safe 2019-07-14T21:47:32.614Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 24, k = 5 harmful 2019-07-14T21:49:31.606Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 25, k = 5 harmful 2019-07-14T21:51:16.614Z
+
+  console.log tests/utils.js:157
+    . X n = 26, k = 5 safe 2019-07-14T21:57:52.047Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 27, k = 5 harmful 2019-07-14T21:59:32.054Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 28, k = 5 harmful 2019-07-14T22:02:08.658Z
+
+  console.log tests/utils.js:157
+    . X n = 29, k = 5 safe 2019-07-14T22:09:49.424Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 30, k = 5 harmful 2019-07-14T22:18:42.048Z
+
+  console.log tests/utils.js:232
+    Final correct score: 25/30
+
+  console.log tests/utils.js:233
+    Final accuracy score: 83.33333333333334%
+
+  console.log tests/utils.js:234
+    Final sensitivity score: 0.95
+
+  console.log tests/utils.js:235
+    Final specificity score: 0.6
+
+  console.log tests/utils.js:236
+    Final precision score: 0.8260869565217391
+
+  console.log tests/evaluation/bagOfWords-tagged.test.js:24
+    Start Scenario: Sun Jul 14 2019 23:18:42 GMT+0100 (British Summer Time)
+
+  console.log tests/utils.js:141
+    . ✓ n = 1, k = 10 safe 2019-07-14T22:22:21.016Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 2, k = 10 safe 2019-07-14T22:25:00.027Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 3, k = 10 safe 2019-07-14T22:26:26.970Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 4, k = 10 safe 2019-07-14T22:28:23.228Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 5, k = 10 safe 2019-07-14T22:30:50.582Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 6, k = 10 safe 2019-07-14T22:32:09.451Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 7, k = 10 safe 2019-07-14T22:36:23.406Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 8, k = 10 safe 2019-07-14T22:40:03.358Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 9, k = 10 safe 2019-07-14T23:05:14.493Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 10, k = 10 safe 2019-07-15T00:23:18.689Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 11, k = 10 safe 2019-07-15T00:24:35.006Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 12, k = 10 safe 2019-07-15T00:39:22.489Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 13, k = 10 safe 2019-07-15T00:41:02.699Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 14, k = 10 safe 2019-07-15T00:46:26.378Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 15, k = 10 safe 2019-07-15T00:48:44.809Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 16, k = 10 safe 2019-07-15T01:04:40.390Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 17, k = 10 safe 2019-07-15T01:06:01.739Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 18, k = 10 safe 2019-07-15T01:08:52.470Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 19, k = 10 safe 2019-07-15T01:10:43.852Z
+
+  console.log tests/utils.js:141
+    . ✓ n = 20, k = 10 safe 2019-07-15T01:13:46.380Z
+
+  console.log tests/utils.js:157
+    . X n = 21, k = 10 safe 2019-07-15T01:15:35.435Z
+
+  console.log tests/utils.js:157
+    . X n = 22, k = 10 safe 2019-07-15T01:17:59.367Z
+
+  console.log tests/utils.js:157
+    . X n = 23, k = 10 safe 2019-07-15T01:21:30.943Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 24, k = 10 harmful 2019-07-15T01:23:33.921Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 25, k = 10 harmful 2019-07-15T01:25:21.100Z
+
+  console.log tests/utils.js:157
+    . X n = 26, k = 10 safe 2019-07-15T01:32:05.596Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 27, k = 10 harmful 2019-07-15T01:33:47.900Z
+
+  console.log tests/utils.js:157
+    . X n = 28, k = 10 safe 2019-07-15T01:36:23.645Z
+
+  console.log tests/utils.js:157
+    . X n = 29, k = 10 safe 2019-07-15T01:44:11.224Z
+
+  console.log tests/utils.js:154
+    . ✓ n = 30, k = 10 harmful 2019-07-15T01:53:12.308Z
+
+  console.log tests/utils.js:232
+    Final correct score: 24/30
+
+  console.log tests/utils.js:233
+    Final accuracy score: 80%
+
+  console.log tests/utils.js:234
+    Final sensitivity score: 1
+
+  console.log tests/utils.js:235
+ PASS     Final specificity score: 0.4
+
+  console.log  tests/utils.js:236
+tests/evaluation/    Final precision score: 0.7692307692307693
+
+  bagOfWords-tagged.test.jsconsole.log  (tests/evaluation/bagOfWords-tagged.test.js:29
+64793.734s    Complete Run: Mon Jul 15 2019 02:53:12 GMT+0100 (British Summer Time)
+)
+
+  √ Should run evaluation of model against test data for k = 1 (12486751ms)
+  √ Should run evaluation of model against test data for k = 3 (12492339ms)
+  √ Should run evaluation of model against test data for k = 5 (12541159ms)
+  √ Should run evaluation of model against test data for k = 10 (12870260ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        64793.797s
+Ran all test suites matching /tests\\evaluation\\bagOfWords-tagged.test.js/i.
+
+Process finished with exit code 0
