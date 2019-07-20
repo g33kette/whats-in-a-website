@@ -108,9 +108,6 @@
   console.log tests/utils.js:228
     Final sensitivity score: 0.9
 
-  console.log tests/utils.js:229
-    Final specificity score: 0.5
-
   console.log tests/utils.js:230
     Final precision score: 0.782608695652174
 

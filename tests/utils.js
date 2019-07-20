@@ -212,25 +212,18 @@ const prepareVectorFromFile = async (filesDirectory, file, vectorType, wordType)
  * @param {*} results
  */
 const outputModelEvaluationResults = (results) => {
-    // Sensitivity = TP / TP + FN
-    // Specificity = TN / TN + FP
+    // Accuracy = TP + TN / TP + FP + TN + FN
+    // Sensitivity/Recall = TP / TP + FN
     // Precision = TP / TP + FP
-    // True-Positive Rate = TP / TP + FN
-    // False-Positive Rate = FP / FP + TN
-    // True-Negative Rate = TN / TN + FP
-    // False-Negative Rate = FN / FN + TP
     const accuracy = (results.tp + results.tn) === 0 ? 0
         : (((results.tp + results.tn)/(results.tp + results.tn + results.fp + results.fn))*100);
     const sensitivity = (results.tp + results.fn) === 0 ? 0
         : (results.tp/(results.tp + results.fn));
-    const specificity = (results.tn + results.fp) === 0 ? 0
-        : (results.tn/(results.tn + results.fp));
     const precision = (results.tp + results.fp) === 0 ? 0
         : (results.tp/(results.tp + results.fp));
     const totalResults = (results.tp + results.tn + results.fn + results.fp);
     console.log('Final correct score: '+(results.tp + results.tn)+'/'+totalResults);
     console.log('Final accuracy score: '+accuracy+'%');
     console.log('Final sensitivity score: '+sensitivity);
-    console.log('Final specificity score: '+specificity);
     console.log('Final precision score: '+precision);
 };

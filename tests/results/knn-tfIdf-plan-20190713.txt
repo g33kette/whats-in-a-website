@@ -208,9 +208,6 @@
   console.log tests/utils.js:231
     Final sensitivity score: 0.5
 
-  console.log tests/utils.js:232
-    Final specificity score: 0.6
-
   console.log tests/utils.js:233
     Final precision score: 0.7142857142857143
 
@@ -406,9 +403,6 @@
   console.log tests/utils.js:231
     Final sensitivity score: 0.75
 
-  console.log tests/utils.js:232
-    Final specificity score: 0.5
-
   console.log tests/utils.js:233
     Final precision score: 0.75
 
@@ -603,9 +597,6 @@
 
   console.log tests/utils.js:231
     Final sensitivity score: 0.75
-
-  console.log tests/utils.js:232
-    Final specificity score: 0.6
 
   console.log tests/utils.js:233
     Final precision score: 0.7894736842105263
@@ -812,9 +803,6 @@ Ran all test suites matching /tests\\evaluation\\knn-tfIdf-plain.test.js/i.
 
   console.log tests/utils.js:231
     Final sensitivity score: 0.75
-
-  console.log tests/utils.js:232
-    Final specificity score: 0.5
 
   console.log tests/utils.js:233
     Final precision score: 0.75

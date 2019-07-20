@@ -355,9 +355,6 @@ T09:45:36.311Z
   console.log tests/utils.js:233
     Final sensitivity score: 0.75
 
-  console.log tests/utils.js:234
-    Final specificity score: 0.5
-
   console.log tests/utils.js:235
     Final precision score: 0.75
 
@@ -463,9 +460,6 @@ T09:45:36.311Z
   console.log tests/utils.js:233
     Final sensitivity score: 1
 
-  console.log tests/utils.js:234
-    Final specificity score: 0.5
-
   console.log tests/utils.js:235
     Final precision score: 0.8
 
@@ -570,9 +564,6 @@ T09:45:36.311Z
 
   console.log tests/utils.js:233
     Final sensitivity score: 1
-
-  console.log tests/utils.js:234
-    Final specificity score: 0.5
 
   console.log tests/utils.js:235
     Final precision score: 0.8
@@ -689,9 +680,6 @@ Ran all test suites matching /tests\\evaluation\\knn-bagOfWords-plain.test.js/i.
 
   console.log tests/utils.js:233
     Final sensitivity score: 0.95
-
-  console.log tests/utils.js:234
-    Final specificity score: 0.4
 
   console.log tests/utils.js:235
     Final precision score: 0.76

@@ -350,9 +350,6 @@ Ran all test suites matching /tests\\evaluation\\nbayes-bagOfWords-plain.test.js
   console.log tests/utils.js:233
     Final sensitivity score: 0.95
 
-  console.log tests/utils.js:234
-    Final specificity score: 0.7
-
   console.log tests/utils.js:235
     Final precision score: 0.8636363636363636
 

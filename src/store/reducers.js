@@ -1,7 +1,6 @@
 import {
     RESET,
     OVERRIDE_STATE_PARAMS,
-    SET_ENCRYPTION_TOKEN,
     SET_USERNAME,
     SET_ENABLED,
     SET_CORPUS,
@@ -20,7 +19,6 @@ export let testMode = false; // Remember to re-build after changing this value
  */
 function getInitialStateValues() {
     return Object.assign({}, getInitialModelStateValues(), {
-        encryptionToken: null,
         tabs: {},
         queue: [],
         username: null,
@@ -57,8 +55,6 @@ export function coreReducer(state = getInitialStateValues(), action) {
             return Object.assign({}, getInitialStateValues());
         case OVERRIDE_STATE_PARAMS:
             return Object.assign({}, state, action.params);
-        case SET_ENCRYPTION_TOKEN:
-            return Object.assign({}, state, {encryptionToken: action.encryptionToken});
         case SET_USERNAME:
             return Object.assign({}, state, {username: action.username});
         case SET_ENABLED:

@@ -23,8 +23,8 @@ export const summariseText = async (rawText) => {
     const topPhraseIndexes = vector
         .map((v, k) => [k, v]) // Convert key => value array to array of [key, value]
         .sort((a, b) => (a[1] > b[1])?-1:1) // sort by weighted value
-        .slice(0, config.nPhrases) // Reduce to top nPhrases
         .filter((a) => a[1] > 0) // Ensure only positive values (ie. words in current vector) are returned
+        .slice(0, config.nPhrases) // Reduce to top nPhrases
         .map((a) => a[0]); // Convert to array of keys
     // Return matching noun phrases
     return (await listAllNounPhrasesInCorpus()).filter((v, k) => topPhraseIndexes.indexOf(k) >= 0);

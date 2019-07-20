@@ -20,7 +20,7 @@ export function ProcessQueue() {
      * @return {Promise<boolean>}
      */
     this.process = async () => {
-        if (processing === null) { // If it is not null, then the process queue is already running so just stop
+        if (processing === null) { // If it is not null, then the process queue is already running
             // If the process queue needs to be started, get the next process, run, then loop
             // until getNextQueuedProcess() returns null
             while ((processing = await nextQueuedProcess())) {
