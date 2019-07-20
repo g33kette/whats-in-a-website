@@ -15,7 +15,7 @@ import {
     setQueue,
     clearModelData,
     queueProcess,
-    reset, setUsername, setEncryptionToken, overrideStateParams,
+    reset, setUsername, overrideStateParams,
 } from './../store/actions';
 import {ProcessQueue} from './processQueue';
 
@@ -186,7 +186,6 @@ export async function triggerToggleEnabled(forceState) {
  */
 export async function setAuthenticatedUser(username, token) {
     store.dispatch(setUsername(username));
-    store.dispatch(setEncryptionToken(token));
     return true;
 }
 

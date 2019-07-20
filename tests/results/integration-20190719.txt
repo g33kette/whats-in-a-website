@@ -1,0 +1,26 @@
+
+> Extension@1.0.0 test C:\Users\Jo\Desktop\chrome-plugin
+> jest --testPathPattern=^tests/integration
+
+ PASS  tests/integration/analyseContent.test.js
+ PASS  tests/integration/basic.test.js
+ PASS  tests/integration/summarise.test.js (10.721s)
+ PASS  tests/integration/model.test.js (25.408s)
+  ● Console
+
+    console.warn node_modules/@tensorflow/tfjs-core/dist/log.js:26
+
+      ============================
+      Hi there 👋. Looks like you are running TensorFlow.js in Node.js. To speed things up dramatically, install our node backend, which binds to TensorFlow C++, by running npm i @te
+nsorflow/tfjs-node, or npm i @tensorflow/tfjs-node-gpu if you have CUDA. Then call require('@tensorflow/tfjs-node'); (-gpu suffix for CUDA) at the start of your program. Visit https:
+//github.com/tensorflow/tfjs-node for more details.
+      ============================
+
+
+
+Test Suites: 4 passed, 4 total
+Tests:       18 passed, 18 total
+Snapshots:   0 total
+Time:        26.467s
+Ran all test suites matching /tests\\integration/i.
+

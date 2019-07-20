@@ -7,9 +7,6 @@ export const reset = () => ({type: RESET});
 export const OVERRIDE_STATE_PARAMS = 'overrideStateParams';
 export const overrideStateParams = (params) => ({type: OVERRIDE_STATE_PARAMS, params});
 
-export const SET_ENCRYPTION_TOKEN = 'setEncryptionToken';
-export const setEncryptionToken = (encryptionToken) => ({type: SET_ENCRYPTION_TOKEN, encryptionToken});
-
 export const SET_USERNAME = 'setUsername';
 export const setUsername = (username) => ({type: SET_USERNAME, username});
 

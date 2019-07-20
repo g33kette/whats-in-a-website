@@ -25,6 +25,12 @@ Joanne Buxton | MSC Knowledge Discovery and Data Mining | University of East Ang
  - Turn on **Developer Mode**
  - Click **Load Unpacked** and open _/project-folder/dist_
 
+### Testing
+```
+> npm run test // Jest Integration Tests
+> npm run test // CucumberJS E2E Selenium Tests
+```
+
 ### Testing setup on Windows:
  - Install Visual Studio 2019 with C++ stuff: https://visualstudio.microsoft.com/downloads/
  - Install Python 2.7 https://www.python.org/download/releases/2.7/

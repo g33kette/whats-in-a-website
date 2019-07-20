@@ -1,0 +1,57 @@
+
+> Extension@1.0.0 e2e C:\Users\Jo\Desktop\chrome-plugin
+> node ./node_modules/selenium-cucumber-js/index.js -f ./features/e2e -s ./features/step_definitions/steps.js -b ./features/driver.js
+
+Feature: Training the App
+
+    As a user
+    In order for the browser protect app to know what pages are safe
+    It should learn from my browsing habits
+
+  Scenario: Training BBC Football Using Training Overlay
+
+DevTools listening on ws://127.0.0.1:62939/devtools/browser/13fad740-0b00-42ab-b165-9319d32bd02d
+  √ When I go to "https://www.bbc.co.uk/sport/football"
+  √ Then I should see protection overlay
+  √ When content analysis is complete
+  √ Then I should see "This website cannot be classified." in protection overlay
+  √ When I continue to website
+  √ Then I should see protection training
+  √ Then I mark page as "safe"
+  √ When I go to "https://www.bbc.co.uk/sport/football/teams/manchester-united"
+  √ Then I should see protection overlay
+  √ When content analysis is complete
+  √ Then I should see "This website cannot be classified." in protection overlay
+  √ When I continue to website
+  √ Then I should see protection training
+  √ Then I mark page as "harmful"
+  √ When I go to "https://www.bbc.co.uk/news"
+  √ Then I should see protection overlay
+  √ When content analysis is complete
+  √ Then the classification result should be "safe"
+[2028:20332:0719/223926.095:ERROR:browser_process_sub_thread.cc(221)] Waited 81 ms for network service
+
+  Scenario: Training BBC Football Directly From Protection Overlay
+
+DevTools listening on ws://127.0.0.1:52617/devtools/browser/5f62485b-cf8b-4a41-8b50-24538b2336c7
+  √ When I go to "https://www.bbc.co.uk/sport/football"
+  √ Then I should see protection overlay
+  √ When content analysis is complete
+  √ Then I should see "This website cannot be classified." in protection overlay
+  √ Then I mark page as "safe" in protection overlay
+  √ When I go to "https://www.bbc.co.uk/sport/football/teams/manchester-united"
+  √ Then I should see protection overlay
+  √ When content analysis is complete
+  √ Then I should see "This website cannot be classified." in protection overlay
+  √ Then I mark page as "harmful" in protection overlay
+  √ When I go to "https://www.bbc.co.uk/news"
+  √ Then I should see protection overlay
+  √ When content analysis is complete
+  √ Then the classification result should be "safe"
+[22096:9348:0719/224039.047:ERROR:browser_process_sub_thread.cc(221)] Waited 72 ms for network service
+
+2 scenarios (2 passed)
+32 steps (32 passed)
+2m30.804s
+Cucumber HTML report C:\Users\Jo\Desktop\chrome-plugin\reports\cucumber-report.html generated successfully.
+
