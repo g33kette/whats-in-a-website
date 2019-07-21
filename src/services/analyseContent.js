@@ -8,7 +8,7 @@ const nlp = require('compromise');
 // Exported so can be set in tests
 export const config = {
     vectorType: 'bagOfWords', // Options: bagOfWords, tfIdf
-    wordType: 'plain', // Options: plain, tagged
+    wordType: 'plain', // Options: plain, tagged, reducedTagged
 };
 
 // * Prepare Text ------------------------------------------------------------------------------------------------------
@@ -65,11 +65,57 @@ const convertToListOfWords = (doc) => {
     });
     switch (config.wordType) {
         case 'tagged':
-            return normalized.out('tags');
+            return normalized.out('tags').map((tagged) => [tagged.text, tagged.tags]);
+        case 'reducedTagged':
+            return reduceTagsList(normalized.out('tags'));
         case 'plain':
         default:
             return normalized.out('array');
     }
+};
+
+const reduceTagsList = (tags) => {
+    const filterTags = [
+        'Noun',
+        'Person',
+        'Place',
+        'Organization',
+        'FirstName',
+        'LastName',
+        'Country',
+        'City',
+        'Region',
+        'SportsTeam',
+        'Company',
+        'School',
+        'VerbPhrase',
+        'Verb',
+        'Value',
+        'NumericValue',
+        'Money',
+        'Date',
+        'Month',
+        'WeekDay',
+        'RelativeDay',
+        'Year',
+        'Duration',
+        'Time',
+        'Holiday',
+        'Adjective',
+        'Adverb',
+        'Determiner',
+        'Conjunction',
+        'Preposition',
+        'QuestionWord',
+        'Pronoun',
+        'Abbreviation',
+        'PhoneNumber',
+        'Negative',
+        'Acronym',
+        'Quotation',
+        'Parentheses',
+    ];
+    return tags.map((tagged) => [tagged.text, tagged.tags.filter((tag) => filterTags.indexOf(tag) >= 0)]);
 };
 
 // * Prepare Vector ----------------------------------------------------------------------------------------------------

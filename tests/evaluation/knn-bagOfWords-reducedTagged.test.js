@@ -7,7 +7,7 @@ import {config as knnConfig} from '../../src/services/models/knn';
 jest.setTimeout(14400000); // 4 hours
 
 const vectorType = 'bagOfWords';
-const wordType = 'tagged';
+const wordType = 'reducedTagged';
 const limit = 0;
 modelConfig.modelType = 'knn';
 
