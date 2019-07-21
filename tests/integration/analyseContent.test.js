@@ -43,8 +43,8 @@ it('Parses multiple simple sentences to a combined bag of words / tagged words r
     analyseContentConfig.wordType = 'tagged';
     expect(await prepareText('The quick brown fox')).toEqual([1,1,1,1]);
     expect(await prepareText('The quick brown fox jumps over')).toEqual([1,1,1,1,1,1]);
-    expect(await prepareText('The quick brown fox jumps over the lazy dog.'))
-        .toEqual([2,1,1,1,1,1,1,1]);
+    expect(await prepareText('The quick brown fox jumps over the lazy dog and the silly sheep.'))
+        .toEqual([1,1,1,1,1,1,2,1,1,1,1,1]);
 });
 
 // Test TF-IDF Text Preparation ----------------------------------------------------------------------------------------
@@ -97,15 +97,19 @@ it('Parses multiple simple sentences to a combined tf-idf / tagged words represe
         0.5412219880468178,
         0.5412219880468178,
     ]);
-    expect(await prepareText('The quick brown fox jumps over the lazy dog.')).toEqual([
-        0.3369607874680181,
-        0.24533501901928448,
-        0.24533501901928448,
-        0.24533501901928448,
-        0.34441786389361506,
-        0.34441786389361506,
-        0.4840672903116227,
-        0.4840672903116227,
+    expect(await prepareText('The quick brown fox jumps over the lazy dog and the silly sheep.')).toEqual([
+        0.16833389602774482,
+        0.16833389602774482,
+        0.16833389602774482,
+        0.16833389602774482,
+        0.23631848858156074,
+        0.23631848858156074,
+        0.4726369771631215,
+        0.33213739010224125,
+        0.33213739010224125,
+        0.33213739010224125,
+        0.33213739010224125,
+        0.33213739010224125,
     ]);
 });
 
