@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import {predictClassification, config as modelConfig} from '../../src/services/model';
+import {config as knnConfig} from '../../src/services/models/knn';
 import {resetStore, prepareVector, train} from '../utils';
 
 beforeEach(async () => {
@@ -15,6 +16,7 @@ afterAll( async () => {
 
 it('Should train and classify very basic text using knn classifier with frequency weightings', async () => {
     modelConfig.modelType = 'knn';
+    knnConfig.k = 3;
     await train([
         'The quick brown fox',
         'The quick fish',
@@ -35,6 +37,7 @@ it('Should train and classify very basic text using knn classifier with frequenc
 
 it('Should train and classify very basic text using knn classifier with tf-idf weightings', async () => {
     modelConfig.modelType = 'knn';
+    knnConfig.k = 3;
     await train([
         'The quick brown fox',
         'The quick fish',

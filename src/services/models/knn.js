@@ -11,7 +11,7 @@ import {fixLength, config as modelConfig} from '../model';
 
 // Exported so can be set in tests
 export const config = {
-    k: 3,
+    k: 5,
 };
 
 // * Classifier Methods  -----------------------------------------------------------------------------------------------

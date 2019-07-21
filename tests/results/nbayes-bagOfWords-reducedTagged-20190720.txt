@@ -1,0 +1,360 @@
+"C:\Program Files\JetBrains\PhpStorm 2018.2.4\bin\runnerw.exe" "C:\Program Files\nodejs\node.exe" "C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js" run evaluate --scripts-prepend-node-path=auto
+
+> Extension@1.0.0 evaluate C:\Users\Jo\Desktop\chrome-plugin
+> jest --testPathPattern=^tests/evaluation/nbayes-bagOfWords-reducedTagged.test.js
+
+  console.log tests/evaluation/nbayes-bagOfWords-reducedTagged.test.js:14
+    Start Run: Sat Jul 20 2019 19:18:36 GMT+0100 (GMT Summer Time)
+
+  console.log tests/utils.js:192
+    safe http..www.anglianwater.co.uk 2019-07-20T18:18:36.712Z
+
+  console.log tests/utils.js:192
+    safe http..www.argos.co.uk 2019-07-20T18:18:47.873Z
+
+  console.log tests/utils.js:192
+    safe http..www.finnpathologists.co.uk 2019-07-20T18:18:53.300Z
+
+  console.log tests/utils.js:192
+    safe http..www.gamertagnation.com 2019-07-20T18:18:55.889Z
+
+  console.log tests/utils.js:192
+    safe http..www.nathab.com.travelerresources 2019-07-20T18:19:06.018Z
+
+  console.log tests/utils.js:192
+    safe http..www.newsnow.co.uk.itfc 2019-07-20T18:19:15.309Z
+
+  console.log tests/utils.js:192
+    safe http..www.ourburystedmunds.com.whitsunfayre 2019-07-20T18:19:15.863Z
+
+  console.log tests/utils.js:192
+    safe http..www.pexels.com 2019-07-20T18:19:25.367Z
+
+  console.log tests/utils.js:192
+    safe http..www.pivotaltracker.com 2019-07-20T18:19:41.315Z
+
+  console.log tests/utils.js:192
+    safe http..www.sortitoutsi.net 2019-07-20T18:19:44.038Z
+
+  console.log tests/utils.js:192
+    safe http..www.topcashback.co.uk 2019-07-20T18:19:58.085Z
+
+  console.log tests/utils.js:192
+    safe http..www.vodafone.co.uk 2019-07-20T18:20:03.798Z
+
+  console.log tests/utils.js:192
+    safe http..www.westsuffolk.gov.uk 2019-07-20T18:20:34.303Z
+
+  console.log tests/utils.js:192
+    safe https..computationx.wordpress.com.2019.05.23.fivethingsivelearnedaboutpairprogramming 2019-07-20T18:20:43.524Z
+
+  console.log tests/utils.js:192
+    safe https..duckduckgo.com 2019-07-20T18:20:57.113Z
+
+  console.log tests/utils.js:192
+    safe https..talksport.com.football.page.2 2019-07-20T18:20:59.120Z
+
+  console.log tests/utils.js:192
+    safe https..twitter.com.explore 2019-07-20T18:21:14.087Z
+
+  console.log tests/utils.js:192
+    safe https..www.airbnb.co.uk.s.LakeDistrictNationalParkLakesSouthLakelandDistrict.homes+refinement_paths5B5D=2Fhomes&query=Lake20District20National20Park2C20Lakes2C20South20Lakeland20Di 2019-07-20T18:21:33.443Z
+
+  console.log tests/utils.js:192
+    safe https..www.amazon.co.uk 2019-07-20T18:21:43.683Z
+
+  console.log tests/utils.js:192
+    safe https..www.argos.co.uk 2019-07-20T18:22:34.619Z
+
+  console.log tests/utils.js:192
+    safe https..www.argos.co.uk.features.deliverycollectionguide+tag=arpropbarsamedaydelivery 2019-07-20T18:22:41.792Z
+
+  console.log tests/utils.js:192
+    safe https..www.bbc.co.uk.news 2019-07-20T18:22:55.467Z
+
+  console.log tests/utils.js:192
+    safe https..www.bbc.co.uk.news.newsbeat48352581 2019-07-20T18:24:02.671Z
+
+  console.log tests/utils.js:192
+    safe https..www.bbc.co.uk.news.technology 2019-07-20T18:24:28.757Z
+
+  console.log tests/utils.js:192
+    safe https..www.bbc.co.uk.news.uk 2019-07-20T18:24:52.837Z
+
+  console.log tests/utils.js:192
+    safe https..www.bbc.co.uk.sport.football 2019-07-20T18:25:22.923Z
+
+  console.log tests/utils.js:192
+    safe https..www.bbc.co.uk.sport.football.teams.stokecity 2019-07-20T18:26:05.162Z
+
+  console.log tests/utils.js:192
+    safe https..www.bbc.co.uk.weather 2019-07-20T18:26:45.395Z
+
+  console.log tests/utils.js:192
+    safe https..www.bitbucket.org 2019-07-20T18:26:56.897Z
+
+  console.log tests/utils.js:192
+    safe https..www.boohoo.com.womens.trousers 2019-07-20T18:27:07.672Z
+
+  console.log tests/utils.js:192
+    safe https..www.booking.com.index.engb.html 2019-07-20T18:30:32.825Z
+
+  console.log tests/utils.js:192
+    safe https..www.dailymail.co.uk.sport.football.index.html 2019-07-20T18:31:06.430Z
+
+  console.log tests/utils.js:192
+    safe https..www.edp24.co.uk.home 2019-07-20T18:35:24.130Z
+
+  console.log tests/utils.js:192
+    safe https..www.express.co.uk.sport.football.1129109.ManCitynewspunditrevealsONEteamcanchallengenextseasonPepGuardiolatreble 2019-07-20T18:36:44.471Z
+
+  console.log tests/utils.js:192
+    safe https..www.google.com 2019-07-20T18:39:17.730Z
+
+  console.log tests/utils.js:192
+    safe https..www.google.com.maps.place.Longjie+Inn.28.3123828109.603200412z.data=4m121m63m51s0x3699e00bdd955bf30x18c3371b1c8afa9c2sDehang+Restaurant8m23d28.3431354d109.5870363m41s0x00xae 2019-07-20T18:39:18.918Z
+
+  console.log tests/utils.js:192
+    safe https..www.hippychick.com 2019-07-20T18:39:22.696Z
+
+  console.log tests/utils.js:192
+    safe https..www.meetup.com.phpcambridge.events.261757326 2019-07-20T18:39:51.902Z
+
+  console.log tests/utils.js:192
+    safe https..www.newlook.com.uk.c.blackwovenharemtrousers.p.374021301 2019-07-20T18:40:18.464Z
+
+  console.log tests/utils.js:192
+    safe https..www.tesco.com.groceries 2019-07-20T18:40:37.617Z
+
+  console.log tests/utils.js:192
+    safe https..www.theguardian.com.football 2019-07-20T18:40:52.814Z
+
+  console.log tests/utils.js:192
+    safe https..www.theguardian.com.uk.sport 2019-07-20T18:42:03.463Z
+
+  console.log tests/utils.js:192
+    safe https..www.tripadvisor.co.uk 2019-07-20T18:43:09.305Z
+
+  console.log tests/utils.js:192
+    safe https..www.vodafone.co.uk.broadband 2019-07-20T18:44:51.898Z
+
+  console.log tests/utils.js:192
+    safe https..www.youtube.com.results+search_query=game+of+thrones 2019-07-20T18:45:56.064Z
+
+  console.log tests/utils.js:192
+    safe https..yogawithadriene.com 2019-07-20T18:46:40.798Z
+
+  console.log tests/utils.js:192
+    harmful http..www.mufcinfo.com.manupag.az_player_archive.legegendsexunitedm.html 2019-07-20T18:46:46.786Z
+
+  console.log tests/utils.js:192
+    harmful http..www.mufoundation.org.PrimaryStarsTournament 2019-07-20T18:47:37.207Z
+
+  console.log tests/utils.js:192
+    harmful https..en.wikipedia.org.wiki.List_of_Manchester_United_F.C._players_25E2809399_appearances 2019-07-20T18:47:45.695Z
+
+  console.log tests/utils.js:192
+    harmful https..en.wikipedia.org.wiki.List_of_Manchester_United_F.C.appearances 2019-07-20T18:57:23.650Z
+
+  console.log tests/utils.js:192
+    harmful https..en.wikipedia.org.wiki.Manchester_United_F.C 2019-07-20T19:06:36.463Z
+
+  console.log tests/utils.js:192
+    harmful https..en.wikipedia.org.wiki.Manchester_United_Premier_Cup 2019-07-20T19:20:03.290Z
+
+  console.log tests/utils.js:192
+    harmful https..store.manutd.com.stores.manutd.en.+CMP=PPCManUnitedDirectBrand&msclkid=d1f9b4d44e2a18626b24e9d11965128f&gclid=CLSkuYqs7OICFdKRGwod6GENFg&gclsrc=ds 2019-07-20T19:20:53.823Z
+
+  console.log tests/utils.js:192
+    harmful https..talksport.com.football.545799.transfernewslivemanunitedmancityspursfekirdeligt 2019-07-20T19:21:11.401Z
+
+  console.log tests/utils.js:192
+    harmful https..talksport.com.football.548784.manchesterunitedtransfernewsreddevilsoutoftheracetosignajaxcaptainmatthijsdeligtreports 2019-07-20T19:22:26.418Z
+
+  console.log tests/utils.js:192
+    harmful https..twitter.com.ManUtd 2019-07-20T19:23:03.303Z
+
+  console.log tests/utils.js:192
+    harmful https..www.amazon.co.uk.s+k=manchester+united&i=kitchen&hvadid=80195697990945&hvbmt=be&hvdev=c&hvqmt=e&tag=mh0a921&ref=pd_sl_8xen9cnloj_e 2019-07-20T19:24:20.185Z
+
+  console.log tests/utils.js:192
+    harmful https..www.bbc.co.uk.sport.football.teams.manchesterunited 2019-07-20T19:25:16.453Z
+
+  console.log tests/utils.js:192
+    harmful https..www.caughtoffside.com.2019.06.15.manchesterunitedcoulduseuseclevertricktomeetstars60mvaluation 2019-07-20T19:26:28.211Z
+
+  console.log tests/utils.js:192
+    harmful https..www.dailymail.co.uk.sport.football.article7071895.ManUnitedmissKalidouKoulibalyturnattentionsRubenDias.html 2019-07-20T19:26:58.654Z
+
+  console.log tests/utils.js:192
+    harmful https..www.ea.com.engb.news.fifa17manchesterunitedfcplayertournament 2019-07-20T19:28:37.541Z
+
+  console.log tests/utils.js:192
+    harmful https..www.google.com.search+q=manchester+united&rlz=1C1CHBF_enGB839GB839&oq=manchester+united&aqs=chrome..69i57j0l2j69i59j0l2.4223j0j4&sourceid=chrome&ie=UTF8 2019-07-20T19:28:50.932Z
+
+  console.log tests/utils.js:192
+    harmful https..www.internationalchampionscup.com.en.teams.manchesterunitedtab_teamstats=defence&tab_teamplayersstats=general&tab_team=overview 2019-07-20T19:29:40.761Z
+
+  console.log tests/utils.js:192
+    harmful https..www.livefootballtickets.com.englishpremiership.manchesterunitedtickets.html 2019-07-20T19:30:23.191Z
+
+  console.log tests/utils.js:192
+    harmful https..www.manutd.com 2019-07-20T19:31:21.592Z
+
+  console.log tests/utils.js:192
+    harmful https..www.manutd.com.en.news.detail.epltournamentlookingformanutdfifaplayers 2019-07-20T19:32:25.038Z
+
+  console.log tests/utils.js:192
+    harmful https..www.manutd.com.en.ticketsandhospitality.matchtickets+t=y&int_source=muwebsite&int_medium=meganav&int_campaign=matchtickets&int_content=thnav&int_term=matchtickets 2019-07-20T19:33:01.459Z
+
+  console.log tests/utils.js:192
+    harmful https..www.newsnow.co.uk.h.Sport.Football.Premier+League.Manchester+United 2019-07-20T19:33:47.024Z
+
+  console.log tests/utils.js:192
+    harmful https..www.premierleague.com.clubs.12.ManchesterUnited.overview 2019-07-20T19:35:11.229Z
+
+  console.log tests/utils.js:192
+    harmful https..www.ranker.com.list.bestmanchesterunitedplayersofalltime.rankersoccer 2019-07-20T19:35:51.679Z
+
+  console.log tests/utils.js:192
+    harmful https..www.theguardian.com.football.manchesterunited 2019-07-20T19:39:29.470Z
+
+  console.log tests/utils.js:192
+    harmful https..www.ticketmaster.co.uk.manchesterunitedtickets.artist.862031 2019-07-20T19:40:11.065Z
+
+  console.log tests/utils.js:192
+    harmful https..www.transfermarkt.com.manchesterunited.startseite.verein.985 2019-07-20T19:40:16.495Z
+
+  console.log tests/utils.js:192
+    harmful https..www.transfermarkt.com.manchesterunited.transfers.verein.985 2019-07-20T19:42:18.544Z
+
+  console.log tests/utils.js:192
+    harmful https..www.viagogo.co.uk.SportsTickets.Football.BarclaysPremierLeague.ManchesterUnitedTickets 2019-07-20T19:43:51.405Z
+
+  console.log tests/utils.js:192
+    harmful https..www.worldfootball.net.teams.manchesterunited.10 2019-07-20T19:44:23.095Z
+
+  console.log tests/utils.js:192
+    harmful https..www.youtube.com.results+search_query=manchester+united 2019-07-20T19:54:39.953Z
+
+  console.log tests/utils.js:93
+    Training complete. 2019-07-20T19:55:13.549Z
+
+  console.log tests/evaluation/nbayes-bagOfWords-reducedTagged.test.js:26
+    Start Scenario: Sat Jul 20 2019 20:55:13 GMT+0100 (GMT Summer Time)
+
+  console.log tests/utils.js:140
+    . ✓ n = 1, r = 1 safe 2019-07-20T19:56:21.775Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 2, r = 1 safe 2019-07-20T19:57:12.719Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 3, r = 1 safe 2019-07-20T19:57:38.005Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 4, r = 1 safe 2019-07-20T19:58:17.094Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 5, r = 1 safe 2019-07-20T19:59:06.145Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 6, r = 1 safe 2019-07-20T19:59:32.737Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 7, r = 1 safe 2019-07-20T20:00:54.621Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 8, r = 1 safe 2019-07-20T20:02:12.327Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 9, r = 1 safe 2019-07-20T20:11:38.601Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 10, r = 1 safe 2019-07-20T20:44:02.445Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 11, r = 1 safe 2019-07-20T20:44:26.580Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 12, r = 1 safe 2019-07-20T20:49:39.149Z
+
+  console.log tests/utils.js:143
+    . X n = 13, r = 1 harmful 2019-07-20T20:50:10.051Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 14, r = 1 safe 2019-07-20T20:51:55.002Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 15, r = 1 safe 2019-07-20T20:52:37.908Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 16, r = 1 safe 2019-07-20T20:57:50.705Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 17, r = 1 safe 2019-07-20T20:58:13.948Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 18, r = 1 safe 2019-07-20T20:59:08.651Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 19, r = 1 safe 2019-07-20T20:59:43.415Z
+
+  console.log tests/utils.js:140
+    . ✓ n = 20, r = 1 safe 2019-07-20T21:00:30.498Z
+
+  console.log tests/utils.js:153
+    . ✓ n = 21, r = 1 harmful 2019-07-20T21:01:06.667Z
+
+  console.log tests/utils.js:156
+    . X n = 22, r = 1 safe 2019-07-20T21:01:56.830Z
+
+  console.log tests/utils.js:156
+    . X n = 23, r = 1 safe 2019-07-20T21:03:08.414Z
+
+  console.log tests/utils.js:153
+    . ✓ n = 24, r = 1 harmful 2019-07-20T21:03:48.630Z
+
+  console.log tests/utils.js:153
+    . ✓ n = 25, r = 1 harmful 2019-07-20T21:04:22.201Z
+
+  console.log tests/utils.js:156
+    . X n = 26, r = 1 safe 2019-07-20T21:06:48.883Z
+
+  console.log tests/utils.js:153
+    . ✓ n = 27, r = 1 harmful 2019-07-20T21:07:18.907Z
+
+  console.log tests/utils.js:153
+    . ✓ n = 28, r = 1 harmful 2019-07-20T21:08:13.165Z
+
+ PASS  tests/evaluation/nbayes-bagOfWords-reducedTagged.test.js (10501.206s)
+  √ Should run evaluation of model against test data (4701834ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        10501.288s, estimated 22629s
+Ran all test suites matching /tests\\evaluation\\nbayes-bagOfWords-reducedTagged.test.js/i.
+  console.log tests/utils.js:153
+    . ✓ n = 29, r = 1 harmful 2019-07-20T21:10:38.720Z
+
+  console.log tests/utils.js:153
+    . ✓ n = 30, r = 1 harmful 2019-07-20T21:13:35.376Z
+
+  console.log tests/utils.js:225
+    Final correct score: 26/30
+
+  console.log tests/utils.js:226
+    Final accuracy score: 86.66666666666667%
+
+  console.log tests/utils.js:227
+    Final sensitivity score: 0.95
+
+  console.log tests/utils.js:228
+    Final precision score: 0.8636363636363636
+
+  console.log tests/evaluation/nbayes-bagOfWords-reducedTagged.test.js:31
+    Complete Run: Sat Jul 20 2019 22:13:35 GMT+0100 (GMT Summer Time)
+
+
+Process finished with exit code 0
