@@ -5,6 +5,7 @@ import store from '../src/store/store';
 import {reset, setUsername} from './../src/store/actions';
 import {predictClassification, trainModel} from '../src/services/model';
 import fs from 'fs';
+import {summariseText} from '../src/services/summarise';
 
 /**
  * Reset Store
@@ -161,7 +162,7 @@ export async function runClassificationEvaluation(dataDir, vectorType, wordType,
 
 // Private Methods -----------------------------------------------------------------------------------------------------
 
-const listFiles = (dir) => {
+export const listFiles = (dir) => {
     return new Promise((resolve, reject) => {
         fs.readdir(__dirname+'/..'+dir, function(err, files) {
             if (err) {
@@ -191,6 +192,17 @@ const trainCategorisationFiles = async (category, filesDirectory, vectorType, wo
     for (const file of files) {
         console.log(category, file, new Date());
         await trainCategorisationFromFile(category, filesDirectory, file, vectorType, wordType);
+        if (!--limit) {
+            break;
+        }
+    }
+};
+
+export const summariseTextFromFiles = async (filesDirectory, limit) => {
+    const files = await listFiles(filesDirectory);
+    limit = limit?limit:files.length;
+    for (const file of files) {
+        await summariseText(await getFileContent(filesDirectory, file));
         if (!--limit) {
             break;
         }
