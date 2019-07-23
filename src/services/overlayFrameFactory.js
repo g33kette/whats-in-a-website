@@ -229,7 +229,7 @@ export function OverlayFrameFactory(triggerAction) {
             triggerAction('showTrainingFrame');
         });
         completeElement.on('click', '#actionClose', function() {
-            triggerAction('closeTab');
+            triggerAction('sendMessage', {trigger: 'closeTab'});
         });
         completeElement.on('click', '#actionGoBack', function() {
             triggerAction('goBack');
@@ -272,7 +272,7 @@ export function OverlayFrameFactory(triggerAction) {
             triggerAction('removeTrainingFrame');
         });
         trainingElement.on('click', '#actionClose', function() {
-            triggerAction('closeTab');
+            triggerAction('sendMessage', {trigger: 'closeTab'});
         });
     }
 
