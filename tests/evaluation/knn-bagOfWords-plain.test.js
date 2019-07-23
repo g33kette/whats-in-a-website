@@ -32,27 +32,28 @@ afterAll( async () => {
     console.log('Complete Run: '+new Date());
 });
 
-it('Should run evaluation of model against test data for k = 1', async () => {
-    knnConfig.k = 1;
-    await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, knnConfig.k);
-});
-
-it('Should run evaluation of model against test data for k = 3', async () => {
-    knnConfig.k = 3;
-    await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, knnConfig.k);
-});
-
-it('Should run evaluation of model against test data for k = 5', async () => {
-    knnConfig.k = 5;
-    await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, knnConfig.k);
-});
-
-it('Should run evaluation of model against test data for k = 10', async () => {
-    knnConfig.k = 10;
-    await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, knnConfig.k);
-});
+// it('Should run evaluation of model against test data for k = 1', async () => {
+//     knnConfig.k = 1;
+//     await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, knnConfig.k);
+// });
+//
+// it('Should run evaluation of model against test data for k = 3', async () => {
+//     knnConfig.k = 3;
+//     await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, knnConfig.k);
+// });
+//
+// it('Should run evaluation of model against test data for k = 5', async () => {
+//     knnConfig.k = 5;
+//     await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, knnConfig.k);
+// });
+//
+// it('Should run evaluation of model against test data for k = 10', async () => {
+//     knnConfig.k = 10;
+//     await runClassificationEvaluation('/tests/data/testing', vectorType, wordType, knnConfig.k);
+// });
 
 // Not to be run until final evaluation
-// it('Should run evaluation of model against validation data', async () => {
-//     await runClassificationEvaluation('/tests/data/validation', vectorType, wordType, limit);
-// });
+it('Should run evaluation of model against validation data', async () => {
+    knnConfig.k = 5;
+    await runClassificationEvaluation('/tests/data/validation', vectorType, wordType, limit);
+});

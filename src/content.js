@@ -223,9 +223,6 @@ async function changeFrame(type, params) {
  */
 function triggerActionFromFrame(trigger, ...args) {
     switch (trigger) {
-        case 'closeTab':
-            window.close();
-            return;
         case 'closeOverlayFrame':
             removeOverlay();
             return;
