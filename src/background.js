@@ -75,7 +75,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             })();
             return true;
         case 'closeTab':
-            console.log('close tab');
             chrome.tabs.remove(sender.tab.id);
             return;
         default:
